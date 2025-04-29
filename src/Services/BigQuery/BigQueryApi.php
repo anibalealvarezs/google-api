@@ -1,12 +1,12 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\BigQuery;
+namespace Anibalealvarezs\GoogleApi\Services\BigQuery;
 
-use Chmw\GoogleApi\Google\GoogleApi;
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Services\BigQuery\Classes\DataFormatOptions;
-use Chmw\GoogleApi\Services\BigQuery\Classes\Query\QueryRequest;
-use Chmw\GoogleApi\Services\BigQuery\Enums\TableMetadataView;
+use Anibalealvarezs\GoogleApi\Google\GoogleApi;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Services\BigQuery\Classes\DataFormatOptions;
+use Anibalealvarezs\GoogleApi\Services\BigQuery\Classes\Query\QueryRequest;
+use Anibalealvarezs\GoogleApi\Services\BigQuery\Enums\TableMetadataView;
 use GuzzleHttp\Exception\GuzzleException;
 
 class BigQueryApi extends GoogleApi

@@ -1,15 +1,15 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Sheets\Classes\Charts\Scorecard;
+namespace Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Scorecard;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\BaselineValueFormat;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\ChartCustomNumberFormatOptions;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\ChartData;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\KeyValueFormat;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\ChartAggregateType;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\ChartNumberFormatSource;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\BaselineValueFormat;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\ChartCustomNumberFormatOptions;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\ChartData;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\KeyValueFormat;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\ChartAggregateType;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\ChartNumberFormatSource;
 
 /**
  * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#scorecardchartspec

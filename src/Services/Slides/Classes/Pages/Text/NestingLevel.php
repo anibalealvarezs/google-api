@@ -1,9 +1,9 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Slides\Classes\Pages\Text;
+namespace Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Text;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 
 /**
  * @see https://developers.google.com/slides/api/reference/rest/v1/presentations.pages/text#nestinglevel

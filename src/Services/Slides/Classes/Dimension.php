@@ -1,10 +1,10 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Slides\Classes;
+namespace Anibalealvarezs\GoogleApi\Services\Slides\Classes;
 
-use Chmw\GoogleApi\Services\Slides\Enums\Unit;
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Slides\Enums\Unit;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 
 /**
  * @see https://developers.google.com/slides/api/reference/rest/v1/Dimension

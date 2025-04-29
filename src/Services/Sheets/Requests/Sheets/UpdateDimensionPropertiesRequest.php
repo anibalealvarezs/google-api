@@ -1,12 +1,12 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Sheets\Requests\Sheets;
+namespace Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Sheets;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Sheets\Classes\DataSourceSheetDimensionRange;
-use Chmw\GoogleApi\Services\Sheets\Classes\DimensionRange;
-use Chmw\GoogleApi\Services\Sheets\Classes\Sheets\DimensionProperties;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\DataSourceSheetDimensionRange;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\DimensionRange;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Sheets\DimensionProperties;
 
 /**
  * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request?hl=es-419#updatedimensionpropertiesrequest

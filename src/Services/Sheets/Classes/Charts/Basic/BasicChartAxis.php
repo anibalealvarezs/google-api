@@ -1,13 +1,13 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Sheets\Classes\Charts\Basic;
+namespace Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Basic;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\ChartAxisViewWindowOptions;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\TextFormat;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\TextPosition;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartAxisPosition;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\ChartAxisViewWindowOptions;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\TextFormat;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\TextPosition;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartAxisPosition;
 
 /**
  * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#basicchartaxis

@@ -1,11 +1,11 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Slides\Classes\Pages\Other;
+namespace Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Google\Interfaces\Kindable;
-use Chmw\GoogleApi\Services\Slides\Enums\Pages\Other\RelativeSlideLink;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Kindable;
+use Anibalealvarezs\GoogleApi\Services\Slides\Enums\Pages\Other\RelativeSlideLink;
 
 /**
  * @see https://developers.google.com/slides/api/reference/rest/v1/presentations.pages/other#Page.Link

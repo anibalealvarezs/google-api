@@ -1,14 +1,14 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Sheets\Classes\Sheets;
+namespace Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Sheets;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\ColorStyle;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\FilterCriteria;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\GridRange;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\TextFormat;
-use Chmw\GoogleApi\Services\Sheets\Enums\Other\HorizontalAlign;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\ColorStyle;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\FilterCriteria;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\GridRange;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\TextFormat;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Other\HorizontalAlign;
 
 /**
  * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/sheets#slicerspec

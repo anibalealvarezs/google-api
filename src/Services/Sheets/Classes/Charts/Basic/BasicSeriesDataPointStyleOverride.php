@@ -1,11 +1,11 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Sheets\Classes\Charts\Basic;
+namespace Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Basic;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\PointStyle;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\ColorStyle;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\PointStyle;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\ColorStyle;
 
 /**
  * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#basicseriesdatapointstyleoverride

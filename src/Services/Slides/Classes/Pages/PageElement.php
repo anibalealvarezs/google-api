@@ -1,17 +1,17 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Slides\Classes\Pages;
+namespace Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Charts\SheetsChart;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Images\Image;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Lines\Line;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Other\AffineTransform;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Shapes\Shape;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Tables\Table;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Videos\Video;
-use Chmw\GoogleApi\Services\Slides\Classes\Size;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Charts\SheetsChart;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Images\Image;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Lines\Line;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other\AffineTransform;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Shapes\Shape;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Tables\Table;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Videos\Video;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Size;
 
 /**
  * @see https://developers.google.com/slides/api/reference/rest/v1/presentations.pages#pageelement

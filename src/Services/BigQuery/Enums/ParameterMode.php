@@ -1,6 +1,6 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\BigQuery\Enums;
+namespace Anibalealvarezs\GoogleApi\Services\BigQuery\Enums;
 
 enum ParameterMode: string
 {

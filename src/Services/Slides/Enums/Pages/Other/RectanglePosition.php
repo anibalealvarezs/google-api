@@ -1,6 +1,6 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Slides\Enums\Pages\Other;
+namespace Anibalealvarezs\GoogleApi\Services\Slides\Enums\Pages\Other;
 
 /**
  * @see https://developers.google.com/slides/api/reference/rest/v1/presentations.pages/other#rectangleposition

@@ -1,10 +1,10 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Sheets\Classes\Spreadsheets;
+namespace Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Spreadsheets;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Sheets\Enums\Spreadsheets\DeveloperMetadataVisibility;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Spreadsheets\DeveloperMetadataVisibility;
 
 /**
  * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.developerMetadata#resource:-developermetadata

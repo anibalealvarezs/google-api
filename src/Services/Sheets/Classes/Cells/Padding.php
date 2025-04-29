@@ -2,8 +2,8 @@
 
 namespace Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Cells;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 
 /**
  * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#padding

@@ -1,9 +1,9 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\BigQuery\Classes;
+namespace Anibalealvarezs\GoogleApi\Services\BigQuery\Classes;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 
 /**
  * @see https://cloud.google.com/bigquery/docs/reference/rest/v2/ConnectionProperty

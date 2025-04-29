@@ -1,6 +1,6 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Slides\Enums;
+namespace Anibalealvarezs\GoogleApi\Services\Slides\Enums;
 
 enum ObjectDimension
 {
