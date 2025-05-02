@@ -249,7 +249,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -343,7 +343,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -401,7 +401,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -475,7 +475,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -539,7 +539,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -600,7 +600,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -662,7 +662,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -724,7 +724,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -786,7 +786,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -850,7 +850,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -908,7 +908,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
