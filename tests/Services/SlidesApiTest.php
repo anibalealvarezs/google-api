@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Anibalealvarezs\GoogleApi\Services\Slides;
+namespace Tests\Services;
 
 use Anibalealvarezs\ApiSkeleton\Enums\AuthType;
 use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other\SolidFill;
