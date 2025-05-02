@@ -295,10 +295,10 @@ class SlidesApi extends GoogleApi
     }
 
     /**
-     * @param string|null $presentationId
      * @param string $objectId
+     * @param string|null $presentationId
      * @param string $text
-     * @param int|null $insertionIndex
+     * @param int $insertionIndex
      * @param TableCellLocation|array|null $cellLocation
      * @param array|null $presentationData
      * @param bool $checkPresentation
@@ -310,7 +310,7 @@ class SlidesApi extends GoogleApi
         string $objectId,
         string $presentationId = null,
         string $text = "",
-        int $insertionIndex = null,
+        int $insertionIndex = 0,
         TableCellLocation|array|null $cellLocation = null,
         array $presentationData = null,
         bool $checkPresentation = false,
@@ -414,10 +414,10 @@ class SlidesApi extends GoogleApi
     }
 
     /**
-     * @param string|null $presentationId
      * @param string $objectId
+     * @param string|null $presentationId
      * @param string $text
-     * @param int|null $insertionIndex
+     * @param int $insertionIndex
      * @param Range|array|null $range
      * @param TableCellLocation|array|null $cellLocation
      * @param array|null $presentationData
@@ -430,7 +430,7 @@ class SlidesApi extends GoogleApi
         string $objectId,
         string $presentationId = null,
         string $text = "",
-        int $insertionIndex = null,
+        int $insertionIndex = 0,
         Range|array|null $range = null,
         TableCellLocation|array|null $cellLocation = null,
         array $presentationData = null,
@@ -568,9 +568,9 @@ class SlidesApi extends GoogleApi
     public function createTable(
         int $rows,
         int $columns,
+        PageElementProperties|array $elementProperties,
         string $objectId = null,
         string $presentationId = null,
-        PageElementProperties|array $elementProperties,
         array $presentationData = null,
         bool $checkPresentation = false,
         bool $getRequestObjectOnly = false,
