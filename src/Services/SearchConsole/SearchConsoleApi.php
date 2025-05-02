@@ -11,6 +11,7 @@ use Anibalealvarezs\GoogleApi\Services\SearchConsole\Enums\GroupType;
 use Anibalealvarezs\GoogleApi\Services\SearchConsole\Enums\Operator;
 use Anibalealvarezs\GoogleApi\Services\SearchConsole\Enums\SearchAppearance;
 use Exception;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 class SearchConsoleApi extends GoogleApi
@@ -22,6 +23,7 @@ class SearchConsoleApi extends GoogleApi
      * @param string $refreshToken
      * @param string $userId
      * @param array $scopes
+     * @param Client|null $guzzleClient
      * @throws Exception
      */
     public function __construct(
@@ -30,7 +32,8 @@ class SearchConsoleApi extends GoogleApi
         string $clientSecret,
         string $refreshToken,
         string $userId,
-        array $scopes = []
+        array $scopes = [],
+        ?Client $guzzleClient = null
     ) {
         parent::__construct(
             baseUrl: "https://www.googleapis.com/webmasters/v3/",
@@ -40,6 +43,7 @@ class SearchConsoleApi extends GoogleApi
             refreshToken: $refreshToken,
             userId: $userId,
             scopes: ($scopes ?: ["https://www.googleapis.com/auth/webmasters"]),
+            guzzleClient: $guzzleClient,
         );
     }
 

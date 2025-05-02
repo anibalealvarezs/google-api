@@ -4,6 +4,7 @@ namespace Anibalealvarezs\GoogleApi\Services\Gmail;
 
 use Anibalealvarezs\GoogleApi\Google\GoogleApi;
 use Exception;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 class GmailApi extends GoogleApi
@@ -15,6 +16,7 @@ class GmailApi extends GoogleApi
      * @param string $refreshToken
      * @param string $userId
      * @param array $scopes
+     * @param Client|null $guzzleClient
      * @throws Exception
      */
     public function __construct(
@@ -23,7 +25,8 @@ class GmailApi extends GoogleApi
         string $clientSecret,
         string $refreshToken,
         string $userId,
-        array $scopes = []
+        array $scopes = [],
+        ?Client $guzzleClient = null
     ) {
         parent::__construct(
             baseUrl: "https://gmail.googleapis.com/gmail/v1/",
@@ -33,6 +36,7 @@ class GmailApi extends GoogleApi
             refreshToken: $refreshToken,
             userId: $userId,
             scopes: ($scopes ?: ["https://www.googleapis.com/auth/gmail.modify"]),
+            guzzleClient: $guzzleClient,
         );
     }
 
