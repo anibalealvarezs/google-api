@@ -230,7 +230,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $createSlideRequest = [
                 'createSlide' => Helpers::getJsonableArray(new CreateSlideRequest(
@@ -279,7 +279,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Request the presentation data
             $response = $this->performRequest(
                 method: "GET",
@@ -324,7 +324,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $insertTextRequest = [
                 'insertText' => Helpers::getJsonableArray(new InsertTextRequest(
@@ -383,10 +383,10 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $deleteTextRequest = [
-                'insertText' => Helpers::getJsonableArray(new DeleteTextRequest(
+                'deleteText' => Helpers::getJsonableArray(new DeleteTextRequest(
                     objectId: $objectId,
                     textRange: $range,
                     cellLocation: $cellLocation,
@@ -519,7 +519,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $updateTextStyleRequest = [
                 'updateTextStyle' => Helpers::getJsonableArray(new UpdateTextStyleRequest(
@@ -581,7 +581,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $createTableRequest = [
                 'createTable' => Helpers::getJsonableArray(new CreateTableRequest(
@@ -643,7 +643,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $updateTableRowPropertiesRequest = [
                 'updateTableRowProperties' => Helpers::getJsonableArray(new UpdateTableRowPropertiesRequest(
@@ -705,7 +705,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $updateTableColumnPropertiesRequest = [
                 'updateTableColumnProperties' => Helpers::getJsonableArray(new UpdateTableColumnPropertiesRequest(
@@ -767,7 +767,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $updateTableCellPropertiesRequest = [
                 'updateTableCellProperties' => Helpers::getJsonableArray(new UpdateTableCellPropertiesRequest(
@@ -830,7 +830,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $createSheetsChartRequest = [
                 'createSheetsChart' => Helpers::getJsonableArray(new CreateSheetsChartRequest(
@@ -890,7 +890,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $createImageRequest = [
                 'createImage' => Helpers::getJsonableArray(new CreateImageRequest(
