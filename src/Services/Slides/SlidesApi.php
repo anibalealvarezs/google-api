@@ -43,7 +43,7 @@ class SlidesApi extends GoogleApi
      * @param string $userId
      * @param array $scopes
      * @param string $token
-     * @throws GuzzleException
+     * @throws Exception
      */
     public function __construct(
         string $redirectUrl,

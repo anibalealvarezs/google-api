@@ -3,7 +3,7 @@
 namespace Anibalealvarezs\GoogleApi\Google;
 
 use Anibalealvarezs\ApiSkeleton\Clients\OAuthV2Client;
-use GuzzleHttp\Exception\GuzzleException;
+use Exception;
 
 class GoogleApi extends OAuthV2Client
 {
@@ -16,7 +16,7 @@ class GoogleApi extends OAuthV2Client
      * @param string $userId
      * @param array $scopes
      * @param string $token
-     * @throws GuzzleException
+     * @throws Exception
      */
     public function __construct(
         string $baseUrl,

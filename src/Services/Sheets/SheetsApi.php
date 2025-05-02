@@ -37,6 +37,7 @@ use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\AddChartRequ
 use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\AddSheetRequest;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\CopyPasteRequest;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\DeleteSheetRequest;
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 
 class SheetsApi extends GoogleApi
@@ -49,7 +50,7 @@ class SheetsApi extends GoogleApi
      * @param string $userId
      * @param array $scopes
      * @param string $token
-     * @throws GuzzleException
+     * @throws Exception
      */
     public function __construct(
         string $redirectUrl,

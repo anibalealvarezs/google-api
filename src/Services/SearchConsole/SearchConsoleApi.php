@@ -10,6 +10,7 @@ use Anibalealvarezs\GoogleApi\Services\SearchConsole\Enums\Dimension;
 use Anibalealvarezs\GoogleApi\Services\SearchConsole\Enums\GroupType;
 use Anibalealvarezs\GoogleApi\Services\SearchConsole\Enums\Operator;
 use Anibalealvarezs\GoogleApi\Services\SearchConsole\Enums\SearchAppearance;
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 
 class SearchConsoleApi extends GoogleApi
@@ -21,7 +22,7 @@ class SearchConsoleApi extends GoogleApi
      * @param string $refreshToken
      * @param string $userId
      * @param array $scopes
-     * @throws GuzzleException
+     * @throws Exception
      */
     public function __construct(
         string $redirectUrl,

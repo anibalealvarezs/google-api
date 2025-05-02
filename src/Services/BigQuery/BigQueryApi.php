@@ -7,6 +7,7 @@ use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
 use Anibalealvarezs\GoogleApi\Services\BigQuery\Classes\DataFormatOptions;
 use Anibalealvarezs\GoogleApi\Services\BigQuery\Classes\Query\QueryRequest;
 use Anibalealvarezs\GoogleApi\Services\BigQuery\Enums\TableMetadataView;
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 
 class BigQueryApi extends GoogleApi
@@ -19,7 +20,7 @@ class BigQueryApi extends GoogleApi
      * @param string $userId
      * @param array $scopes
      * @param string $token
-     * @throws GuzzleException
+     * @throws Exception
      */
     public function __construct(
         string $redirectUrl,

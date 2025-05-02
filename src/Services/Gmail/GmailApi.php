@@ -3,6 +3,7 @@
 namespace Anibalealvarezs\GoogleApi\Services\Gmail;
 
 use Anibalealvarezs\GoogleApi\Google\GoogleApi;
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 
 class GmailApi extends GoogleApi
@@ -14,7 +15,7 @@ class GmailApi extends GoogleApi
      * @param string $refreshToken
      * @param string $userId
      * @param array $scopes
-     * @throws GuzzleException
+     * @throws Exception
      */
     public function __construct(
         string $redirectUrl,
