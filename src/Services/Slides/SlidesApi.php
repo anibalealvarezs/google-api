@@ -30,6 +30,7 @@ use Anibalealvarezs\GoogleApi\Services\Slides\Requests\UpdateTableColumnProperti
 use Anibalealvarezs\GoogleApi\Services\Slides\Requests\UpdateTableRowPropertiesRequest;
 use Anibalealvarezs\GoogleApi\Services\Slides\Requests\UpdateTextStyleRequest;
 use Exception;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use InvalidArgumentException;
 
@@ -43,6 +44,7 @@ class SlidesApi extends GoogleApi
      * @param string $userId
      * @param array $scopes
      * @param string $token
+     * @param Client|null $guzzleClient
      * @throws Exception
      */
     public function __construct(
@@ -52,7 +54,8 @@ class SlidesApi extends GoogleApi
         string $refreshToken,
         string $userId,
         array $scopes = [],
-        string $token = ""
+        string $token = "",
+        ?Client $guzzleClient = null
     ) {
         parent::__construct(
             baseUrl: "https://slides.googleapis.com/v1/presentations/",
@@ -62,7 +65,8 @@ class SlidesApi extends GoogleApi
             refreshToken: $refreshToken,
             userId: $userId,
             scopes: ($scopes ?: ["https://www.googleapis.com/auth/presentations", "https://www.googleapis.com/auth/drive", "https://www.googleapis.com/auth/spreadsheets"]),
-            token: $token
+            token: $token,
+            guzzleClient: $guzzleClient,
         );
     }
 
