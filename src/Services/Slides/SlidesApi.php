@@ -151,8 +151,8 @@ class SlidesApi extends GoogleApi
         if ($pageSize) {
             if (is_array($pageSize) && isset($pageSize['width']) && isset($pageSize['height'])) {
                 $pageSize = new Size(
-                    width: new Dimension($pageSize['width']),
-                    height: new Dimension($pageSize['height'])
+                    width: is_array($pageSize['width']) ? $pageSize['width'] : new Dimension($pageSize['width']),
+                    height: is_array($pageSize['height']) ? $pageSize['height'] : new Dimension($pageSize['height'])
                 );
             }
             if (!($pageSize instanceof Size)) {
