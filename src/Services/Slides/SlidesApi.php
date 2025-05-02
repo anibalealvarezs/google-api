@@ -445,22 +445,24 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
-            // Get CreateSlide request
-            $deleteTextRequest = $this->deleteText(
-                objectId: $objectId,
-                range: $range,
-                cellLocation: $cellLocation,
-                getRequestObjectOnly: true,
-            );
-            // Get CreateSlide request
-            $insertTextRequest = $this->insertText(
-                objectId: $objectId,
-                text: $text,
-                insertionIndex: $insertionIndex,
-                cellLocation: $cellLocation,
-                getRequestObjectOnly: true,
-            );
+        if (isset($presentationData["presentationId"]) || $presentationId) {
+            // Get Delete Text request
+            $deleteTextRequest = [
+                'deleteText' => Helpers::getJsonableArray(new DeleteTextRequest(
+                    objectId: $objectId,
+                    textRange: $range,
+                    cellLocation: $cellLocation,
+                ))
+            ];
+            // Get Insert Text request
+            $insertTextRequest = [
+                'insertText' => Helpers::getJsonableArray(new InsertTextRequest(
+                    objectId: $objectId,
+                    text: $text,
+                    insertionIndex: $insertionIndex,
+                    cellLocation: $cellLocation,
+                ))
+            ];
             // Consolidate requests
             $updateTextRequest =  [
                 ...$deleteTextRequest,
