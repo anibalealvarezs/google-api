@@ -2,6 +2,9 @@
 
 namespace Anibalealvarezs\GoogleApi\Google\Helpers;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\RequestException;
 use JetBrains\PhpStorm\NoReturn;
 
 class Helpers
@@ -226,5 +229,75 @@ class Helpers
             return chr(ord('A') + $column);
         }
         return self::indexToA1Notation(intval($column / 26) - 1) . chr(ord('A') + ($column % 26));
+    }
+
+    /**
+     * @param $url
+     * @return bool
+     */
+    public static function isValidSearchConsoleUrl($url): bool
+    {
+        $url = trim($url);
+        $urlPrefixPattern = '/^https?:\/\/[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.([a-zA-Z]{2,})(\/)?$/';
+        $domainPattern = '/^sc-domain:[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.([a-zA-Z]{2,})$/';
+
+        if (preg_match($urlPrefixPattern, $url)) {
+            return true;
+        }
+
+        if (preg_match($domainPattern, $url)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function isSitemapUrl(string $url, ?Client $client = null): bool
+    {
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            return false;
+        }
+
+        $url = trim($url);
+
+        $sitemapPattern = '/\.(xml|xml\.gz)$/i';
+        if (!preg_match($sitemapPattern, $url)) {
+            return false;
+        }
+
+        // Use provided client or create a new one
+        $client = $client ?: new Client([
+            'timeout' => 10,
+            'allow_redirects' => [
+                'max' => 5,
+            ],
+            'headers' => [
+                'User-Agent' => 'SitemapValidator/1.0',
+                'Range' => 'bytes=0-2048', // Get just the first 2KB
+            ],
+        ]);
+
+        try {
+            $response = $client->request('GET', $url);
+
+            if ($response->getStatusCode() !== 200) {
+                return false;
+            }
+
+            $contentType = $response->getHeaderLine('Content-Type');
+            if (stripos($contentType, 'xml') === false && stripos($contentType, 'gzip') === false) {
+                return false;
+            }
+
+            $content = $response->getBody()->getContents();
+
+            if (stripos($content, '<sitemapindex') !== false || stripos($content, '<urlset') !== false) {
+                return true;
+            }
+
+            return false;
+        } catch (RequestException|GuzzleException) {
+            return false;
+        }
     }
 }
