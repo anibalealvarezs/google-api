@@ -23,11 +23,11 @@ class SearchConsoleApiLiveTest extends TestCase
     {
         $config = app_config();
 
-        $this->testSiteUrl = 'sc-domain:anibalalvarez.com';
-        $this->testRemovableSiteUrl = 'sc-domain:loquesea.com';
-        $this->testSitemapUrl = 'https://anibalalvarez.com/sitemap_index.xml';
-        $this->testRemovableSitemapUrl = 'https://anibalalvarez.com/geo-sitemap.xml';
-        $this->inspectUrl = 'https://anibalalvarez.com/ecommerce-conversion-optimization-businesses/';
+        $this->testSiteUrl = $config['search_console_test_site_url'];
+        $this->testRemovableSiteUrl = $config['search_console_test_removable_site_url'];
+        $this->testSitemapUrl = $config['search_console_test_sitemap_url'];
+        $this->testRemovableSitemapUrl = $config['search_console_test_removable_sitemap_url'];
+        $this->inspectUrl = $config['search_console_test_inspect_url'];
 
         $this->api = new SearchConsoleApi(
             redirectUrl: $config['google_redirect_uri'],
@@ -35,6 +35,7 @@ class SearchConsoleApiLiveTest extends TestCase
             clientSecret: $config['google_client_secret'],
             refreshToken: $config['google_refresh_token'],
             userId: $config['google_user_id'],
+            scopes: [$config['search_console_scope']],
         );
     }
 
