@@ -4,6 +4,7 @@
 
 - [Google Slides](#google-slides)
   - [Index](#index)
+  - [Testing](TESTS.md)
   - [Raw Requests](#raw-requests)
     - [Raw: CreateImage request](#raw-createimage-request)
       - [Enums included](#enums-included)

@@ -4,6 +4,8 @@ namespace Anibalealvarezs\GoogleApi\Services\Drive;
 
 use Anibalealvarezs\GoogleApi\Google\GoogleApi;
 use Anibalealvarezs\GoogleApi\Services\Drive\Enums\Corpora;
+use Exception;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 class DriveApi extends GoogleApi
@@ -15,7 +17,8 @@ class DriveApi extends GoogleApi
      * @param string $refreshToken
      * @param string $userId
      * @param array $scopes
-     * @throws GuzzleException
+     * @param Client|null $guzzleClient
+     * @throws Exception
      */
     public function __construct(
         string $redirectUrl,
@@ -23,7 +26,8 @@ class DriveApi extends GoogleApi
         string $clientSecret,
         string $refreshToken,
         string $userId,
-        array $scopes = []
+        array $scopes = [],
+        ?Client $guzzleClient = null
     ) {
         parent::__construct(
             baseUrl: "https://www.googleapis.com/drive/v3/",
@@ -33,6 +37,7 @@ class DriveApi extends GoogleApi
             refreshToken: $refreshToken,
             userId: $userId,
             scopes: ($scopes ?: ["https://www.googleapis.com/auth/drive"]),
+            guzzleClient: $guzzleClient,
         );
     }
 

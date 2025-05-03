@@ -18,8 +18,8 @@ class TableCellProperties implements Jsonable
         TableCellBackgroundFill|array $tableCellBackgroundFill,
         ContentAlignment|string $contentAlignment
     ) {
-        $this->location = $this->arrayToObject(class: TableCellBackgroundFill::class, var: $tableCellBackgroundFill);
-        $this->rowSpan = $this->stringToEnum(enum: ContentAlignment::class, var: $contentAlignment);
+        $this->tableCellBackgroundFill = $this->arrayToObject(class: TableCellBackgroundFill::class, var: $tableCellBackgroundFill);
+        $this->contentAlignment = $this->stringToEnum(enum: ContentAlignment::class, var: $contentAlignment);
     }
 
     public function toJson(): string

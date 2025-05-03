@@ -4,6 +4,8 @@ namespace Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Tables;
 
 use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
 use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\DataExecutionStatus;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Cells\DataSourceTableColumnSelectionType;
 use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other\SolidFill;
 use Anibalealvarezs\GoogleApi\Services\Slides\Enums\Pages\Other\PropertyState;
 

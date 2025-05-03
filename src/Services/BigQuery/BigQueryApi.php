@@ -7,6 +7,8 @@ use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
 use Anibalealvarezs\GoogleApi\Services\BigQuery\Classes\DataFormatOptions;
 use Anibalealvarezs\GoogleApi\Services\BigQuery\Classes\Query\QueryRequest;
 use Anibalealvarezs\GoogleApi\Services\BigQuery\Enums\TableMetadataView;
+use Exception;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 class BigQueryApi extends GoogleApi
@@ -19,7 +21,8 @@ class BigQueryApi extends GoogleApi
      * @param string $userId
      * @param array $scopes
      * @param string $token
-     * @throws GuzzleException
+     * @param Client|null $guzzleClient
+     * @throws Exception
      */
     public function __construct(
         string $redirectUrl,
@@ -28,7 +31,8 @@ class BigQueryApi extends GoogleApi
         string $refreshToken,
         string $userId,
         array $scopes = [],
-        string $token = ""
+        string $token = "",
+        ?Client $guzzleClient = null
     ) {
         parent::__construct(
             baseUrl: "https://bigquery.googleapis.com/bigquery/v2/projects/",
@@ -40,7 +44,8 @@ class BigQueryApi extends GoogleApi
             scopes: ($scopes ?: [
                 "https://www.googleapis.com/auth/bigquery",
             ]),
-            token: $token
+            token: $token,
+            guzzleClient: $guzzleClient,
         );
     }
 
