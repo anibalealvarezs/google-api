@@ -213,7 +213,7 @@ class SearchConsoleApi extends GoogleApi
             method: "PUT",
             endpoint: "sites/" . urlencode($siteUrl),
         );
-        return json_decode($response->getBody()->getContents(), true);
+        return json_decode($response->getBody()->getContents() ?: '[]', true);
     }
 
     /**
@@ -229,7 +229,7 @@ class SearchConsoleApi extends GoogleApi
             method: "DELETE",
             endpoint: "sites/" . urlencode($siteUrl),
         );
-        return json_decode($response->getBody()->getContents(), true);
+        return json_decode($response->getBody()->getContents() ?: '[]', true);
     }
 
     /**
@@ -281,7 +281,7 @@ class SearchConsoleApi extends GoogleApi
             method: "PUT",
             endpoint: "sites/" . urlencode($siteUrl) . "/sitemaps/" . urlencode($sitemap),
         );
-        return json_decode($response->getBody()->getContents(), true);
+        return json_decode($response->getBody()->getContents() ?: '[]', true);
     }
 
     /**
@@ -297,7 +297,7 @@ class SearchConsoleApi extends GoogleApi
             method: "DELETE",
             endpoint: "sites/" . urlencode($siteUrl) . "/sitemaps/" . urlencode($sitemap),
         );
-        return json_decode($response->getBody()->getContents(), true);
+        return json_decode($response->getBody()->getContents() ?: '[]', true);
     }
 
     /**
