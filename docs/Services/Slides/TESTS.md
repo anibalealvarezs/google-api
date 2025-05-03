@@ -1,6 +1,6 @@
 # SlidesApi - Testing Instructions
 
-This document provides instructions for running unit tests for the `SlidesApi` class in the `anibalealvarezs/google-api` package. The `SlidesApi` class extends the `GoogleApi` class (which inherits from `OAuthV2Client` in the `anibalealvarezs/api-client-skeleton` package) to interact with Google Slides, offering methods for managing presentations, slides, text, tables, charts, and images. The tests, located in `tests/Services/SlidesApiTest.php`, verify the constructor’s OAuth v2 configuration and the functionality of key public methods.
+This document provides instructions for running unit tests for the `SlidesApi` class in the `anibalealvarezs/google-api` package. The `SlidesApi` class extends the `GoogleApi` class (which inherits from `OAuthV2Client` in the `anibalealvarezs/api-client-skeleton` package) to interact with Google Slides, offering methods for managing presentations, slides, text, tables, charts, and images. The tests, located in `tests/Unit/Services/SlidesApiTest.php`, verify the constructor’s OAuth v2 configuration and the functionality of key public methods.
 
 ---
 NOTE:  
@@ -51,7 +51,7 @@ This will install the `anibalealvarezs/google-api` package, its dependency `anib
 
 ## Test Setup
 
-The `SlidesApiTest.php` test class, located in `tests/Services/SlidesApiTest.php`, verifies the `SlidesApi` class. The test class uses:
+The `SlidesApiTest.php` test class, located in `tests/Unit/Services/SlidesApiTest.php`, verifies the `SlidesApi` class. The test class uses:
 
 - **Faker**: Generates random test data (e.g., UUIDs for presentation IDs, object IDs, client IDs).
 - **Guzzle MockHandler**: Simulates HTTP responses for API calls, including token refresh and Slides API endpoints.
@@ -70,13 +70,13 @@ No additional configuration is required, as the tests are self-contained and do 
 To run the tests for the `SlidesApi` class, use the following command from the root directory of your project:
 
 ```bash
-./vendor/bin/phpunit --verbose tests/Services/SlidesApiTest.php
+./vendor/bin/phpunit --verbose tests/Unit/Services/SlidesApiTest.php
 ```
 
 ### Command Breakdown
 - `./vendor/bin/phpunit`: Executes the PHPUnit binary installed via Composer.
 - `--verbose`: Enables verbose output, displaying detailed information about each test case, including test names and results.
-- `tests/Services/SlidesApiTest.php`: Specifies the test file for the `SlidesApi` class.
+- `tests/Unit/Services/SlidesApiTest.php`: Specifies the test file for the `SlidesApi` class.
 
 ### Expected Output
 When running the command, you will see output similar to the following (assuming all 17 tests pass):
@@ -102,12 +102,12 @@ If tests fail, check the following:
 - **Dependencies**: Ensure all dependencies are installed (`composer install`) and match the required versions. Verify that `anibalealvarezs/google-api` and `anibalealvarezs/api-client-skeleton` are correctly installed.
 - **PHP Version**: Confirm PHP 8.1 or higher is used (`php -v`).
 - **Composer Autoloader**: Run `composer dump-autoload` to regenerate the autoloader if classes are not found.
-- **File Path**: Ensure the test file is located at `tests/Services/SlidesApiTest.php`. Adjust the PHPUnit command if the directory structure differs.
+- **File Path**: Ensure the test file is located at `tests/Unit/Services/SlidesApiTest.php`. Adjust the PHPUnit command if the directory structure differs.
 - **Verbose Output**: The `--verbose` flag provides detailed error messages, including stack traces for failed assertions or exceptions (e.g., `InvalidArgumentException` for invalid parameters or `GuzzleException` for HTTP issues).
 
 ## Test Coverage
 
-The `SlidesApiTest.php` class, located in `tests/Services/SlidesApiTest.php`, includes 17 test methods that cover the `SlidesApi` class’s constructor and key public methods for interacting with Google Slides. The tests include:
+The `SlidesApiTest.php` class, located in `tests/Unit/Services/SlidesApiTest.php`, includes 17 test methods that cover the `SlidesApi` class’s constructor and key public methods for interacting with Google Slides. The tests include:
 
 - **Constructor Validation**:
     - `testConstructorWithValidParameters`: Verifies that the constructor sets the base URL (`https://slides.googleapis.com/v1/presentations/`), OAuth v2 URLs, client credentials, scopes, token, authentication type, settings, and headers.
@@ -143,13 +143,13 @@ The `SlidesApiTest.php` class, located in `tests/Services/SlidesApiTest.php`, in
 To generate a test coverage report:
 
 ```bash
-./vendor/bin/phpunit --verbose --coverage-text tests/Services/SlidesApiTest.php
+./vendor/bin/phpunit --verbose --coverage-text tests/Unit/Services/SlidesApiTest.php
 ```
 
 For an HTML report:
 
 ```bash
-./vendor/bin/phpunit --verbose --coverage-html coverage tests/Services/SlidesApiTest.php
+./vendor/bin/phpunit --verbose --coverage-html coverage tests/Unit/Services/SlidesApiTest.php
 ```
 
 This generates an HTML report in the `coverage/` directory, detailing coverage for the `SlidesApi` class (requires PHPUnit to be configured with coverage reporting).
@@ -171,5 +171,5 @@ This generates an HTML report in the `coverage/` directory, detailing coverage f
       </php>
   </phpunit>
   ```
-- **Directory Structure**: The test file is located at `tests/Services/SlidesApiTest.php` to match the namespace `Tests\Services`. Adjust the path in the PHPUnit command if your project uses a different structure.
+- **Directory Structure**: The test file is located at `tests/Unit/Services/SlidesApiTest.php` to match the namespace `Tests\Services`. Adjust the path in the PHPUnit command if your project uses a different structure.
 - **Dependency**: The `anibalealvarezs/api-client-skeleton` package is automatically included as a dependency of `anibalealvarezs/google-api`. Ensure it is installed correctly via Composer.
