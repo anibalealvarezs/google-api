@@ -1,6 +1,6 @@
 # GoogleApi - Testing Instructions
 
-This document provides instructions for running unit tests for the `GoogleApi` class in the `anibalealvarezs/google-api` package. The `GoogleApi` class extends the `OAuthV2Client` from the `anibalealvarezs/api-client-skeleton` package to configure OAuth v2 authentication for Google APIs. The tests, located in `tests/GoogleApiTest.php`, verify the constructor's behavior, including parameter validation and OAuth v2 configuration.
+This document provides instructions for running unit tests for the `GoogleApi` class in the `anibalealvarezs/google-api` package. The `GoogleApi` class extends the `OAuthV2Client` from the `anibalealvarezs/api-client-skeleton` package to configure OAuth v2 authentication for Google APIs. The tests, located in `tests/Unit/GoogleApiTest.php`, verify the constructor's behavior, including parameter validation and OAuth v2 configuration.
 
 ---
 Tests for specific services are documented here:  
@@ -54,7 +54,7 @@ This will install the `anibalealvarezs/google-api` package, its dependency `anib
 
 ## Test Setup
 
-The `GoogleApiTest.php` test class, located in `tests/GoogleApiTest.php`, verifies the `GoogleApi` class. The test class uses:
+The `GoogleApiTest.php` test class, located in `tests/Unit/GoogleApiTest.php`, verifies the `GoogleApi` class. The test class uses:
 
 - **Faker**: Generates random test data (e.g., UUIDs for client IDs, refresh tokens, tokens).
 - **Guzzle MockHandler**: Available for simulating HTTP responses, though not currently used as tests focus on the constructor.
@@ -72,13 +72,13 @@ No additional configuration is required, as the tests are self-contained and do 
 To run the tests for the `GoogleApi` class, use the following command from the root directory of your project:
 
 ```bash
-./vendor/bin/phpunit --verbose tests/GoogleApiTest.php
+./vendor/bin/phpunit --verbose tests/Unit/GoogleApiTest.php
 ```
 
 ### Command Breakdown
 - `./vendor/bin/phpunit`: Executes the PHPUnit binary installed via Composer.
 - `--verbose`: Enables verbose output, displaying detailed information about each test case, including test names and results.
-- `tests/GoogleApiTest.php`: Specifies the test file for the `GoogleApi` class.
+- `tests/Unit/GoogleApiTest.php`: Specifies the test file for the `GoogleApi` class.
 
 ### Expected Output
 When running the command, you will see output similar to the following (assuming all 10 tests pass):
@@ -104,12 +104,12 @@ If tests fail, check the following:
 - **Dependencies**: Ensure all dependencies are installed (`composer install`) and match the required versions. Verify that `anibalealvarezs/google-api` and `anibalealvarezs/api-client-skeleton` are correctly installed.
 - **PHP Version**: Confirm PHP 8.1 or higher is used (`php -v`).
 - **Composer Autoloader**: Run `composer dump-autoload` to regenerate the autoloader if classes are not found.
-- **File Path**: Ensure the test file is located at `tests/GoogleApiTest.php`. Adjust the PHPUnit command if the directory structure differs.
+- **File Path**: Ensure the test file is located at `tests/Unit/GoogleApiTest.php`. Adjust the PHPUnit command if the directory structure differs.
 - **Verbose Output**: The `--verbose` flag provides detailed error messages, including stack traces for failed assertions or exceptions (e.g., `InvalidArgumentException` for invalid URLs or missing credentials).
 
 ## Test Coverage
 
-The `GoogleApiTest.php` class, located in `tests/GoogleApiTest.php`, includes 10 test methods that cover the `GoogleApi` class's constructor, which is the only public method. The tests ensure proper initialization and validation of OAuth v2 authentication parameters, including:
+The `GoogleApiTest.php` class, located in `tests/Unit/GoogleApiTest.php`, includes 10 test methods that cover the `GoogleApi` class's constructor, which is the only public method. The tests ensure proper initialization and validation of OAuth v2 authentication parameters, including:
 - **Valid Configuration**: Verifies that the constructor correctly sets the base URL, authentication URLs (auth URL, token URL, refresh auth URL), redirect URL, client ID, client secret, refresh token, user ID, scopes, token, authentication type, settings, and headers (e.g., `testConstructorWithValidParameters`).
 - **Error Handling**: Tests for invalid or empty inputs, including:
   - Empty base URL (`testConstructorWithEmptyBaseUrl`).
@@ -123,13 +123,13 @@ The `GoogleApiTest.php` class, located in `tests/GoogleApiTest.php`, includes 10
 To generate a test coverage report:
 
 ```bash
-./vendor/bin/phpunit --verbose --coverage-text tests/GoogleApiTest.php
+./vendor/bin/phpunit --verbose --coverage-text tests/Unit/GoogleApiTest.php
 ```
 
 This will display a coverage report in the terminal. For an HTML report:
 
 ```bash
-./vendor/bin/phpunit --verbose --coverage-html coverage tests/GoogleApiTest.php
+./vendor/bin/phpunit --verbose --coverage-html coverage tests/Unit/GoogleApiTest.php
 ```
 
 This generates an HTML report in the `coverage/` directory, detailing coverage for the `GoogleApi` class (requires PHPUnit to be configured with coverage reporting).
@@ -151,5 +151,5 @@ This generates an HTML report in the `coverage/` directory, detailing coverage f
       </php>
   </phpunit>
   ```
-- **Directory Structure**: The test file is located at `tests/GoogleApiTest.php` to match the namespace `Tests`. Adjust the path in the PHPUnit command if your project uses a different structure.
+- **Directory Structure**: The test file is located at `tests/Unit/GoogleApiTest.php` to match the namespace `Tests`. Adjust the path in the PHPUnit command if your project uses a different structure.
 - **Dependency**: The `anibalealvarezs/api-client-skeleton` package is automatically included as a dependency of `anibalealvarezs/google-api`. Ensure it is installed correctly via Composer.

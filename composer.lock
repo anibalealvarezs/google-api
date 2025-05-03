@@ -66,18 +66,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/anibalealvarezs/oauth-v1.git",
-                "reference": "c8974f7bbd2729c9392d5f2c3b9a9e9bc7e8522c"
+                "reference": "c47bb38647f4e331c33ff1fc1a0968d6aec00350"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.anibalalvarez.com/dist/anibalealvarezs/oauth-v1/anibalealvarezs-oauth-v1-c8974f7bbd2729c9392d5f2c3b9a9e9bc7e8522c-zip-eeadb4.zip",
-                "reference": "c8974f7bbd2729c9392d5f2c3b9a9e9bc7e8522c",
-                "shasum": "374be1ee194d3a1cf99fe9da3d7afca997388a00"
+                "url": "https://satis.anibalalvarez.com/dist/anibalealvarezs/oauth-v1/anibalealvarezs-oauth-v1-c47bb38647f4e331c33ff1fc1a0968d6aec00350-zip-b2a53f.zip",
+                "reference": "c47bb38647f4e331c33ff1fc1a0968d6aec00350",
+                "shasum": "e4254addab2564db4514669d3b2c7917c94e7e82"
             },
             "require": {
                 "php": ">=8.1"
             },
             "require-dev": {
+                "fakerphp/faker": "^1.20",
                 "phpunit/phpunit": "^9"
             },
             "default-branch": true,
@@ -106,7 +107,7 @@
                 "source": "https://github.com/anibalealvarezs/oauth-v1/tree/main",
                 "issues": "https://github.com/anibalealvarezs/oauth-v1/issues"
             },
-            "time": "2025-02-07T22:24:03+00:00"
+            "time": "2025-05-02T18:49:31+00:00"
         },
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -917,7 +918,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/main"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.6.0-BETA1"
             },
             "funding": [
                 {
@@ -997,7 +998,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.31.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.32.0"
             },
             "funding": [
                 {
@@ -1079,7 +1080,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/1.x"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.32.0"
             },
             "funding": [
                 {
@@ -1160,7 +1161,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/1.x"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.32.0"
             },
             "funding": [
                 {
@@ -1334,7 +1335,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/translation-contracts/tree/main"
+                "source": "https://github.com/symfony/translation-contracts/tree/v3.6.0-BETA1"
             },
             "funding": [
                 {
@@ -2125,12 +2126,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "8d7e17e8a4ab7bcf8864fbf809ff97196b68f50f"
+                "reference": "43d2cb18d0675c38bd44982a5d1d88f6d53d8d95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/8d7e17e8a4ab7bcf8864fbf809ff97196b68f50f",
-                "reference": "8d7e17e8a4ab7bcf8864fbf809ff97196b68f50f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/43d2cb18d0675c38bd44982a5d1d88f6d53d8d95",
+                "reference": "43d2cb18d0675c38bd44982a5d1d88f6d53d8d95",
                 "shasum": ""
             },
             "require": {
@@ -2204,7 +2205,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.23"
             },
             "funding": [
                 {
@@ -2228,7 +2229,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-30T08:28:12+00:00"
+            "time": "2025-05-02T06:40:34+00:00"
         },
         {
             "name": "psr/container",

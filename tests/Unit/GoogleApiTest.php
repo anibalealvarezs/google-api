@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\Unit;
 
 use Anibalealvarezs\ApiSkeleton\Enums\AuthType;
 use Anibalealvarezs\GoogleApi\Google\GoogleApi;
