@@ -4,9 +4,9 @@ This document provides instructions for running unit tests for the `SearchConsol
 
 ---
 **NOTE**:  
-Information about the `GoogleApi` class can be found in the [GoogleApi](../../../README.md) documentation.  
-Information about the `GoogleApiTest` class can be found in the [GoogleApiTest](../../TESTS.md) documentation.  
-Information about the `SearchConsoleApi` class can be found in the [SearchConsoleApi](README.md) documentation.
+- Information about the `GoogleApi` class can be found in the [GoogleApi](../../../README.md) documentation.  
+- Information about the `GoogleApiTest` class can be found in the [GoogleApiTest](../../TESTS.md) documentation.  
+- Information about the `SearchConsoleApi` class can be found in the [SearchConsoleApi](README.md) documentation.
 ---
 
 ## Prerequisites
