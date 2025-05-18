@@ -1,38 +1,37 @@
-slides_client_id: # client_id_string
-slides_client_secret: # client_secret_string
-slides_redirect_uri: # https://oauth.pstmn.io/v1/browser-callback
-slides_refresh_token: # refresh_token_string
-slides_user_id: # your@email.com
+# Google
+google_client_id: # client_id_string
+google_client_secret: # client_secret_string
+google_redirect_uri: # https://oauth.pstmn.io/v1/browser-callback
+google_refresh_token: # refresh_token_string
+google_user_id: # your@email.com
+
+# Slides
 slides_scope: # [scope1, scope2]
 slides_token: # token_string
 slides_themes: # {"SimpleLight2":{"id":"simple-light-2","layouts":{"Cover":"p2","Agenda":"p12","TitleRed":"gc17cfde283_0_16","TitleDiamond":"gc17cfde283_1_2","Text":"gc17cfde283_1_62","Canvas":"gc17cfde283_1_14","CanvasRed":"gc17cfde283_1_68","End":"gc17cfde283_1_76","Creatives":"g118c5aca048_2_0"}}}
 
-sheets_client_id: # client_id_string
-sheets_client_secret: # client_secret_string
-sheets_redirect_uri: # https://oauth.pstmn.io/v1/browser-callback
-sheets_refresh_token: # refresh_token_string
-sheets_user_id: # your@email.com
+# Sheets
 sheets_scope: # [scope1, scope2]
 sheets_token: # token_string
 sheets_themes: # {"SimpleLight2":{"id":"simple-light-2","layouts":{"Cover":"p2","Agenda":"p12","TitleRed":"gc17cfde283_0_16","TitleDiamond":"gc17cfde283_1_2","Text":"gc17cfde283_1_62","Canvas":"gc17cfde283_1_14","CanvasRed":"gc17cfde283_1_68","End":"gc17cfde283_1_76","Creatives":"g118c5aca048_2_0"}}}
 
-gmail_client_id: # client_id_string
-gmail_client_secret: # client_secret_string
-gmail_redirect_uri: # https://oauth.pstmn.io/v1/browser-callback
-gmail_refresh_token: # refresh_token_string
-gmail_user_id: # your@email.com
+# Gmail
 gmail_scope: # [scope1, scope2]
+gmail_token: # token_string
 
-drive_client_id: # client_id_string
-drive_client_secret: # client_secret_string
-drive_redirect_uri: # https://oauth.pstmn.io/v1/browser-callback
-drive_refresh_token: # refresh_token_string
-drive_user_id: # your@email.com
+#Drive
 drive_scope: # [scope1, scope2]
+drive_token: # token_string
 
-bigquery_client_id: # client_id_string
-bigquery_client_secret: # client_secret_string
-bigquery_redirect_uri: # https://oauth.pstmn.io/v1/browser-callback
-bigquery_refresh_token: # refresh_token_string
-bigquery_user_id: # your@email.com
+# BigQuery
 bigquery_scope: # [scope1, scope2]
+bigquery_token: # token_string
+
+# SearchConsole
+search_console_scope: # [scope1, scope2]
+search_console_token: # token_string
+search_console_test_site_url: # https://www.example.com
+search_console_test_removable_site_url: # sc-domain:secondary-example.com
+search_console_test_sitemap_url: # https://www.example.com/sitemap.xml
+search_console_test_removable_sitemap_url: # https://www.example.com/secondary_sitemap.xml
+search_console_test_inspect_url: # https://www.example.com/path/to/page

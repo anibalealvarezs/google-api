@@ -1,35 +1,36 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Slides;
+namespace Anibalealvarezs\GoogleApi\Services\Slides;
 
-use Chmw\GoogleApi\Google\GoogleApi;
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Services\Slides\Classes\Dimension;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Other\Placeholder;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Page;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Tables\TableCellLocation;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Tables\TableCellProperties;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Tables\TableColumnProperties;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Tables\TableRowProperties;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Text\TextStyle;
-use Chmw\GoogleApi\Services\Slides\Classes\Presentations\Request\LayoutReference;
-use Chmw\GoogleApi\Services\Slides\Classes\Presentations\Request\PageElementProperties;
-use Chmw\GoogleApi\Services\Slides\Classes\Presentations\Request\Range;
-use Chmw\GoogleApi\Services\Slides\Classes\Presentations\Request\TableRange;
-use Chmw\GoogleApi\Services\Slides\Classes\Size;
-use Chmw\GoogleApi\Services\Slides\Enums\Presentations\Request\LinkingMode;
-use Chmw\GoogleApi\Services\Slides\Requests\CreateImageRequest;
-use Chmw\GoogleApi\Services\Slides\Requests\CreatePresentationRequest;
-use Chmw\GoogleApi\Services\Slides\Requests\CreateSheetsChartRequest;
-use Chmw\GoogleApi\Services\Slides\Requests\CreateSlideRequest;
-use Chmw\GoogleApi\Services\Slides\Requests\CreateTableRequest;
-use Chmw\GoogleApi\Services\Slides\Requests\DeleteTextRequest;
-use Chmw\GoogleApi\Services\Slides\Requests\InsertTextRequest;
-use Chmw\GoogleApi\Services\Slides\Requests\UpdateTableCellPropertiesRequest;
-use Chmw\GoogleApi\Services\Slides\Requests\UpdateTableColumnPropertiesRequest;
-use Chmw\GoogleApi\Services\Slides\Requests\UpdateTableRowPropertiesRequest;
-use Chmw\GoogleApi\Services\Slides\Requests\UpdateTextStyleRequest;
+use Anibalealvarezs\GoogleApi\Google\GoogleApi;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Dimension;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other\Placeholder;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Page;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Tables\TableCellLocation;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Tables\TableCellProperties;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Tables\TableColumnProperties;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Tables\TableRowProperties;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Text\TextStyle;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Presentations\Request\LayoutReference;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Presentations\Request\PageElementProperties;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Presentations\Request\Range;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Presentations\Request\TableRange;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Size;
+use Anibalealvarezs\GoogleApi\Services\Slides\Enums\Presentations\Request\LinkingMode;
+use Anibalealvarezs\GoogleApi\Services\Slides\Requests\CreateImageRequest;
+use Anibalealvarezs\GoogleApi\Services\Slides\Requests\CreatePresentationRequest;
+use Anibalealvarezs\GoogleApi\Services\Slides\Requests\CreateSheetsChartRequest;
+use Anibalealvarezs\GoogleApi\Services\Slides\Requests\CreateSlideRequest;
+use Anibalealvarezs\GoogleApi\Services\Slides\Requests\CreateTableRequest;
+use Anibalealvarezs\GoogleApi\Services\Slides\Requests\DeleteTextRequest;
+use Anibalealvarezs\GoogleApi\Services\Slides\Requests\InsertTextRequest;
+use Anibalealvarezs\GoogleApi\Services\Slides\Requests\UpdateTableCellPropertiesRequest;
+use Anibalealvarezs\GoogleApi\Services\Slides\Requests\UpdateTableColumnPropertiesRequest;
+use Anibalealvarezs\GoogleApi\Services\Slides\Requests\UpdateTableRowPropertiesRequest;
+use Anibalealvarezs\GoogleApi\Services\Slides\Requests\UpdateTextStyleRequest;
 use Exception;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use InvalidArgumentException;
 
@@ -43,7 +44,8 @@ class SlidesApi extends GoogleApi
      * @param string $userId
      * @param array $scopes
      * @param string $token
-     * @throws GuzzleException
+     * @param Client|null $guzzleClient
+     * @throws Exception
      */
     public function __construct(
         string $redirectUrl,
@@ -52,7 +54,8 @@ class SlidesApi extends GoogleApi
         string $refreshToken,
         string $userId,
         array $scopes = [],
-        string $token = ""
+        string $token = "",
+        ?Client $guzzleClient = null
     ) {
         parent::__construct(
             baseUrl: "https://slides.googleapis.com/v1/presentations/",
@@ -62,7 +65,8 @@ class SlidesApi extends GoogleApi
             refreshToken: $refreshToken,
             userId: $userId,
             scopes: ($scopes ?: ["https://www.googleapis.com/auth/presentations", "https://www.googleapis.com/auth/drive", "https://www.googleapis.com/auth/spreadsheets"]),
-            token: $token
+            token: $token,
+            guzzleClient: $guzzleClient,
         );
     }
 
@@ -147,8 +151,8 @@ class SlidesApi extends GoogleApi
         if ($pageSize) {
             if (is_array($pageSize) && isset($pageSize['width']) && isset($pageSize['height'])) {
                 $pageSize = new Size(
-                    width: new Dimension($pageSize['width']),
-                    height: new Dimension($pageSize['height'])
+                    width: is_array($pageSize['width']) ? $pageSize['width'] : new Dimension($pageSize['width']),
+                    height: is_array($pageSize['height']) ? $pageSize['height'] : new Dimension($pageSize['height'])
                 );
             }
             if (!($pageSize instanceof Size)) {
@@ -226,7 +230,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $createSlideRequest = [
                 'createSlide' => Helpers::getJsonableArray(new CreateSlideRequest(
@@ -245,7 +249,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -275,7 +279,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Request the presentation data
             $response = $this->performRequest(
                 method: "GET",
@@ -291,10 +295,10 @@ class SlidesApi extends GoogleApi
     }
 
     /**
-     * @param string|null $presentationId
      * @param string $objectId
+     * @param string|null $presentationId
      * @param string $text
-     * @param int|null $insertionIndex
+     * @param int $insertionIndex
      * @param TableCellLocation|array|null $cellLocation
      * @param array|null $presentationData
      * @param bool $checkPresentation
@@ -306,7 +310,7 @@ class SlidesApi extends GoogleApi
         string $objectId,
         string $presentationId = null,
         string $text = "",
-        int $insertionIndex = null,
+        int $insertionIndex = 0,
         TableCellLocation|array|null $cellLocation = null,
         array $presentationData = null,
         bool $checkPresentation = false,
@@ -320,7 +324,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $insertTextRequest = [
                 'insertText' => Helpers::getJsonableArray(new InsertTextRequest(
@@ -339,7 +343,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -379,10 +383,10 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $deleteTextRequest = [
-                'insertText' => Helpers::getJsonableArray(new DeleteTextRequest(
+                'deleteText' => Helpers::getJsonableArray(new DeleteTextRequest(
                     objectId: $objectId,
                     textRange: $range,
                     cellLocation: $cellLocation,
@@ -397,7 +401,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -410,10 +414,10 @@ class SlidesApi extends GoogleApi
     }
 
     /**
-     * @param string|null $presentationId
      * @param string $objectId
+     * @param string|null $presentationId
      * @param string $text
-     * @param int|null $insertionIndex
+     * @param int $insertionIndex
      * @param Range|array|null $range
      * @param TableCellLocation|array|null $cellLocation
      * @param array|null $presentationData
@@ -426,7 +430,7 @@ class SlidesApi extends GoogleApi
         string $objectId,
         string $presentationId = null,
         string $text = "",
-        int $insertionIndex = null,
+        int $insertionIndex = 0,
         Range|array|null $range = null,
         TableCellLocation|array|null $cellLocation = null,
         array $presentationData = null,
@@ -441,22 +445,24 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
-            // Get CreateSlide request
-            $deleteTextRequest = $this->deleteText(
-                objectId: $objectId,
-                range: $range,
-                cellLocation: $cellLocation,
-                getRequestObjectOnly: true,
-            );
-            // Get CreateSlide request
-            $insertTextRequest = $this->insertText(
-                objectId: $objectId,
-                text: $text,
-                insertionIndex: $insertionIndex,
-                cellLocation: $cellLocation,
-                getRequestObjectOnly: true,
-            );
+        if (isset($presentationData["presentationId"]) || $presentationId) {
+            // Get Delete Text request
+            $deleteTextRequest = [
+                'deleteText' => Helpers::getJsonableArray(new DeleteTextRequest(
+                    objectId: $objectId,
+                    textRange: $range,
+                    cellLocation: $cellLocation,
+                ))
+            ];
+            // Get Insert Text request
+            $insertTextRequest = [
+                'insertText' => Helpers::getJsonableArray(new InsertTextRequest(
+                    objectId: $objectId,
+                    text: $text,
+                    insertionIndex: $insertionIndex,
+                    cellLocation: $cellLocation,
+                ))
+            ];
             // Consolidate requests
             $updateTextRequest =  [
                 ...$deleteTextRequest,
@@ -471,7 +477,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -515,7 +521,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $updateTextStyleRequest = [
                 'updateTextStyle' => Helpers::getJsonableArray(new UpdateTextStyleRequest(
@@ -535,7 +541,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -562,9 +568,9 @@ class SlidesApi extends GoogleApi
     public function createTable(
         int $rows,
         int $columns,
+        PageElementProperties|array $elementProperties,
         string $objectId = null,
         string $presentationId = null,
-        PageElementProperties|array $elementProperties,
         array $presentationData = null,
         bool $checkPresentation = false,
         bool $getRequestObjectOnly = false,
@@ -577,7 +583,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $createTableRequest = [
                 'createTable' => Helpers::getJsonableArray(new CreateTableRequest(
@@ -596,7 +602,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -639,7 +645,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $updateTableRowPropertiesRequest = [
                 'updateTableRowProperties' => Helpers::getJsonableArray(new UpdateTableRowPropertiesRequest(
@@ -658,7 +664,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -701,7 +707,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $updateTableColumnPropertiesRequest = [
                 'updateTableColumnProperties' => Helpers::getJsonableArray(new UpdateTableColumnPropertiesRequest(
@@ -720,7 +726,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -763,7 +769,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $updateTableCellPropertiesRequest = [
                 'updateTableCellProperties' => Helpers::getJsonableArray(new UpdateTableCellPropertiesRequest(
@@ -782,7 +788,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -826,7 +832,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $createSheetsChartRequest = [
                 'createSheetsChart' => Helpers::getJsonableArray(new CreateSheetsChartRequest(
@@ -846,7 +852,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response
@@ -886,7 +892,7 @@ class SlidesApi extends GoogleApi
         if (is_null($presentationData) && $checkPresentation) {
             $presentationData = $this->getPresentationData($presentationId);
         }
-        if (isset($presentationData["presentationId"]) || !$checkPresentation) {
+        if (isset($presentationData["presentationId"]) || $presentationId) {
             // Get CreateSlide request
             $createImageRequest = [
                 'createImage' => Helpers::getJsonableArray(new CreateImageRequest(
@@ -904,7 +910,7 @@ class SlidesApi extends GoogleApi
             // Exec request
             $response = $this->performRequest(
                 method: "POST",
-                endpoint: isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId . ':batchUpdate',
+                endpoint: (isset($presentationData["presentationId"]) && $presentationData["presentationId"] ? $presentationData["presentationId"] : $presentationId) . ':batchUpdate',
                 body: json_encode($requests),
             );
             // Return response

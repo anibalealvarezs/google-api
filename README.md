@@ -3,7 +3,6 @@
 ## Instructions
 
 Require the package in the `composer.json` file of your project, and map the package in the `repositories` section.
-You must also map the `api-skeleton` package.
 
 ```json
 {
@@ -11,19 +10,24 @@ You must also map the `api-skeleton` package.
         "php": ">=8.1",
         "anibalealvarezs/google-api": "@dev"
     },
-  "repositories": [
-    {
-      "type": "composer", "url": "https://satis.anibalalvarez.com/"
-    }
-  ]
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://satis.anibalalvarez.com/"
+        }
+    ]
 }
 ```
 
-Note: In order to use the package from GitLab, you need to have a valid SSH key configured in your GitLab account.
-
 ## Services
 
+- [BigQuery](docs/Services/BigQuery/README.md)
 - [Drive](docs/Services/Drive/README.md)
 - [Gmail](docs/Services/Gmail/README.md)
+- [SearchConsole](docs/Services/SearchConsole/README.md)
 - [Sheets](docs/Services/Sheets/README.md)
 - [Slides](docs/Services/Slides/README.md)
+
+## Testing
+
+Instructions [here](docs/TESTS.md).

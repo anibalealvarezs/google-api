@@ -1,11 +1,11 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Sheets\Classes\Charts;
+namespace Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\LineDashType;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\ViewWindowMode;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\LineDashType;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\ViewWindowMode;
 
 /**
  * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#chartaxisviewwindowoptions

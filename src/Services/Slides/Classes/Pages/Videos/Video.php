@@ -1,11 +1,11 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Slides\Classes\Pages\Videos;
+namespace Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Videos;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Videos\VideoProperties;
-use Chmw\GoogleApi\Services\Slides\Enums\Pages\Videos\Source;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Videos\VideoProperties;
+use Anibalealvarezs\GoogleApi\Services\Slides\Enums\Pages\Videos\Source;
 
 /**
  * @see https://developers.google.com/slides/api/reference/rest/v1/presentations.pages/videos#video

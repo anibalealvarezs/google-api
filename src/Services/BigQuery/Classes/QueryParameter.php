@@ -1,11 +1,11 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\BigQuery\Classes;
+namespace Anibalealvarezs\GoogleApi\Services\BigQuery\Classes;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\BigQuery\Classes\QueryParameter\QueryParameterType;
-use Chmw\GoogleApi\Services\BigQuery\Classes\QueryParameter\QueryParameterValue;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\BigQuery\Classes\QueryParameter\QueryParameterType;
+use Anibalealvarezs\GoogleApi\Services\BigQuery\Classes\QueryParameter\QueryParameterValue;
 
 /**
  * @see https://cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter

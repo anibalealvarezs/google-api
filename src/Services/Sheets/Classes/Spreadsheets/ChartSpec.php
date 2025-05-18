@@ -1,35 +1,35 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Sheets\Classes\Spreadsheets;
+namespace Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Spreadsheets;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\Basic\BasicChartSpec;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\Bubble\BubbleChartSpec;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\Candlestick\CandlestickChartSpec;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\Candlestick\CandlestickDomain;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\ChartData;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\DataLabel;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\DataSourceChartProperties;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\Histogram\HistogramChartSpec;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\KeyValueFormat;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\LineStyle;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\Org\OrgChartSpec;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\Pie\PieChartSpec;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\Scorecard\ScorecardChartSpec;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\Treemap\TreemapChartColorScale;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\Treemap\TreemapChartSpec;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\Waterfall\WaterfallChartDomain;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\Waterfall\WaterfallChartSpec;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\ColorStyle;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\TextFormat;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\TextPosition;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartCompareMode;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartLegendPosition;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartStackedType;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartType;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\ChartHiddenDimensionStrategy;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\ChartTypes;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Basic\BasicChartSpec;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Bubble\BubbleChartSpec;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Candlestick\CandlestickChartSpec;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Candlestick\CandlestickDomain;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\ChartData;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\DataLabel;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\DataSourceChartProperties;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Histogram\HistogramChartSpec;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\KeyValueFormat;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\LineStyle;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Org\OrgChartSpec;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Pie\PieChartSpec;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Scorecard\ScorecardChartSpec;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Treemap\TreemapChartColorScale;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Treemap\TreemapChartSpec;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Waterfall\WaterfallChartDomain;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Waterfall\WaterfallChartSpec;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\ColorStyle;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\TextFormat;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\TextPosition;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartCompareMode;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartLegendPosition;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartStackedType;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartType;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\ChartHiddenDimensionStrategy;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\ChartTypes;
 
 /**
  * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#ChartSpec

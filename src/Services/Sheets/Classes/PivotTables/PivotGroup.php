@@ -1,11 +1,11 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Sheets\Classes\PivotTables;
+namespace Anibalealvarezs\GoogleApi\Services\Sheets\Classes\PivotTables;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\DataSourceColumnReference;
-use Chmw\GoogleApi\Services\Sheets\Enums\Other\SortOrder;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\DataSourceColumnReference;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Other\SortOrder;
 
 /**
  * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/pivot-tables#pivotgroup

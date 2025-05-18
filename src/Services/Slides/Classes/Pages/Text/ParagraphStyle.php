@@ -1,13 +1,13 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Slides\Classes\Pages\Text;
+namespace Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Text;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Slides\Classes\Dimension;
-use Chmw\GoogleApi\Services\Slides\Enums\Pages\Text\Alignment;
-use Chmw\GoogleApi\Services\Slides\Enums\Pages\Text\SpacingMode;
-use Chmw\GoogleApi\Services\Slides\Enums\Pages\Text\TextDirection;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Dimension;
+use Anibalealvarezs\GoogleApi\Services\Slides\Enums\Pages\Text\Alignment;
+use Anibalealvarezs\GoogleApi\Services\Slides\Enums\Pages\Text\SpacingMode;
+use Anibalealvarezs\GoogleApi\Services\Slides\Enums\Pages\Text\TextDirection;
 
 /**
  * @see https://developers.google.com/slides/api/reference/rest/v1/presentations.pages/text#paragraphstyle

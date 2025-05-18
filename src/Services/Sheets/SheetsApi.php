@@ -2,41 +2,43 @@
 
 namespace Anibalealvarezs\GoogleApi\Services\Sheets;
 
-use Chmw\GoogleApi\Google\GoogleApi;
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Services\Sheets\Classes\Cells\ValueRange;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\DataSourceChartProperties;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\EmbeddedObjectBorder;
-use Chmw\GoogleApi\Services\Sheets\Classes\DimensionRange;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\ColorStyle;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\EmbeddedObjectPosition;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\FilterSpec;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\GridCoordinate;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\GridRange;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\SortSpec;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\TextFormat;
-use Chmw\GoogleApi\Services\Sheets\Classes\Sheets\DimensionProperties;
-use Chmw\GoogleApi\Services\Sheets\Classes\Sheets\GridProperties;
-use Chmw\GoogleApi\Services\Sheets\Classes\Sheets\RowData;
-use Chmw\GoogleApi\Services\Sheets\Classes\Sheets\SheetProperties;
-use Chmw\GoogleApi\Services\Sheets\Classes\Spreadsheets\ChartSpec;
-use Chmw\GoogleApi\Services\Sheets\Classes\Spreadsheets\EmbeddedChart;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\ChartTypes;
-use Chmw\GoogleApi\Services\Sheets\Enums\ClearSheetMethods;
-use Chmw\GoogleApi\Services\Sheets\Enums\DateTimeRenderOption;
-use Chmw\GoogleApi\Services\Sheets\Enums\Dimension;
-use Chmw\GoogleApi\Services\Sheets\Enums\Spreadsheets\PasteOrientation;
-use Chmw\GoogleApi\Services\Sheets\Enums\Spreadsheets\PasteType;
-use Chmw\GoogleApi\Services\Sheets\Enums\ValueInputOption;
-use Chmw\GoogleApi\Services\Sheets\Enums\ValueRenderOption;
-use Chmw\GoogleApi\Services\Sheets\Requests\Sheets\DeleteDimensionRequest;
-use Chmw\GoogleApi\Services\Sheets\Requests\Sheets\UpdateCellsRequest;
-use Chmw\GoogleApi\Services\Sheets\Requests\Sheets\UpdateDimensionPropertiesRequest;
-use Chmw\GoogleApi\Services\Sheets\Requests\Sheets\UpdateSheetPropertiesRequest;
-use Chmw\GoogleApi\Services\Sheets\Requests\Spreadsheets\AddChartRequest;
-use Chmw\GoogleApi\Services\Sheets\Requests\Spreadsheets\AddSheetRequest;
-use Chmw\GoogleApi\Services\Sheets\Requests\Spreadsheets\CopyPasteRequest;
-use Chmw\GoogleApi\Services\Sheets\Requests\Spreadsheets\DeleteSheetRequest;
+use Anibalealvarezs\GoogleApi\Google\GoogleApi;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Cells\ValueRange;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\DataSourceChartProperties;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\EmbeddedObjectBorder;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\DimensionRange;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\ColorStyle;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\EmbeddedObjectPosition;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\FilterSpec;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\GridCoordinate;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\GridRange;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\SortSpec;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\TextFormat;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Sheets\DimensionProperties;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Sheets\GridProperties;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Sheets\RowData;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Sheets\SheetProperties;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Spreadsheets\ChartSpec;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Spreadsheets\EmbeddedChart;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\ChartTypes;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\ClearSheetMethods;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\DateTimeRenderOption;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Dimension;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Spreadsheets\PasteOrientation;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Spreadsheets\PasteType;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\ValueInputOption;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\ValueRenderOption;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Sheets\DeleteDimensionRequest;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Sheets\UpdateCellsRequest;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Sheets\UpdateDimensionPropertiesRequest;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Sheets\UpdateSheetPropertiesRequest;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\AddChartRequest;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\AddSheetRequest;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\CopyPasteRequest;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\DeleteSheetRequest;
+use Exception;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 class SheetsApi extends GoogleApi
@@ -49,7 +51,8 @@ class SheetsApi extends GoogleApi
      * @param string $userId
      * @param array $scopes
      * @param string $token
-     * @throws GuzzleException
+     * @param Client|null $guzzleClient
+     * @throws Exception
      */
     public function __construct(
         string $redirectUrl,
@@ -58,7 +61,8 @@ class SheetsApi extends GoogleApi
         string $refreshToken,
         string $userId,
         array $scopes = [],
-        string $token = ""
+        string $token = "",
+        ?Client $guzzleClient = null
     ) {
         parent::__construct(
             baseUrl: "https://sheets.googleapis.com/v4/spreadsheets/",
@@ -68,7 +72,8 @@ class SheetsApi extends GoogleApi
             refreshToken: $refreshToken,
             userId: $userId,
             scopes: ($scopes ?: ["https://www.googleapis.com/auth/spreadsheets"]),
-            token: $token
+            token: $token,
+            guzzleClient: $guzzleClient,
         );
     }
 

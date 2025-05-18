@@ -1,12 +1,12 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Slides\Classes\Pages\Shapes;
+namespace Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Shapes;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Other\Placeholder;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Text\TextContent;
-use Chmw\GoogleApi\Services\Slides\Enums\Pages\Shapes\Type;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other\Placeholder;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Text\TextContent;
+use Anibalealvarezs\GoogleApi\Services\Slides\Enums\Pages\Shapes\Type;
 
 /**
  * @see https://developers.google.com/slides/api/reference/rest/v1/presentations.pages/shapes#shape

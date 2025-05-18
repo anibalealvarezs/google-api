@@ -1,14 +1,14 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Sheets\Classes\Charts\Basic;
+namespace Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\Basic;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Sheets\Classes\Charts\DataLabel;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartCompareMode;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartLegendPosition;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartStackedType;
-use Chmw\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartType;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\DataLabel;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartCompareMode;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartLegendPosition;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartStackedType;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\Basic\BasicChartType;
 
 /**
  * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/charts#basicchartspec

@@ -1,14 +1,14 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\BigQuery\Classes\Query;
+namespace Anibalealvarezs\GoogleApi\Services\BigQuery\Classes\Query;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\BigQuery\Classes\ConnectionProperty;
-use Chmw\GoogleApi\Services\BigQuery\Classes\DataFormatOptions;
-use Chmw\GoogleApi\Services\BigQuery\Classes\Datasets\DatasetReference;
-use Chmw\GoogleApi\Services\BigQuery\Classes\QueryParameter;
-use Chmw\GoogleApi\Services\BigQuery\Enums\ParameterMode;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\BigQuery\Classes\ConnectionProperty;
+use Anibalealvarezs\GoogleApi\Services\BigQuery\Classes\DataFormatOptions;
+use Anibalealvarezs\GoogleApi\Services\BigQuery\Classes\Datasets\DatasetReference;
+use Anibalealvarezs\GoogleApi\Services\BigQuery\Classes\QueryParameter;
+use Anibalealvarezs\GoogleApi\Services\BigQuery\Enums\ParameterMode;
 
 /**
  * @see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest

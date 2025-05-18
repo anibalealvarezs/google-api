@@ -4,8 +4,8 @@ namespace Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Cells;
 
 use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
 use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Sheets\Classes\Other\ExtendedValue;
-use Chmw\GoogleApi\Services\Sheets\Classes\PivotTables\PivotTable;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\ExtendedValue;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\PivotTables\PivotTable;
 
 /**
  * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#celldata

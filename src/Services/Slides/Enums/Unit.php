@@ -1,6 +1,6 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Slides\Enums;
+namespace Anibalealvarezs\GoogleApi\Services\Slides\Enums;
 
 /**
  * @see https://developers.google.com/slides/api/reference/rest/v1/Unit

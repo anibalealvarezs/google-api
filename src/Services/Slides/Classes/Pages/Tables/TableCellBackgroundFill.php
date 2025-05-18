@@ -1,11 +1,13 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Slides\Classes\Pages\Tables;
+namespace Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Tables;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Other\SolidFill;
-use Chmw\GoogleApi\Services\Slides\Enums\Pages\Other\PropertyState;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\DataExecutionStatus;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Cells\DataSourceTableColumnSelectionType;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other\SolidFill;
+use Anibalealvarezs\GoogleApi\Services\Slides\Enums\Pages\Other\PropertyState;
 
 /**
  * @see https://developers.google.com/slides/api/reference/rest/v1/presentations.pages/tables#Page.TableCellBackgroundFill

@@ -1,14 +1,14 @@
 <?php
 
-namespace Chmw\GoogleApi\Services\Slides\Classes\Pages\Other;
+namespace Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other;
 
-use Chmw\GoogleApi\Google\Helpers\Helpers;
-use Chmw\GoogleApi\Google\Interfaces\Jsonable;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Other\CropProperties;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Other\Link;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Other\Outline;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Other\Recolor;
-use Chmw\GoogleApi\Services\Slides\Classes\Pages\Other\Shadow;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
+use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other\CropProperties;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other\Link;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other\Outline;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other\Recolor;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other\Shadow;
 
 /**
  * @see https://developers.google.com/slides/api/reference/rest/v1/presentations.pages/other#Page.ImageProperties
