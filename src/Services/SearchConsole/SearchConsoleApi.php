@@ -51,7 +51,28 @@ class SearchConsoleApi extends GoogleApi
             token: $token,
             guzzleClient: $guzzleClient,
         );
-        $this->defaultSitemapClient = $defaultSitemapClient;
+        $this->setDefaultSitemapClient($defaultSitemapClient);
+    }
+
+    /**
+     * Get the default Guzzle client for sitemap validation.
+     *
+     * @return Client|null
+     */
+    public function getDefaultSitemapClient(): ?Client
+    {
+        return $this->defaultSitemapClient;
+    }
+
+    /**
+     * Set the default Guzzle client for sitemap validation.
+     *
+     * @param Client|null $client
+     * @return void
+     */
+    public function setDefaultSitemapClient(?Client $client): void
+    {
+        $this->defaultSitemapClient = $client;
     }
 
     /**
@@ -325,16 +346,5 @@ class SearchConsoleApi extends GoogleApi
         $this->setBaseUrl($baseUrl);
 
         return json_decode($response->getBody()->getContents(), true);
-    }
-
-    /**
-     * Set the default Guzzle client for sitemap validation.
-     *
-     * @param Client|null $client
-     * @return void
-     */
-    public function setDefaultSitemapClient(?Client $client): void
-    {
-        $this->defaultSitemapClient = $client;
     }
 }
