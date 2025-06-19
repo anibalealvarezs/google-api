@@ -186,7 +186,10 @@ class SearchConsoleApi extends GoogleApi
         do {
             // Request the spreadsheet data
             $response = $this->getSearchQueryResults(...$params);
-            $rows = array_merge($rows, $response["rows"] ?? []);
+            if (!isset($response["rows"])) {
+                return ['rows' => $rows];
+            }
+            $rows = array_merge($rows, $response["rows"]);
             $params["startRow"] += $rowLimit;
         } while (count($response["rows"]) == $rowLimit);
         // Return response
