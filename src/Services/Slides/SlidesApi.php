@@ -5,13 +5,13 @@ namespace Anibalealvarezs\GoogleApi\Services\Slides;
 use Anibalealvarezs\GoogleApi\Google\GoogleApi;
 use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
 use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Dimension;
-use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other\Placeholder;
 use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Page;
 use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Tables\TableCellLocation;
 use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Tables\TableCellProperties;
 use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Tables\TableColumnProperties;
 use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Tables\TableRowProperties;
 use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Text\TextStyle;
+use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Presentations\Request\LayoutPlaceholderIdMapping;
 use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Presentations\Request\LayoutReference;
 use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Presentations\Request\PageElementProperties;
 use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Presentations\Request\Range;
@@ -205,7 +205,7 @@ class SlidesApi extends GoogleApi
      * @param string $objectId
      * @param int|null $insertionIndex
      * @param LayoutReference|null $slideLayoutReference
-     * @param Placeholder|null $placeholderIdMappings
+     * @param LayoutPlaceholderIdMapping|array|null $placeholderIdMappings
      * @param array|null $presentationData
      * @param bool $checkPresentation
      * @param bool $getRequestObjectOnly
@@ -217,7 +217,7 @@ class SlidesApi extends GoogleApi
         string $objectId = "",
         int $insertionIndex = null,
         LayoutReference $slideLayoutReference = null,
-        Placeholder $placeholderIdMappings = null,
+        LayoutPlaceholderIdMapping|array|null $placeholderIdMappings = null,
         array $presentationData = null,
         bool $checkPresentation = false,
         bool $getRequestObjectOnly = false,

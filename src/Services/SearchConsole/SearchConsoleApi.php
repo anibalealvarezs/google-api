@@ -84,7 +84,7 @@ class SearchConsoleApi extends GoogleApi
      * @param DataState $dataState
      * @param array|null $dimensions
      * @param string|null $type
-     * @param DimensionFilterGroup[]|null $dimensionFilterGroups
+     * @param array<int, DimensionFilterGroup|array>|null $dimensionFilterGroups
      * @param AggregationType $aggregationType
      * @return array
      * @throws GuzzleException
@@ -122,18 +122,22 @@ class SearchConsoleApi extends GoogleApi
         if ($dimensionFilterGroups) {
             $groups = [];
             foreach($dimensionFilterGroups as $dimensionFilterGroup) {
-                if (!empty($dimensionFilterGroup["filters"])) {
-                    $groups[] = Helpers::getJsonableArray(new DimensionFilterGroup(
-                        filters: $dimensionFilterGroup["filters"],
-                        groupType: $dimensionFilterGroup["groupType"] ?? GroupType::AND,
-                    ));
+                if ($dimensionFilterGroup instanceof DimensionFilterGroup) {
+                    if (!empty($dimensionFilterGroup->filters)) {
+                        $groups[] = Helpers::getJsonableArray($dimensionFilterGroup);
+                    }
+                } elseif (is_array($dimensionFilterGroup)) {
+                    if (!empty($dimensionFilterGroup["filters"])) {
+                        $groups[] = Helpers::getJsonableArray(new DimensionFilterGroup(
+                            filters: $dimensionFilterGroup["filters"],
+                            groupType: $dimensionFilterGroup["groupType"] ?? GroupType::AND,
+                        ));
+                    }
                 }
             }
             $request["dimensionFilterGroups"] = $groups;
         }
-        if ($aggregationType) {
-            $request["aggregationType"] = $aggregationType->value;
-        }
+        $request["aggregationType"] = $aggregationType->value;
         // Request the spreadsheet data
         $response = $this->performRequest(
             method: "POST",
@@ -153,7 +157,7 @@ class SearchConsoleApi extends GoogleApi
      * @param DataState $dataState
      * @param array|null $dimensions
      * @param string|null $type
-     * @param DimensionFilterGroup[]|null $dimensionFilterGroups
+     * @param array<int, DimensionFilterGroup|array>|null $dimensionFilterGroups
      * @param AggregationType $aggregationType
      * @return array
      * @throws GuzzleException

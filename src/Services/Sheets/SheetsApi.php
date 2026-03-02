@@ -109,7 +109,7 @@ class SheetsApi extends GoogleApi
     public function createSheetAtStart(
         string $spreadsheetId,
         string $title = "New Sheet",
-        int $sheetId = null,
+        ?int $sheetId = null,
     ): array {
         // Create a new sheet at index 0
         return $this->createSheet(
@@ -131,8 +131,8 @@ class SheetsApi extends GoogleApi
     public function createSheetAtTheEnd(
         string $spreadsheetId,
         string $title = "New Sheet",
-        int $sheetId = null,
-        array $spreadsheetData = null,
+        ?int $sheetId = null,
+        ?array $spreadsheetData = null,
     ): array {
         // Get spreadsheet data if not provided
         if (is_null($spreadsheetData)) {
@@ -169,8 +169,8 @@ class SheetsApi extends GoogleApi
         string $spreadsheetId,
         int $index,
         string $title = "New Sheet",
-        int $sheetId = null,
-        array $spreadsheetData = null,
+        ?int $sheetId = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -182,7 +182,7 @@ class SheetsApi extends GoogleApi
             $spreadsheetData = $this->getSpreadsheetData($spreadsheetId);
         }
         if (isset($spreadsheetData["sheets"])) {
-            if ($sheetId) {
+            if (!is_null($sheetId)) {
                 // Check sheet ID
                 $sheetId = Helpers::getFirstValid(
                     id: $sheetId,
@@ -242,7 +242,7 @@ class SheetsApi extends GoogleApi
     public function createMultipleSheets(
         string $spreadsheetId,
         array $sheetsData,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectsOnly = false,
     ): array {
         // Initialize requests array
@@ -309,7 +309,7 @@ class SheetsApi extends GoogleApi
     public function deleteSheet(
         string $spreadsheetId,
         int $sheetId,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -359,7 +359,7 @@ class SheetsApi extends GoogleApi
     public function deleteMultipleSheets(
         string $spreadsheetId,
         array $sheetIds,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectsOnly = false,
     ): array {
         // Initialize requests array
@@ -412,7 +412,7 @@ class SheetsApi extends GoogleApi
     public function deleteAllSheetsBut(
         string $spreadsheetId,
         array $keepSheetIds,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectsOnly = false,
     ): array {
         // Initialize requests array
@@ -470,7 +470,7 @@ class SheetsApi extends GoogleApi
     public function copySheet(
         string $sourceSpreadsheetId,
         int $sheetId,
-        string $destinySpreadsheetId = null,
+        ?string $destinySpreadsheetId = null,
     ): array {
         // Build request
         $request = [
@@ -508,14 +508,14 @@ class SheetsApi extends GoogleApi
         string $spreadsheetId,
         array $rows = [],
         string $fields = "*",
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
         string|int $startColumnIndex = 1,
         int $startRowIndex = 1,
         string|int $endColumnIndex = 1000000,
         int $endRowIndex = 1000000,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -602,7 +602,7 @@ class SheetsApi extends GoogleApi
     public function updateMultipleSheetsCells(
         string $spreadsheetId,
         array $sheetsData,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectsOnly = false,
     ): array {
         // Initialize requests array
@@ -709,14 +709,14 @@ class SheetsApi extends GoogleApi
      */
     public function clearCells(
         string $spreadsheetId,
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
         string|int $startColumnIndex = 'A',
         int $startRowIndex = 1,
         string|int $endColumnIndex = 'ZZ',
         int $endRowIndex = 1000000,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
     ): array {
         // Get spreadsheet data if not provided
         if (is_null($spreadsheetData)) {
@@ -758,9 +758,9 @@ class SheetsApi extends GoogleApi
      */
     public function clearSheet(
         string $spreadsheetId,
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
         ClearSheetMethods $method = ClearSheetMethods::CLEAR_CELLS,
     ): array {
         return match ($method) {
@@ -782,7 +782,6 @@ class SheetsApi extends GoogleApi
                 sheetIndex: $sheetIndex,
                 sheetTitle: $sheetTitle,
             ),
-            default => false,
         };
     }
 
@@ -801,14 +800,14 @@ class SheetsApi extends GoogleApi
      */
     public function readCells(
         string $spreadsheetId,
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
         string|int $startColumnIndex = 'A',
         int $startRowIndex = 1,
         string|int $endColumnIndex = 'ZZ',
         int $endRowIndex = 1000000,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
     ): array {
         // Get spreadsheet data if not provided
         if (is_null($spreadsheetData)) {
@@ -862,14 +861,14 @@ class SheetsApi extends GoogleApi
         string $spreadsheetId,
         array $data = [],
         Dimension $majorDimension = Dimension::ROWS,
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
         string|int $startColumnIndex = 'A',
         int $startRowIndex = 1,
         string|int $endColumnIndex = 'ZZ',
         int $endRowIndex = 1000000,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         ValueInputOption $valueInputOption = ValueInputOption::USER_ENTERED,
         ValueRenderOption $responseValueRenderOption = ValueRenderOption::FORMATTED_VALUE,
         DateTimeRenderOption $responseDateTimeRenderOption = DateTimeRenderOption::SERIAL_NUMBER,
@@ -920,7 +919,7 @@ class SheetsApi extends GoogleApi
      * @param GridProperties|array $gridProperties
      * @param ColorStyle|array $tabColorStyle
      * @param string $title
-     * @param string|null $index
+     * @param int|null $index
      * @param string $fields
      * @param int|null $sheetId
      * @param int|null $sheetIndex
@@ -935,12 +934,12 @@ class SheetsApi extends GoogleApi
         GridProperties|array $gridProperties,
         ColorStyle|array $tabColorStyle = ['rgbColor' => []],
         string $title = "",
-        ?string $index = null,
+        ?int $index = null,
         string $fields = "*",
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
-        array $spreadsheetData = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -997,7 +996,7 @@ class SheetsApi extends GoogleApi
      *                          - 'gridProperties' (GridProperties|array): The grid properties to update.
      *                          - 'tabColorStyle' (ColorStyle|array, optional): The tab color style. Default is ['rgbColor' => []].
      *                          - 'title' (string, optional): The title of the sheet. Default is "".
-     *                          - 'index' (string|null, optional): The index of the sheet. Default is null.
+     *                          - 'index' (int|null, optional): The index of the sheet. Default is null.
      *                          - 'fields' (string, optional): The fields to update. Default is "*".
      *                          - 'sheetId' (int, optional): The ID of the sheet. Default is null.
      *                          - 'sheetIndex' (int, optional): The index of the sheet. Default is null.
@@ -1010,7 +1009,7 @@ class SheetsApi extends GoogleApi
     public function updateMultipleSheetsProperties(
         string $spreadsheetId,
         array $sheetsData,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectsOnly = false,
     ): array {
         // Initialize requests array
@@ -1105,10 +1104,10 @@ class SheetsApi extends GoogleApi
         ?int $startIndex = null,
         ?int $endIndex = null,
         string $fields = "*",
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
-        array $spreadsheetData = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -1177,7 +1176,7 @@ class SheetsApi extends GoogleApi
     public function deleteMultipleDimensions(
         string $spreadsheetId,
         array $dimensionsData,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectsOnly = false,
     ): array {
         // Initialize requests array
@@ -1265,10 +1264,10 @@ class SheetsApi extends GoogleApi
         ?int $startIndex = null,
         ?int $endIndex = null,
         string $fields = "*",
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
-        array $spreadsheetData = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -1343,7 +1342,7 @@ class SheetsApi extends GoogleApi
     public function updateMultipleDimensionsProperties(
         string $spreadsheetId,
         array $dimensionsData,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectsOnly = false,
     ): array {
         // Initialize requests array
@@ -1438,12 +1437,12 @@ class SheetsApi extends GoogleApi
         string $spreadsheetId,
         array $rows = [],
         string $fields = "*",
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
         int $rowIndex = 1,
         int $columnIndex = 1,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -1518,16 +1517,16 @@ class SheetsApi extends GoogleApi
         string $spreadsheetId,
         int $chartId,
         array $chartData,
-        string $dataSourceId = null,
-        array $filterSpecs = null,
-        array $sortSpecs = null,
+        ?string $dataSourceId = null,
+        ?array $filterSpecs = null,
+        ?array $sortSpecs = null,
         string $title = 'New Chart',
         string $subtitle = '',
         string $fontName = 'Roboto',
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
-        array $spreadsheetData = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
+        ?array $spreadsheetData = null,
         ChartTypes $chartType = ChartTypes::BASIC,
         bool $getRequestObjectOnly = false,
     ): array {
@@ -1657,7 +1656,7 @@ class SheetsApi extends GoogleApi
         GridRange|array $destinationRange,
         PasteType|string $pasteType = PasteType::PASTE_NORMAL,
         bool $transpose = false,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -1731,8 +1730,8 @@ class SheetsApi extends GoogleApi
      */
     public function getSheetTitle(
         array $spreadsheetData,
-        int $sheetId = null,
-        int $sheetIndex = null
+        ?int $sheetId = null,
+        ?int $sheetIndex = null
     ): string {
         if ($sheetId) {
             foreach ($spreadsheetData["sheets"] as $sheet) {
@@ -1754,8 +1753,8 @@ class SheetsApi extends GoogleApi
      */
     public function getSheetId(
         array $spreadsheetData,
-        string $sheetTitle = null,
-        int $sheetIndex = null
+        ?string $sheetTitle = null,
+        ?int $sheetIndex = null
     ): string {
         if ($sheetTitle) {
             foreach ($spreadsheetData["sheets"] as $sheet) {
@@ -1773,13 +1772,13 @@ class SheetsApi extends GoogleApi
      * @param array $spreadsheetData
      * @param string|null $sheetTitle
      * @param int|null $sheetId
-     * @return string
+     * @return int
      */
     public function getSheetIndex(
         array $spreadsheetData,
-        string $sheetTitle = null,
-        int $sheetId = null
-    ): string {
+        ?string $sheetTitle = null,
+        ?int $sheetId = null
+    ): int {
         if ($sheetTitle) {
             foreach ($spreadsheetData["sheets"] as $key => $sheet) {
                 if ($sheet["properties"]["title"] == $sheetTitle) {
@@ -1807,10 +1806,10 @@ class SheetsApi extends GoogleApi
      */
     public function getSheetDimensions(
         string $spreadsheetId,
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
-        array $spreadsheetData = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
+        ?array $spreadsheetData = null,
     ): array {
         // Get the current spreadsheet data if not provided
         if (is_null($spreadsheetData)) {
@@ -1851,7 +1850,7 @@ class SheetsApi extends GoogleApi
      */
     public function getAllSheetsDimensions(
         string $spreadsheetId,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
     ): array {
         // Get the current spreadsheet data if not provided
         if (is_null($spreadsheetData)) {
@@ -1888,10 +1887,10 @@ class SheetsApi extends GoogleApi
      */
     public function checkSheetId(
         string $spreadsheetId,
-        int $sheetId = null,
-        array $spreadsheetData = null,
-        string $sheetTitle = null,
-        int $sheetIndex = null
+        ?int $sheetId = null,
+        ?array $spreadsheetData = null,
+        ?string $sheetTitle = null,
+        ?int $sheetIndex = null
     ): int {
         if (!$sheetId) {
             // Get spreadsheet data if not provided

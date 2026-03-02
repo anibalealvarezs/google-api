@@ -24,7 +24,7 @@ class Spreadsheet implements Jsonable
         SpreadsheetProperties|array $properties,
         array $sheets,
         array $namedRanges,
-        array $spreadsheetUrl,
+        string $spreadsheetUrl,
         array $developerMetadata,
         array $dataSources,
         array $dataSourceSchedules,

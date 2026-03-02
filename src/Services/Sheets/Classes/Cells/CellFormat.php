@@ -40,8 +40,7 @@ class CellFormat implements Jsonable
         VerticalAlign|string $verticalAlignment = VerticalAlign::MIDDLE,
         WrapStrategy|string $wrapStrategy = WrapStrategy::OVERFLOW_CELL,
         TextDirection|string $textDirection = TextDirection::LEFT_TO_RIGHT,
-        HyperlinkDisplayType|string|null $hyperlinkDisplayType = null,
-        mixed $backgroundColor = null,
+        HyperlinkDisplayType|string|null $hyperlinkDisplayType = null
     ) {
         $this->backgroundColorStyle = $this->arrayToObject(class: ColorStyle::class, var: $backgroundColorStyle);
         $this->padding = $this->arrayToObject(class: Padding::class, var: $padding);

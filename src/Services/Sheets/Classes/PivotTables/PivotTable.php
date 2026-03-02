@@ -31,7 +31,6 @@ class PivotTable implements Jsonable
         GridRange|array|null $source = null,
         ?string $dataSourceId = null,
         PivotValueLayout|string $valueLayout = PivotValueLayout::HORIZONTAL,
-        ?array $criteria = null,
     ) {
         $this->rows = $rows;
         $this->columns = $columns;

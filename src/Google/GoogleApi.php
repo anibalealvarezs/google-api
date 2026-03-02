@@ -31,7 +31,7 @@ class GoogleApi extends OAuthV2Client
         string $token = "",
         ?Client $guzzleClient = null
     ) {
-        return parent::__construct(
+        parent::__construct(
             baseUrl: $baseUrl,
             authUrl: "https://accounts.google.com/o/oauth2/auth",
             tokenUrl: "https://oauth2.googleapis.com/token",
