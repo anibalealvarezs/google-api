@@ -45,6 +45,7 @@ class SlidesApi extends GoogleApi
      * @param array $scopes
      * @param string $token
      * @param Client|null $guzzleClient
+     * @param string $tokenPath
      * @throws Exception
      */
     public function __construct(
@@ -55,7 +56,8 @@ class SlidesApi extends GoogleApi
         string $userId,
         array $scopes = [],
         string $token = "",
-        ?Client $guzzleClient = null
+        ?Client $guzzleClient = null,
+        string $tokenPath = ""
     ) {
         parent::__construct(
             baseUrl: "https://slides.googleapis.com/v1/presentations/",
@@ -67,6 +69,7 @@ class SlidesApi extends GoogleApi
             scopes: ($scopes ?: ["https://www.googleapis.com/auth/presentations", "https://www.googleapis.com/auth/drive", "https://www.googleapis.com/auth/spreadsheets"]),
             token: $token,
             guzzleClient: $guzzleClient,
+            tokenPath: $tokenPath,
         );
     }
 

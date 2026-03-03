@@ -6,3 +6,5 @@
 /phpstan.neon
 /.vscode/
 /.bin/
+/config/google_tokens.json
+/scripts/

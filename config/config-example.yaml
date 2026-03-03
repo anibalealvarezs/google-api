@@ -4,6 +4,7 @@ google_client_secret: # client_secret_string
 google_redirect_uri: # https://oauth.pstmn.io/v1/browser-callback
 google_refresh_token: # refresh_token_string
 google_user_id: # your@email.com
+google_token_path: # ./config/google_tokens.json
 
 # Slides
 slides_scope: # [scope1, scope2]

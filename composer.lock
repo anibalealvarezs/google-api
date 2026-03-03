@@ -12,13 +12,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/anibalealvarezs/api-client-skeleton.git",
-                "reference": "e62e67399c5b9db1e64d067698494058e0366762"
+                "reference": "5c122ef04bff64fb764eadb33b738d13574f4394"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.anibalalvarez.com/dist/anibalealvarezs/api-client-skeleton/anibalealvarezs-api-client-skeleton-e62e67399c5b9db1e64d067698494058e0366762-zip-e1034e.zip",
-                "reference": "e62e67399c5b9db1e64d067698494058e0366762",
-                "shasum": "3e54d95482a963f4afd11e49079abe4dae16e516"
+                "url": "https://satis.anibalalvarez.com/dist/anibalealvarezs/api-client-skeleton/anibalealvarezs-api-client-skeleton-5c122ef04bff64fb764eadb33b738d13574f4394-zip-cc5755.zip",
+                "reference": "5c122ef04bff64fb764eadb33b738d13574f4394",
+                "shasum": "a56c1c258d2d77b641ebbd8eb403bc739052f561"
             },
             "require": {
                 "anibalealvarezs/oauth-v1": "@dev",
@@ -30,6 +30,7 @@
             },
             "require-dev": {
                 "fakerphp/faker": "^1.20",
+                "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^9"
             },
             "default-branch": true,
@@ -58,7 +59,7 @@
                 "source": "https://github.com/anibalealvarezs/api-client-skeleton/tree/main",
                 "issues": "https://github.com/anibalealvarezs/api-client-skeleton/issues"
             },
-            "time": "2025-05-02T04:32:37+00:00"
+            "time": "2026-03-02T21:37:54+00:00"
         },
         {
             "name": "anibalealvarezs/oauth-v1",

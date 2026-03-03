@@ -16,8 +16,9 @@ class DriveApi extends GoogleApi
      * @param string $clientSecret
      * @param string $refreshToken
      * @param string $userId
-     * @param array $scopes
+     * @param string $token
      * @param Client|null $guzzleClient
+     * @param string $tokenPath
      * @throws Exception
      */
     public function __construct(
@@ -27,7 +28,9 @@ class DriveApi extends GoogleApi
         string $refreshToken,
         string $userId,
         array $scopes = [],
-        ?Client $guzzleClient = null
+        string $token = "",
+        ?Client $guzzleClient = null,
+        string $tokenPath = ""
     ) {
         parent::__construct(
             baseUrl: "https://www.googleapis.com/drive/v3/",
@@ -37,7 +40,9 @@ class DriveApi extends GoogleApi
             refreshToken: $refreshToken,
             userId: $userId,
             scopes: ($scopes ?: ["https://www.googleapis.com/auth/drive"]),
+            token: $token,
             guzzleClient: $guzzleClient,
+            tokenPath: $tokenPath,
         );
     }
 

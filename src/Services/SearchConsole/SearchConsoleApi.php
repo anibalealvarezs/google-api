@@ -27,6 +27,7 @@ class SearchConsoleApi extends GoogleApi
      * @param string $token
      * @param Client|null $guzzleClient
      * @param Client|null $defaultSitemapClient
+     * @param string $tokenPath
      * @throws Exception
      */
     public function __construct(
@@ -38,7 +39,8 @@ class SearchConsoleApi extends GoogleApi
         array $scopes = [],
         string $token = "",
         ?Client $guzzleClient = null,
-        ?Client $defaultSitemapClient = null
+        ?Client $defaultSitemapClient = null,
+        string $tokenPath = ""
     ) {
         parent::__construct(
             baseUrl: "https://www.googleapis.com/webmasters/v3/",
@@ -50,6 +52,7 @@ class SearchConsoleApi extends GoogleApi
             scopes: ($scopes ?: ["https://www.googleapis.com/auth/webmasters"]),
             token: $token,
             guzzleClient: $guzzleClient,
+            tokenPath: $tokenPath,
         );
         $this->setDefaultSitemapClient($defaultSitemapClient);
     }

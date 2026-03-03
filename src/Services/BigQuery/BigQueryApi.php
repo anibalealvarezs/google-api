@@ -22,6 +22,7 @@ class BigQueryApi extends GoogleApi
      * @param array $scopes
      * @param string $token
      * @param Client|null $guzzleClient
+     * @param string $tokenPath
      * @throws Exception
      */
     public function __construct(
@@ -32,7 +33,8 @@ class BigQueryApi extends GoogleApi
         string $userId,
         array $scopes = [],
         string $token = "",
-        ?Client $guzzleClient = null
+        ?Client $guzzleClient = null,
+        string $tokenPath = ""
     ) {
         parent::__construct(
             baseUrl: "https://bigquery.googleapis.com/bigquery/v2/projects/",
@@ -46,6 +48,7 @@ class BigQueryApi extends GoogleApi
             ]),
             token: $token,
             guzzleClient: $guzzleClient,
+            tokenPath: $tokenPath,
         );
     }
 
