@@ -77,6 +77,7 @@ class SlidesApi extends GoogleApi
      * @param string $presentationId
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/slides/api/reference/rest/v1/presentations/get
      */
     public function getPresentationData(
         string $presentationId
@@ -132,6 +133,7 @@ class SlidesApi extends GoogleApi
      * @param Page|null $notesMaster
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/slides/api/reference/rest/v1/presentations/create
      */
     public function createPresentation(
         ?string $presentationId = null,
@@ -214,14 +216,16 @@ class SlidesApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/slides/api/reference/rest/v1/presentations/batchUpdate
+     * @see https://developers.google.com/slides/api/reference/rest/v1/presentations/request#CreateSlideRequest
      */
     public function createSlide(
-        string $presentationId = null,
+        ?string $presentationId = null,
         string $objectId = "",
         int $insertionIndex = null,
         LayoutReference $slideLayoutReference = null,
         LayoutPlaceholderIdMapping|array|null $placeholderIdMappings = null,
-        array $presentationData = null,
+        ?array $presentationData = null,
         bool $checkPresentation = false,
         bool $getRequestObjectOnly = false,
     ): array {
@@ -271,6 +275,7 @@ class SlidesApi extends GoogleApi
      * @param bool $checkPresentation
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/slides/api/reference/rest/v1/presentations.pages/get
      */
     public function getSlide(
         string $pageId,
@@ -308,14 +313,16 @@ class SlidesApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/slides/api/reference/rest/v1/presentations/batchUpdate
+     * @see https://developers.google.com/slides/api/reference/rest/v1/presentations/request#InsertTextRequest
      */
     public function insertText(
         string $objectId,
-        string $presentationId = null,
+        ?string $presentationId = null,
         string $text = "",
         int $insertionIndex = 0,
         TableCellLocation|array|null $cellLocation = null,
-        array $presentationData = null,
+        ?array $presentationData = null,
         bool $checkPresentation = false,
         bool $getRequestObjectOnly = false,
     ): array {
@@ -368,13 +375,15 @@ class SlidesApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/slides/api/reference/rest/v1/presentations/batchUpdate
+     * @see https://developers.google.com/slides/api/reference/rest/v1/presentations/request#DeleteTextRequest
      */
     public function deleteText(
         string $objectId,
-        string $presentationId = null,
+        ?string $presentationId = null,
         Range|array|null $range = null,
         TableCellLocation|array|null $cellLocation = null,
-        array $presentationData = null,
+        ?array $presentationData = null,
         bool $checkPresentation = false,
         bool $getRequestObjectOnly = false,
     ): array {
@@ -428,15 +437,18 @@ class SlidesApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/slides/api/reference/rest/v1/presentations/batchUpdate
+     * @see https://developers.google.com/slides/api/reference/rest/v1/presentations/request#DeleteTextRequest
+     * @see https://developers.google.com/slides/api/reference/rest/v1/presentations/request#InsertTextRequest
      */
     public function updateText(
         string $objectId,
-        string $presentationId = null,
+        ?string $presentationId = null,
         string $text = "",
         int $insertionIndex = 0,
         Range|array|null $range = null,
         TableCellLocation|array|null $cellLocation = null,
-        array $presentationData = null,
+        ?array $presentationData = null,
         bool $checkPresentation = false,
         bool $getRequestObjectOnly = false,
     ): array {
@@ -504,15 +516,17 @@ class SlidesApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/slides/api/reference/rest/v1/presentations/batchUpdate
+     * @see https://developers.google.com/slides/api/reference/rest/v1/presentations/request#UpdateTextStyleRequest
      */
     public function updateTextStyle(
         string $objectId,
-        string $presentationId = null,
+        ?string $presentationId = null,
         TextStyle|array|null $style = null,
         Range|array|null $textRange = null,
         TableCellLocation|array|null $cellLocation = null,
         string $fields = '*',
-        array $presentationData = null,
+        ?array $presentationData = null,
         bool $checkPresentation = false,
         bool $getRequestObjectOnly = false,
     ): array {
@@ -567,14 +581,16 @@ class SlidesApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/slides/api/reference/rest/v1/presentations/batchUpdate
+     * @see https://developers.google.com/slides/api/reference/rest/v1/presentations/request#CreateTableRequest
      */
     public function createTable(
         int $rows,
         int $columns,
         PageElementProperties|array $elementProperties,
-        string $objectId = null,
-        string $presentationId = null,
-        array $presentationData = null,
+        ?string $objectId = null,
+        ?string $presentationId = null,
+        ?array $presentationData = null,
         bool $checkPresentation = false,
         bool $getRequestObjectOnly = false,
     ): array {
@@ -629,14 +645,16 @@ class SlidesApi extends GoogleApi
      * @return array
      * @throws GuzzleException
      * @throws Exception
+     * @link https://developers.google.com/slides/api/reference/rest/v1/presentations/batchUpdate
+     * @see https://developers.google.com/slides/api/reference/rest/v1/presentations/request#UpdateTableRowPropertiesRequest
      */
     public function updateTableRowProperties(
         string $objectId,
         array $rowIndices,
         TableRowProperties|array $tableRowProperties,
-        string $presentationId = null,
+        ?string $presentationId = null,
         string $fields = '*',
-        array $presentationData = null,
+        ?array $presentationData = null,
         bool $checkPresentation = false,
         bool $getRequestObjectOnly = false,
     ): array {
@@ -691,14 +709,16 @@ class SlidesApi extends GoogleApi
      * @return array
      * @throws GuzzleException
      * @throws Exception
+     * @link https://developers.google.com/slides/api/reference/rest/v1/presentations/batchUpdate
+     * @see https://developers.google.com/slides/api/reference/rest/v1/presentations/request#UpdateTableColumnPropertiesRequest
      */
     public function updateTableColumnProperties(
         string $objectId,
         array $columnIndices,
         TableColumnProperties|array $tableColumnProperties,
-        string $presentationId = null,
+        ?string $presentationId = null,
         string $fields = '*',
-        array $presentationData = null,
+        ?array $presentationData = null,
         bool $checkPresentation = false,
         bool $getRequestObjectOnly = false,
     ): array {
@@ -753,14 +773,16 @@ class SlidesApi extends GoogleApi
      * @return array
      * @throws GuzzleException
      * @throws Exception
+     * @link https://developers.google.com/slides/api/reference/rest/v1/presentations/batchUpdate
+     * @see https://developers.google.com/slides/api/reference/rest/v1/presentations/request#UpdateTableCellPropertiesRequest
      */
     public function updateTableCellProperties(
         string $objectId,
         TableCellProperties|array $tableCellProperties,
-        string $presentationId = null,
+        ?string $presentationId = null,
         TableRange|array|null $tableRange  = null,
         string $fields = '*',
-        array $presentationData = null,
+        ?array $presentationData = null,
         bool $checkPresentation = false,
         bool $getRequestObjectOnly = false,
     ): array {
@@ -815,15 +837,17 @@ class SlidesApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/slides/api/reference/rest/v1/presentations/batchUpdate
+     * @see https://developers.google.com/slides/api/reference/rest/v1/presentations/request#CreateSheetsChartRequest
      */
     public function createSheetsChart(
         PageElementProperties|array $elementProperties,
         string $spreadsheetId,
         int $chartId,
-        string $presentationId = null,
+        ?string $presentationId = null,
         LinkingMode|string $linkingMode = LinkingMode::LINKED,
-        string $objectId = null,
-        array $presentationData = null,
+        ?string $objectId = null,
+        ?array $presentationData = null,
         bool $checkPresentation = false,
         bool $getRequestObjectOnly = false,
     ): array {
@@ -877,13 +901,15 @@ class SlidesApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/slides/api/reference/rest/v1/presentations/batchUpdate
+     * @see https://developers.google.com/slides/api/reference/rest/v1/presentations/request#CreateImageRequest
      */
     public function createImage(
         PageElementProperties|array $elementProperties,
         string $url,
-        string $presentationId = null,
-        string $objectId = null,
-        array $presentationData = null,
+        ?string $presentationId = null,
+        ?string $objectId = null,
+        ?array $presentationData = null,
         bool $checkPresentation = false,
         bool $getRequestObjectOnly = false,
     ): array {

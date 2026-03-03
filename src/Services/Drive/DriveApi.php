@@ -50,6 +50,7 @@ class DriveApi extends GoogleApi
      * @param string $fileId
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/files/get
      */
     public function getFileMetadata(
         string $fileId
@@ -90,6 +91,7 @@ class DriveApi extends GoogleApi
      * @param bool $stream
      * @return bool
      * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/files/get
      */
     public function getFile(
         string $fileId,
@@ -118,6 +120,7 @@ class DriveApi extends GoogleApi
      * @param bool $stream
      * @return bool
      * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/files/export
      */
     public function exportFile(
         string $fileId,
@@ -150,6 +153,7 @@ class DriveApi extends GoogleApi
      * @param bool $supportsAllDrives
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/files/copy
      */
     public function copyFile(
         string $fileId,
@@ -187,13 +191,14 @@ class DriveApi extends GoogleApi
      * @param string $q
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/files/list
      */
     public function getFilesMetadata(
-        string $pageToken = null,
-        string $driveId = null,
+        ?string $pageToken = null,
+        ?string $driveId = null,
         int $pageSize = 1000,
         array $orderBy = [],
-        string $q = ''
+        ?string $q = null
     ): array {
         $fields = [
             'md5Checksum',
@@ -248,6 +253,7 @@ class DriveApi extends GoogleApi
      * @param string|null $driveId
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/changes/getStartPageToken
      */
     public function getStartPageToken(
         string $driveId = null
@@ -280,10 +286,11 @@ class DriveApi extends GoogleApi
      * @param int $pageSize
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/changes/list
      */
     public function getChanges(
         int $pageToken,
-        string $driveId = null,
+        ?string $driveId = null,
         int $pageSize = 1000
     ): array {
         $query =[

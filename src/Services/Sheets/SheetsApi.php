@@ -85,6 +85,7 @@ class SheetsApi extends GoogleApi
      * @param string $fields
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get
      */
     public function getSpreadsheetData(
         string $spreadsheetId,
@@ -108,6 +109,8 @@ class SheetsApi extends GoogleApi
      * @param int|null $sheetId
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AddSheetRequest
      */
     public function createSheetAtStart(
         string $spreadsheetId,
@@ -130,6 +133,8 @@ class SheetsApi extends GoogleApi
      * @param array|null $spreadsheetData
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AddSheetRequest
      */
     public function createSheetAtTheEnd(
         string $spreadsheetId,
@@ -167,6 +172,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AddSheetRequest
      */
     public function createSheet(
         string $spreadsheetId,
@@ -241,6 +248,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectsOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AddSheetRequest
      */
     public function createMultipleSheets(
         string $spreadsheetId,
@@ -308,6 +317,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteSheetRequest
      */
     public function deleteSheet(
         string $spreadsheetId,
@@ -358,6 +369,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectsOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteSheetRequest
      */
     public function deleteMultipleSheets(
         string $spreadsheetId,
@@ -411,6 +424,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectsOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteSheetRequest
      */
     public function deleteAllSheetsBut(
         string $spreadsheetId,
@@ -469,6 +484,7 @@ class SheetsApi extends GoogleApi
      * @param string|null $destinySpreadsheetId
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.sheets/copyTo
      */
     public function copySheet(
         string $sourceSpreadsheetId,
@@ -506,6 +522,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateCellsRequest
      */
     public function updateCells(
         string $spreadsheetId,
@@ -601,6 +619,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectsOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateCellsRequest
      */
     public function updateMultipleSheetsCells(
         string $spreadsheetId,
@@ -709,6 +729,7 @@ class SheetsApi extends GoogleApi
      * @param array|null $spreadsheetData
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/clear
      */
     public function clearCells(
         string $spreadsheetId,
@@ -758,6 +779,9 @@ class SheetsApi extends GoogleApi
      * @param ClearSheetMethods $method
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/clear
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateCellsRequest
      */
     public function clearSheet(
         string $spreadsheetId,
@@ -800,6 +824,7 @@ class SheetsApi extends GoogleApi
      * @param array|null $spreadsheetData
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
      */
     public function readCells(
         string $spreadsheetId,
@@ -859,6 +884,7 @@ class SheetsApi extends GoogleApi
      * @param DateTimeRenderOption $responseDateTimeRenderOption
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/update
      */
     public function writeCells(
         string $spreadsheetId,
@@ -931,6 +957,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest
      */
     public function updateSheetProperties(
         string $spreadsheetId,
@@ -1008,6 +1036,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectsOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest
      */
     public function updateMultipleSheetsProperties(
         string $spreadsheetId,
@@ -1100,6 +1130,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteDimensionRequest
      */
     public function deleteDimension(
         string $spreadsheetId,
@@ -1175,6 +1207,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectsOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteDimensionRequest
      */
     public function deleteMultipleDimensions(
         string $spreadsheetId,
@@ -1259,6 +1293,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateDimensionPropertiesRequest
      */
     public function updateDimensionProperties(
         string $spreadsheetId,
@@ -1341,6 +1377,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectsOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateDimensionPropertiesRequest
      */
     public function updateMultipleDimensionsProperties(
         string $spreadsheetId,
@@ -1435,6 +1473,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateCellsRequest
      */
     public function addPivotTable(
         string $spreadsheetId,
@@ -1515,6 +1555,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AddChartRequest
      */
     public function addChart(
         string $spreadsheetId,
@@ -1652,6 +1694,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#CopyPasteRequest
      */
     public function copyAndPaste(
         string $spreadsheetId,

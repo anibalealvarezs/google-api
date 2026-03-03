@@ -92,6 +92,7 @@ class SearchConsoleApi extends GoogleApi
      * @return array
      * @throws GuzzleException
      * @throws Exception
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/searchanalytics/query
      */
     public function getSearchQueryResults(
         string $siteUrl,
@@ -101,7 +102,7 @@ class SearchConsoleApi extends GoogleApi
         int $startRow = 0,
         DataState $dataState = DataState::ALL,
         ?array $dimensions = null,
-        string $type = null,
+        ?string $type = null,
         ?array $dimensionFilterGroups = null,
         AggregationType $aggregationType = AggregationType::AUTO,
     ): array {
@@ -164,6 +165,7 @@ class SearchConsoleApi extends GoogleApi
      * @param AggregationType $aggregationType
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/searchanalytics/query
      */
     public function getAllSearchQueryResults(
         string $siteUrl,
@@ -173,7 +175,7 @@ class SearchConsoleApi extends GoogleApi
         int $startRow = 0,
         DataState $dataState = DataState::ALL,
         ?array $dimensions = null,
-        string $type = null,
+        ?string $type = null,
         ?array $dimensionFilterGroups = null,
         AggregationType $aggregationType = AggregationType::AUTO,
     ): array {
@@ -205,6 +207,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sites/list
      */
     public function getSites(): array
     {
@@ -217,6 +220,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sites/get
      */
     public function getSite(string $siteUrl): array
     {
@@ -233,6 +237,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sites/add
      */
     public function addSite(string $siteUrl): array
     {
@@ -249,6 +254,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sites/delete
      */
     public function removeSite(string $siteUrl): array
     {
@@ -265,6 +271,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sitemaps/list
      */
     public function getSitemaps(string $siteUrl): array
     {
@@ -281,6 +288,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sitemaps/get
      */
     public function getSitemap(string $siteUrl, string $sitemap): array
     {
@@ -297,6 +305,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sitemaps/submit
      */
     public function addSitemap(string $siteUrl, string $sitemap, ?Client $client = null): array
     {
@@ -317,6 +326,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sitemaps/delete
      */
     public function removeSitemap(string $siteUrl, string $sitemap): array
     {
@@ -333,6 +343,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/urlInspection.index/inspect
      */
     public function inspectUrl(string $siteUrl, string $url, string $languageCode = "en-US"): array
     {
