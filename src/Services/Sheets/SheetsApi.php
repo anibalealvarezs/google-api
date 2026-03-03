@@ -21,6 +21,7 @@ use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Sheets\RowData;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Sheets\SheetProperties;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Spreadsheets\ChartSpec;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Spreadsheets\EmbeddedChart;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Spreadsheets\Spreadsheet;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\ChartTypes;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\ClearSheetMethods;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\DateTimeRenderOption;
@@ -37,6 +38,9 @@ use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\AddChartRequ
 use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\AddSheetRequest;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\CopyPasteRequest;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\DeleteSheetRequest;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Cells\InsertDataOption;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Cells\BatchClearValuesRequest;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Cells\BatchUpdateValuesRequest;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -1743,6 +1747,160 @@ class SheetsApi extends GoogleApi
         return [
             'error' => 'Error getting spreadsheet\'s sheets'
         ];
+    }
+
+    /**
+     * @param Spreadsheet|array $spreadsheet
+     * @return array
+     * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create
+     */
+    public function createSpreadsheet(
+        Spreadsheet|array $spreadsheet = []
+    ): array {
+        // Request the spreadsheet data
+        $response = $this->performRequest(
+            method: "POST",
+            endpoint: "",
+            body: json_encode(is_object($spreadsheet) ? Helpers::getJsonableArray($spreadsheet) : $spreadsheet),
+        );
+        // Return response
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    /**
+     * @param string $spreadsheetId
+     * @param array $data
+     * @param string $range
+     * @param ValueInputOption $valueInputOption
+     * @param InsertDataOption $insertDataOption
+     * @param bool $includeValuesInResponse
+     * @param ValueRenderOption $responseValueRenderOption
+     * @param DateTimeRenderOption $responseDateTimeRenderOption
+     * @return array
+     * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/append
+     */
+    public function appendCells(
+        string $spreadsheetId,
+        array $data = [],
+        string $range = 'A1',
+        ValueInputOption $valueInputOption = ValueInputOption::USER_ENTERED,
+        InsertDataOption $insertDataOption = InsertDataOption::INSERT_ROWS,
+        bool $includeValuesInResponse = false,
+        ValueRenderOption $responseValueRenderOption = ValueRenderOption::FORMATTED_VALUE,
+        DateTimeRenderOption $responseDateTimeRenderOption = DateTimeRenderOption::SERIAL_NUMBER,
+    ): array {
+        // Build request
+        $request = Helpers::getJsonableArray(new ValueRange(
+            range: $range,
+            values: $data,
+        ));
+        // Exec request
+        $response = $this->performRequest(
+            method: "POST",
+            endpoint: $spreadsheetId . '/values/' . $range . ':append',
+            query: [
+                "valueInputOption" => $valueInputOption->name,
+                "insertDataOption" => $insertDataOption->name,
+                "includeValuesInResponse" => $includeValuesInResponse ? 'true' : 'false',
+                "responseValueRenderOption" => $responseValueRenderOption->name,
+                "responseDateTimeRenderOption" => $responseDateTimeRenderOption->name,
+            ],
+            body: json_encode($request),
+        );
+        // Return response
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    /**
+     * @param string $spreadsheetId
+     * @param array $ranges
+     * @param Dimension $majorDimension
+     * @param ValueRenderOption $valueRenderOption
+     * @param DateTimeRenderOption $dateTimeRenderOption
+     * @return array
+     * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchGet
+     */
+    public function readMultipleCells(
+        string $spreadsheetId,
+        array $ranges = [],
+        Dimension $majorDimension = Dimension::ROWS,
+        ValueRenderOption $valueRenderOption = ValueRenderOption::FORMATTED_VALUE,
+        DateTimeRenderOption $dateTimeRenderOption = DateTimeRenderOption::SERIAL_NUMBER,
+    ): array {
+        $valueRanges = [];
+        foreach ($ranges as $range) {
+            // Exec request
+            $response = $this->performRequest(
+                method: "GET",
+                endpoint: $spreadsheetId . '/values:batchGet',
+                query: [
+                    "ranges" => $range,
+                    "majorDimension" => $majorDimension->name,
+                    "valueRenderOption" => $valueRenderOption->name,
+                    "dateTimeRenderOption" => $dateTimeRenderOption->name,
+                ],
+            );
+            $decoded = json_decode($response->getBody()->getContents(), true);
+            if (isset($decoded['valueRanges'][0])) {
+                $valueRanges[] = $decoded['valueRanges'][0];
+            }
+        }
+        // Return response
+        return [
+            'spreadsheetId' => $spreadsheetId,
+            'valueRanges' => $valueRanges
+        ];
+    }
+
+    /**
+     * @param string $spreadsheetId
+     * @param BatchUpdateValuesRequest|array $request
+     * @return array
+     * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchUpdate
+     */
+    public function updateMultipleCellsValues(
+        string $spreadsheetId,
+        BatchUpdateValuesRequest|array $request
+    ): array {
+        if (is_array($request)) {
+            $request = new BatchUpdateValuesRequest(...$request);
+        }
+        // Exec request
+        $response = $this->performRequest(
+            method: "POST",
+            endpoint: $spreadsheetId . '/values:batchUpdate',
+            body: json_encode(Helpers::getJsonableArray($request)),
+        );
+        // Return response
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    /**
+     * @param string $spreadsheetId
+     * @param BatchClearValuesRequest|array $request
+     * @return array
+     * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchClear
+     */
+    public function clearMultipleCells(
+        string $spreadsheetId,
+        BatchClearValuesRequest|array $request
+    ): array {
+        if (is_array($request)) {
+            $request = new BatchClearValuesRequest(...$request);
+        }
+        // Exec request
+        $response = $this->performRequest(
+            method: "POST",
+            endpoint: $spreadsheetId . '/values:batchClear',
+            body: json_encode(Helpers::getJsonableArray($request)),
+        );
+        // Return response
+        return json_decode($response->getBody()->getContents(), true);
     }
 
     /**
