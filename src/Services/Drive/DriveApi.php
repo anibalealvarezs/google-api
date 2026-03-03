@@ -316,4 +316,20 @@ class DriveApi extends GoogleApi
         // Return response
         return json_decode($response->getBody()->getContents(), true);
     }
+
+    /**
+     * @param string $fileId
+     * @return bool
+     * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/files/delete
+     */
+    public function deleteFile(
+        string $fileId
+    ): bool {
+        $this->performRequest(
+            method: "DELETE",
+            endpoint: "files/" . $fileId,
+        );
+        return true;
+    }
 }

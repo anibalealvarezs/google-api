@@ -8,3 +8,4 @@
 /.bin/
 /config/google_tokens.json
 /scripts/
+/tmp/
