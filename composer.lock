@@ -4,21 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1eb67c9dcba1fcd20d6cec1b2229ee68",
+    "content-hash": "54cc3abf408ab379dffff313a5c75d3d",
     "packages": [
         {
             "name": "anibalealvarezs/api-client-skeleton",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/anibalealvarezs/api-client-skeleton.git",
-                "reference": "5c122ef04bff64fb764eadb33b738d13574f4394"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://satis.anibalalvarez.com/dist/anibalealvarezs/api-client-skeleton/anibalealvarezs-api-client-skeleton-5c122ef04bff64fb764eadb33b738d13574f4394-zip-cc5755.zip",
-                "reference": "5c122ef04bff64fb764eadb33b738d13574f4394",
-                "shasum": "a56c1c258d2d77b641ebbd8eb403bc739052f561"
+                "type": "path",
+                "url": "../api-client-skeleton",
+                "reference": "5c122ef04bff64fb764eadb33b738d13574f4394"
             },
             "require": {
                 "anibalealvarezs/oauth-v1": "@dev",
@@ -33,7 +27,6 @@
                 "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^9"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -55,25 +48,18 @@
                 }
             ],
             "description": "description",
-            "support": {
-                "source": "https://github.com/anibalealvarezs/api-client-skeleton/tree/main",
-                "issues": "https://github.com/anibalealvarezs/api-client-skeleton/issues"
-            },
-            "time": "2026-03-02T21:37:54+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "anibalealvarezs/oauth-v1",
             "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/anibalealvarezs/oauth-v1.git",
-                "reference": "c47bb38647f4e331c33ff1fc1a0968d6aec00350"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://satis.anibalalvarez.com/dist/anibalealvarezs/oauth-v1/anibalealvarezs-oauth-v1-c47bb38647f4e331c33ff1fc1a0968d6aec00350-zip-b2a53f.zip",
-                "reference": "c47bb38647f4e331c33ff1fc1a0968d6aec00350",
-                "shasum": "e4254addab2564db4514669d3b2c7917c94e7e82"
+                "type": "path",
+                "url": "../OAuth-v1",
+                "reference": "c47bb38647f4e331c33ff1fc1a0968d6aec00350"
             },
             "require": {
                 "php": ">=8.1"
@@ -82,7 +68,6 @@
                 "fakerphp/faker": "^1.20",
                 "phpunit/phpunit": "^9"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -104,11 +89,10 @@
                 }
             ],
             "description": "description",
-            "support": {
-                "source": "https://github.com/anibalealvarezs/oauth-v1/tree/main",
-                "issues": "https://github.com/anibalealvarezs/oauth-v1/issues"
-            },
-            "time": "2025-05-02T18:49:31+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -2216,12 +2200,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a8ed8c5d85b7cb6768e2829b4ee507e880e9f22e"
+                "reference": "a71778ade547d17881d1039314375ec273a0b32f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a8ed8c5d85b7cb6768e2829b4ee507e880e9f22e",
-                "reference": "a8ed8c5d85b7cb6768e2829b4ee507e880e9f22e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a71778ade547d17881d1039314375ec273a0b32f",
+                "reference": "a71778ade547d17881d1039314375ec273a0b32f",
                 "shasum": ""
             },
             "require": {
@@ -2299,27 +2283,11 @@
             },
             "funding": [
                 {
-                    "url": "https://phpunit.de/sponsors.html",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                },
-                {
-                    "url": "https://liberapay.com/sebastianbergmann",
-                    "type": "liberapay"
-                },
-                {
-                    "url": "https://thanks.dev/u/gh/sebastianbergmann",
-                    "type": "thanks_dev"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/phpunit/phpunit",
-                    "type": "tidelift"
+                    "url": "https://phpunit.de/sponsoring.html",
+                    "type": "other"
                 }
             ],
-            "time": "2026-02-23T16:12:28+00:00"
+            "time": "2026-03-03T16:43:55+00:00"
         },
         {
             "name": "psr/container",

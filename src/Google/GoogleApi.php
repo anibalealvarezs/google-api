@@ -67,6 +67,9 @@ class GoogleApi extends OAuthV2Client
             token: $token,
             guzzleClient: $guzzleClient,
         );
+
+        $this->setResponseErrorDetector('error');
+        $this->setErrorMessageParser(fn($data) => $data['error']['message'] ?? json_encode($data));
     }
 
     /**
