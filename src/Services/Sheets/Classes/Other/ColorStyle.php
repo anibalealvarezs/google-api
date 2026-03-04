@@ -13,7 +13,7 @@ class ColorStyle implements Jsonable
 {
     public Color|array|null $rgbColor;
     public ThemeColorType|string|null $themeColor;
-    
+
     public function __construct(
         Color|array|null $rgbColor = null,
         ThemeColorType|string|null $themeColor = null,

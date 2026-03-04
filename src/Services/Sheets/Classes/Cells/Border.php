@@ -14,7 +14,7 @@ class Border implements Jsonable
 {
     public ColorStyle|array $colorStyle;
     public Style|string $style;
-    
+
     public function __construct(
         ColorStyle|array $colorStyle,
         Style|string $style = Style::SOLID

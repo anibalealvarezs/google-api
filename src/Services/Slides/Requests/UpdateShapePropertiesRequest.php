@@ -14,7 +14,7 @@ class UpdateShapePropertiesRequest implements Jsonable
     public string $objectId;
     public ShapeProperties|array $shapeProperties;
     public string $fields;
-    
+
     public function __construct(
         string $objectId,
         ShapeProperties|array $shapeProperties,

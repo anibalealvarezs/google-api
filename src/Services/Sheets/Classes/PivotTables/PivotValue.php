@@ -19,7 +19,7 @@ class PivotValue implements Jsonable
     public DataSourceColumnReference|array|null $dataSourceColumnReference;
     public PivotValueSummarizeFunction|string $summarizeFunction;
     public PivotValueCalculatedDisplayType|string $calculatedDisplayType;
-    
+
     public function __construct(
         ?string $name = null,
         ?string $formula = null,

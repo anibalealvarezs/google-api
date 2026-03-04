@@ -22,7 +22,7 @@ class LineProperties implements Jsonable
     public Link|array|null $link;
     public LineConnection|array|null $startConnection;
     public LineConnection|array|null $endConnection;
-    
+
     public function __construct(
         LineFill|array $lineFill,
         Dimension|array $weight,

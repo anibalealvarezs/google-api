@@ -12,7 +12,7 @@ use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Charts\ChartData;
 class CandlestickSeries implements Jsonable
 {
     public ChartData|array $data;
-    
+
     public function __construct(
         ChartData|array $data
     ) {

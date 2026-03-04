@@ -13,7 +13,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class TableBorderRow implements Jsonable
 {
     public array $tableBorderCells;
-    
+
     public function __construct(
         array $tableBorderCells = [],
     ) {

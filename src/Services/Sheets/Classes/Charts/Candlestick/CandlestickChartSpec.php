@@ -12,7 +12,7 @@ class CandlestickChartSpec implements Jsonable
 {
     public CandlestickDomain|array $domain;
     public array $data;
-    
+
     public function __construct(
         CandlestickDomain|array $domain,
         array $data,

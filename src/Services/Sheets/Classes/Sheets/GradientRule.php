@@ -13,7 +13,7 @@ class GradientRule implements Jsonable
     public InterpolationPoint|array $minpoint;
     public InterpolationPoint|array $maxpoint;
     public InterpolationPoint|array|null $midpoint;
-    
+
     public function __construct(
         InterpolationPoint|array $minpoint,
         InterpolationPoint|array $maxpoint,

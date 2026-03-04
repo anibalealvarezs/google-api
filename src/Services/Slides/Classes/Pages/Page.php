@@ -30,7 +30,7 @@ class Page implements Jsonable
     public SlideProperties|array|null $slideProperties;
     public ?string $revisionId;
     public PageType|string $pageType;
-    
+
     public function __construct(
         string $objectId,
         PageProperties|array $pageProperties,
@@ -62,7 +62,7 @@ class Page implements Jsonable
         $this->slideProperties = $this->arrayToObject(class: SlideProperties::class, var: $slideProperties);
         $this->revisionId = $revisionId;
         $this->pageType = $this->stringToEnum(enum: PageType::class, var: $pageType);
-        
+
         $this->keepOneOfKind([
             'slideProperties',
             'layoutProperties',

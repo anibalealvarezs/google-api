@@ -22,7 +22,7 @@ class PivotGroup implements Jsonable
     public bool $showTotals;
     public SortOrder|string $sortOrder;
     public bool $repeatHeadings;
-    
+
     public function __construct(
         array $valueMetadata = [],
         ?string $label = null,

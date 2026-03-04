@@ -13,7 +13,7 @@ class HistogramRule implements Jsonable
     public float $interval;
     public ?float $start;
     public ?float $end;
-    
+
     public function __construct(
         float $interval,
         ?float $start = null,

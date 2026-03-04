@@ -14,7 +14,7 @@ class Borders implements Jsonable
     public Border|array|null $bottom;
     public Border|array|null $left;
     public Border|array|null $right;
-    
+
     public function __construct(
         Border|array|null $top = null,
         Border|array|null $bottom = null,

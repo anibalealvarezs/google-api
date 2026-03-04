@@ -14,7 +14,7 @@ class Restrictions implements Jsonable
     public bool $copyRequiresWriterPermission;
     public bool $domainUsersOnly;
     public bool $driveMembersOnly;
-    
+
     public function __construct(
         bool $adminManagedRestrictions = false,
         bool $copyRequiresWriterPermission = false,

@@ -15,7 +15,7 @@ class GridData implements Jsonable
     public array $rowData;
     public array $rowMetadata;
     public array $columnMetadata;
-    
+
     public function __construct(
         int $startRow,
         int $startColumn,

@@ -23,7 +23,7 @@ class SlicerSpec implements Jsonable
     public ColorStyle|array $backgroundColorStyle;
     public bool $applyToPivotTables;
     public HorizontalAlign|string $horizontalAlignment;
-    
+
     public function __construct(
         GridRange|array $dataRange,
         FilterCriteria|array $filterCriteria,

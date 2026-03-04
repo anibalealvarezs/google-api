@@ -13,7 +13,7 @@ class Recolor implements Jsonable
 {
     public ColorStop|array $recolorStops;
     public Name|string $name;
-    
+
     public function __construct(
         ColorStop|array $recolorStops,
         Name|string $name = Name::NONE

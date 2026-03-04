@@ -18,7 +18,7 @@ class Outline implements Jsonable
     public OutlineFill|array|null $outlineFill;
     public DashStyle|string $dashStyle;
     public PropertyState|string $propertyState;
-    
+
     public function __construct(
         Dimension|array $weight,
         OutlineFill|array|null $outlineFill = null,

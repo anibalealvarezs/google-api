@@ -13,7 +13,7 @@ class ConditionalFormatRule implements Jsonable
     public array $ranges;
     public BooleanRule|array|null $booleanRule;
     public GradientRule|array|null $gradientRule;
-    
+
     public function __construct(
         array $ranges,
         BooleanRule|array|null $booleanRule = null,

@@ -125,7 +125,7 @@ class SearchConsoleApi extends GoogleApi
         }
         if ($dimensionFilterGroups) {
             $groups = [];
-            foreach($dimensionFilterGroups as $dimensionFilterGroup) {
+            foreach ($dimensionFilterGroups as $dimensionFilterGroup) {
                 if ($dimensionFilterGroup instanceof DimensionFilterGroup) {
                     if (!empty($dimensionFilterGroup->filters)) {
                         $groups[] = Helpers::getJsonableArray($dimensionFilterGroup);

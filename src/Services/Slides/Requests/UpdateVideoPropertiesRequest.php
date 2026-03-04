@@ -14,14 +14,14 @@ class UpdateVideoPropertiesRequest implements Jsonable
     public string $objectId;
     public VideoProperties|array $videoProperties;
     public string $fields;
-    
+
     public function __construct(
         string $objectId,
         VideoProperties|array $videoProperties,
         string $fields = "*"
     ) {
         $this->objectId = $objectId;
-        $this->videoProperties = $this->arrayToObject(class: VideoProperties::class, var: $videoProperties); 
+        $this->videoProperties = $this->arrayToObject(class: VideoProperties::class, var: $videoProperties);
         $this->fields = $fields;
     }
 

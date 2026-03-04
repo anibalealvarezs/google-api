@@ -69,7 +69,7 @@ class GoogleApi extends OAuthV2Client
         );
 
         $this->setResponseErrorDetector('error');
-        $this->setErrorMessageParser(fn($data) => $data['error']['message'] ?? json_encode($data));
+        $this->setErrorMessageParser(fn ($data) => $data['error']['message'] ?? json_encode($data));
     }
 
     /**

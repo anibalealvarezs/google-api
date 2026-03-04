@@ -48,7 +48,7 @@ class GoogleApiLiveTest extends TestCase
     {
         $config = app_config();
         $tokenPath = $config['google_token_path'] ?? "";
-        
+
         if ($tokenPath && file_exists($tokenPath)) {
             unlink($tokenPath);
         }

@@ -23,7 +23,7 @@ class UpdateCellsRequest implements Jsonable
     public GridCoordinate|array|null $start;
     public GridRange|array|null $range;
     public string $fields;
-    
+
     public function __construct(
         array $rows,
         GridCoordinate|array|null $start = null,

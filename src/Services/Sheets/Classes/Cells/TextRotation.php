@@ -12,7 +12,7 @@ class TextRotation implements Jsonable
 {
     public ?int $angle;
     public ?bool $vertical;
-    
+
     public function __construct(
         ?int $angle = null,
         ?bool $vertical = null,

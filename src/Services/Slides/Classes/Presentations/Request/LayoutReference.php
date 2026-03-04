@@ -14,7 +14,7 @@ class LayoutReference implements Jsonable, Kindable
 {
     public ?string $layoutId;
     public PredefinedLayout|string $predefinedLayout;
-    
+
     public function __construct(
         ?string $layoutId = null,
         PredefinedLayout|string $predefinedLayout = PredefinedLayout::BLANK

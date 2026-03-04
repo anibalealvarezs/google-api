@@ -14,7 +14,7 @@ class ChartHistogramRule implements Jsonable
     public float $minValue;
     public float $maxValue;
     public float $intervalSize;
-    
+
     public function __construct(
         float $minValue,
         float $maxValue,

@@ -19,7 +19,7 @@ class DataSourceTable implements Jsonable
     public int $rowLimit;
     public DataExecutionStatus|array $dataExecutionStatus;
     public DataSourceTableColumnSelectionType|string $columnSelectionType;
-    
+
     public function __construct(
         string $dataSourceId,
         array $columns,

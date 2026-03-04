@@ -217,7 +217,7 @@ class DriveApi extends GoogleApi
             'trashedTime',
         ];
 
-        $query =[
+        $query = [
             "corpora" => $driveId ? Corpora::drive->name : Corpora::allDrives->name,
             "supportsAllDrives" => "true",
             "includeItemsFromAllDrives" => "true",
@@ -258,7 +258,7 @@ class DriveApi extends GoogleApi
     public function getStartPageToken(
         string $driveId = null
     ): array {
-        $query =[
+        $query = [
             "includeCorpusRemovals" => "true",
             "supportsAllDrives" => "true",
             "includeItemsFromAllDrives" => "true",
@@ -293,7 +293,7 @@ class DriveApi extends GoogleApi
         ?string $driveId = null,
         int $pageSize = 1000
     ): array {
-        $query =[
+        $query = [
             "includeCorpusRemovals" => "true",
             "supportsAllDrives" => "true",
             "includeItemsFromAllDrives" => "true",

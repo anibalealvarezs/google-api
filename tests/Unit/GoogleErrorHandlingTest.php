@@ -85,7 +85,7 @@ class GoogleErrorHandlingTest extends TestCase
 
         $response = $client->performRequest('GET', '/test');
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         $data = json_decode($response->getBody()->getContents(), true);
         $this->assertEquals('drive#fileList', $data['kind']);
     }

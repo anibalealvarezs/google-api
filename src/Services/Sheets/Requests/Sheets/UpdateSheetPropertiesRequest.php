@@ -13,7 +13,7 @@ class UpdateSheetPropertiesRequest implements Jsonable
 {
     public SheetProperties $properties;
     public string $fields;
-    
+
     public function __construct(
         SheetProperties $properties,
         string $fields = '*',

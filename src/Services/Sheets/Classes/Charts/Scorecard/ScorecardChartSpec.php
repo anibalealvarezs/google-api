@@ -24,7 +24,7 @@ class ScorecardChartSpec implements Jsonable
     public BaselineValueFormat|array|null $baselineValueFormat;
     public ChartNumberFormatSource|string $numberFormatSource;
     public ChartCustomNumberFormatOptions|array|null $customFormatOptions;
-    
+
     public function __construct(
         ChartData|array $keyValueData,
         KeyValueFormat|array $keyValueFormat,

@@ -13,7 +13,7 @@ class StretchedPictureFill implements Jsonable
 {
     public string $contentUrl;
     public readonly Size|array $size;
-    
+
     public function __construct(
         string $contentUrl,
         Size|array $size,

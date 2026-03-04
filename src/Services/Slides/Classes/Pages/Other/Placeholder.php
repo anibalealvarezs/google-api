@@ -14,7 +14,7 @@ class Placeholder implements Jsonable
     public ?int $index;
     public ?string $parentObjectId;
     public PlaceholderType|string $type;
-    
+
     public function __construct(
         ?int $index = null,
         ?string $parentObjectId = null,

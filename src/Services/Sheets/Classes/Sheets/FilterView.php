@@ -18,7 +18,7 @@ class FilterView implements Jsonable
     public string $namedRangeId;
     public array $sortSpecs;
     public FilterSpec|array $filterSpecs;
-    
+
     public function __construct(
         int $filterViewId,
         string $title,

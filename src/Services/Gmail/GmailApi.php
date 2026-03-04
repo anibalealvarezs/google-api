@@ -249,8 +249,7 @@ class GmailApi extends GoogleApi
      */
     public function hasTextBody(
         object $message
-    ): bool
-    {
+    ): bool {
         return !empty($message->text);
     }
 
@@ -381,8 +380,7 @@ class GmailApi extends GoogleApi
      */
     public function replaceChars(
         string $data
-    ): string
-    {
+    ): string {
         $data = base64_decode(str_replace(array('-', '_'), array('+', '/'), $data));
         //from php.net/manual/es/function.base64-decode.php#118244
 
@@ -395,8 +393,7 @@ class GmailApi extends GoogleApi
      */
     public function gmailBodyDecode(
         string $data
-    ): string|bool
-    {
+    ): string|bool {
         $data = $this->replaceChars(data: $data);
         //from php.net/manual/es/function.base64-decode.php#118244
 

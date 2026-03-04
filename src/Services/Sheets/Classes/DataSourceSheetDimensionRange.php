@@ -14,7 +14,7 @@ class DataSourceSheetDimensionRange implements Jsonable
 {
     public int $sheetId;
     public array $columnReferences;
-    
+
     public function __construct(
         int $sheetId,
         array $columnReferences = null,

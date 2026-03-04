@@ -15,7 +15,7 @@ class ChartAxisViewWindowOptions implements Jsonable
     public float $viewWindowMin;
     public float $viewWindowMax;
     public ViewWindowMode|string $viewWindowMode;
-    
+
     public function __construct(
         float $viewWindowMin,
         float $viewWindowMax,

@@ -11,7 +11,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class MasterProperties implements Jsonable
 {
     public string $displayName;
-    
+
     public function __construct(
         string $displayName,
     ) {

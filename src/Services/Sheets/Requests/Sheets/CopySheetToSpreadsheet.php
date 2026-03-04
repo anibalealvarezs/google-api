@@ -11,7 +11,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class CopySheetToSpreadsheet implements Jsonable
 {
     public string $destinationSpreadsheetId;
-    
+
     public function __construct(
         string $destinationSpreadsheetId
     ) {

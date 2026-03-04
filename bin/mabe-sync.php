@@ -48,7 +48,7 @@ list($processedData, $startRowIndex, $responses) = prepareSection(
 );
 
 $formattedData = [];
-foreach($processedData as $index => $row) {
+foreach ($processedData as $index => $row) {
     $formattedRow = [
         'values' => []
     ];
@@ -78,8 +78,15 @@ foreach($processedData as $index => $row) {
     $formattedData[] = $formattedRow;
 }
 
-list($numRowsToWrite, $numColsToWrite, $responses) = computeWriteDimensionsFromFormattedData($formattedData, $sheetsApi,
-    $destinySpreadsheetId, $startRowIndex, $destTitle, $destSheetId, $responses);
+list($numRowsToWrite, $numColsToWrite, $responses) = computeWriteDimensionsFromFormattedData(
+    $formattedData,
+    $sheetsApi,
+    $destinySpreadsheetId,
+    $startRowIndex,
+    $destTitle,
+    $destSheetId,
+    $responses
+);
 
 // PROCESS LEADS
 
@@ -102,7 +109,7 @@ list($processedData, $startRowIndex, $responses) = prepareSection(
 );
 
 $formattedData = [];
-foreach($processedData as $index => $row) {
+foreach ($processedData as $index => $row) {
     $formattedRow = [
         'values' => []
     ];
@@ -133,8 +140,15 @@ foreach($processedData as $index => $row) {
 }
 
 // compute write dimensions from formatted data
-list($numRowsToWrite, $numColsToWrite, $responses) = computeWriteDimensionsFromFormattedData($formattedData, $sheetsApi,
-    $destinySpreadsheetId, $startRowIndex, $destTitle, $destSheetId, $responses);
+list($numRowsToWrite, $numColsToWrite, $responses) = computeWriteDimensionsFromFormattedData(
+    $formattedData,
+    $sheetsApi,
+    $destinySpreadsheetId,
+    $startRowIndex,
+    $destTitle,
+    $destSheetId,
+    $responses
+);
 
 // Print the result
 header('Content-Type: application/json');
@@ -219,7 +233,7 @@ function computeWriteDimensionsFromFormattedData(
     $numRowsToWrite = count($formattedData);
     $numColsToWrite = count($formattedData[0]['values']);
 
-// expand sheet if needed
+    // expand sheet if needed
     $responses[] = $sheetsApi->updateSheetProperties(
         spreadsheetId: $destinySpreadsheetId,
         gridProperties: [
@@ -230,7 +244,7 @@ function computeWriteDimensionsFromFormattedData(
         sheetId: $destSheetId,
     );
 
-// Write the copied data to the destination spreadsheet
+    // Write the copied data to the destination spreadsheet
     $responses[] = $sheetsApi->updateCells(
         spreadsheetId: $destinySpreadsheetId,
         rows: $formattedData,

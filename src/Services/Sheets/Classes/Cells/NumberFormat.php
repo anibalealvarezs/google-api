@@ -13,7 +13,7 @@ class NumberFormat implements Jsonable
 {
     public NumberFormatType|string $type;
     public ?string $pattern;
-    
+
     public function __construct(
         NumberFormatType|string $type = NumberFormatType::NUMBER,
         ?string $pattern = null,

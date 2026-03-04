@@ -17,7 +17,7 @@ class CreateParagraphBulletsRequest implements Jsonable
     public Range|array|null $textRange;
     public TableCellLocation|array|null $cellLocation;
     public BulletGlyphPreset|string $bulletPreset;
-    
+
     public function __construct(
         string $objectId,
         Range|array|null $textRange = null,

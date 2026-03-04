@@ -14,7 +14,7 @@ class BackgroundImageFile implements Jsonable
     public float $xCoordinate;
     public float $yCoordinate;
     public float $width;
-    
+
     public function __construct(
         string $id = '',
         float $xCoordinate = 0.0,

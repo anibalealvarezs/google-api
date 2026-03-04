@@ -37,7 +37,7 @@ class CellData implements Jsonable
     public ?string $hyperlink;
     public ?string $note;
     public DataValidationRule|array|null $dataValidation;
-    
+
     public function __construct(
         ExtendedValue|array|null $userEnteredValue = null,
         ExtendedValue|array|null $effectiveValue = null,

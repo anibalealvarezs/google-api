@@ -19,7 +19,7 @@ class SpreadsheetProperties implements Jsonable
     public IterativeCalculationSettings|array $iterativeCalculationSettings;
     public SpreadsheetTheme|array $spreadsheetTheme;
     public RecalculationInterval|string $autoRecalc;
-    
+
     public function __construct(
         string $title,
         string $locale,

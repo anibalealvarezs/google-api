@@ -20,7 +20,7 @@ class BaselineValueFormat implements Jsonable
     public ComparisonType|string $comparisonType;
     public TextPosition|array|null $position;
     public ?string $description;
-    
+
     public function __construct(
         TextFormat|array $textFormat,
         ColorStyle|array $positiveColorStyle,

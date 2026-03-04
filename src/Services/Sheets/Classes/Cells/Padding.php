@@ -14,7 +14,7 @@ class Padding implements Jsonable
     public int $right;
     public int $bottom;
     public int $left;
-    
+
     public function __construct(
         int $top,
         int $right,

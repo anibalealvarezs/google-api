@@ -23,7 +23,7 @@ class ParagraphStyle implements Jsonable
     public Dimension|array|null $indentFirstLine;
     public TextDirection|string|null $direction;
     public SpacingMode|string|null $spacingMode;
-    
+
     public function __construct(
         ?int $lineSpacing = null,
         Alignment|string|null $alignment = Alignment::START,

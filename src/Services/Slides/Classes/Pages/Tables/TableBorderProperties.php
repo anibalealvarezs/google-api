@@ -16,7 +16,7 @@ class TableBorderProperties implements Jsonable
     public TableBorderFill|array $tableBorderFill;
     public Dimension|array $weight;
     public DashStyle|string $dashStyle;
-    
+
     public function __construct(
         TableBorderFill|array $tableBorderFill,
         Dimension|array $weight,

@@ -2,13 +2,7 @@
 
 namespace Tests\Unit\Services;
 
-use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Cells\ValueRange;
-use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Spreadsheets\Spreadsheet;
-use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Cells\InsertDataOption;
-use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Dimension;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\ValueInputOption;
-use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Cells\BatchClearValuesRequest;
-use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Cells\BatchUpdateValuesRequest;
 use Anibalealvarezs\GoogleApi\Services\Sheets\SheetsApi;
 use Exception;
 use Faker\Factory as Faker;
@@ -109,7 +103,7 @@ class SheetsApiTest extends TestCase
         $lastRequest = $mock->getLastRequest();
         $this->assertEquals('POST', $lastRequest->getMethod());
         $this->assertStringContainsString('/values/' . $range . ':append', (string)$lastRequest->getUri());
-        
+
         $body = json_decode($lastRequest->getBody()->getContents(), true);
         $this->assertEquals($data, $body['values']);
     }
@@ -120,9 +114,9 @@ class SheetsApiTest extends TestCase
      */
     public function testReadMultipleCellsSuccess(): void
     {
-        $responseData = ['valueRanges' => [['range' => 'A1:B2', 'values' => [['1']]]]];
+        $responseData = ['spreadsheetId' => $this->spreadsheetId, 'valueRanges' => [['range' => 'A1:B2', 'values' => [['1']]]]];
         $mock = new MockHandler([
-            new Response(200, [], json_encode($responseData))
+            new Response(200, [], json_encode(['valueRanges' => [['range' => 'A1:B2', 'values' => [['1']]]]]))
         ]);
         $guzzle = new GuzzleClient(['handler' => HandlerStack::create($mock)]);
 
@@ -143,7 +137,7 @@ class SheetsApiTest extends TestCase
         $lastRequest = $mock->getLastRequest();
         $this->assertEquals('GET', $lastRequest->getMethod());
         $this->assertStringContainsString('/values:batchGet', (string)$lastRequest->getUri());
-        
+
         $query = $lastRequest->getUri()->getQuery();
         foreach ($ranges as $range) {
             $this->assertStringContainsString(urlencode($range), $query);
@@ -188,7 +182,7 @@ class SheetsApiTest extends TestCase
         $lastRequest = $mock->getLastRequest();
         $this->assertEquals('POST', $lastRequest->getMethod());
         $this->assertStringContainsString('/values:batchUpdate', (string)$lastRequest->getUri());
-        
+
         $body = json_decode($lastRequest->getBody()->getContents(), true);
         $this->assertEquals('RAW', $body['valueInputOption']);
         $this->assertEquals('Sheet1!A1', $body['data'][0]['range']);
@@ -223,7 +217,7 @@ class SheetsApiTest extends TestCase
         $lastRequest = $mock->getLastRequest();
         $this->assertEquals('POST', $lastRequest->getMethod());
         $this->assertStringContainsString('/values:batchClear', (string)$lastRequest->getUri());
-        
+
         $body = json_decode($lastRequest->getBody()->getContents(), true);
         $this->assertEquals($ranges, $body['ranges']);
     }

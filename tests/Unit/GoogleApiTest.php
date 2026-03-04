@@ -288,7 +288,7 @@ class GoogleApiTest extends TestCase
         }
 
         $newToken = 'new-access-token';
-        
+
         $client = new GoogleApi(
             baseUrl: $this->baseUrl,
             redirectUrl: $this->redirectUrl,
@@ -363,7 +363,7 @@ class GoogleApiTest extends TestCase
         // 3. Verify exactly 1 request was made (no refresh request)
         $this->assertCount(1, $container);
         $request = $container[0]['request'];
-        
+
         // 4. Verify the request used the token from the file
         $this->assertEquals('Bearer ' . $storedToken, $request->getHeaderLine('Authorization'));
         $this->assertStringContainsString('/test-endpoint', (string) $request->getUri());

@@ -18,7 +18,7 @@ class Spreadsheet implements Jsonable
     public array $developerMetadata;
     public array $dataSources;
     public array $dataSourceSchedules;
-    
+
     public function __construct(
         string $spreadsheetId,
         SpreadsheetProperties|array $properties,

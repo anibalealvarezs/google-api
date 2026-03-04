@@ -12,7 +12,7 @@ class PivotGroupLimit implements Jsonable
 {
     public int $countLimit;
     public ?int $applyOrder;
-    
+
     public function __construct(
         int $countLimit,
         ?int $applyOrder = null,

@@ -16,7 +16,7 @@ class ChartData implements Jsonable
     public ChartAggregateType|string|null $aggregateType;
     public ChartSourceRange|array|null $sourceRange;
     public DataSourceColumnReference|array|null $columnReference;
-    
+
     public function __construct(
         ChartGroupRule|array|null $groupRule = null,
         ChartAggregateType|string|null $aggregateType = ChartAggregateType::AVERAGE,

@@ -22,7 +22,7 @@ class HistogramChartSpec implements Jsonable
     public float $outlierPercentile;
     public HistogramChartLegendPosition|string $legendPosition;
     public bool $showItemDividers;
-    
+
     public function __construct(
         array $series,
         float $bucketSize,

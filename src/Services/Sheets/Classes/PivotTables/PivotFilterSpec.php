@@ -14,7 +14,7 @@ class PivotFilterSpec implements Jsonable
     public PivotFilterCriteria|array $filterCriteria;
     public ?int $columnOffsetIndex;
     public DataSourceColumnReference|array|null $dataSourceColumnReference;
-    
+
     public function __construct(
         PivotFilterCriteria|array $filterCriteria,
         ?int $columnOffsetIndex = null,

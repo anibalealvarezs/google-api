@@ -21,7 +21,7 @@ class PivotTable implements Jsonable
     public GridRange|array|null $source;
     public ?string $dataSourceId;
     public PivotValueLayout|string $valueLayout;
-    
+
     public function __construct(
         array $rows,
         array $columns,

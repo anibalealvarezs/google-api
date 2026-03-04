@@ -13,7 +13,7 @@ class TableCellProperties implements Jsonable
 {
     public TableCellBackgroundFill|array $tableCellBackgroundFill;
     public ContentAlignment|string $contentAlignment;
-    
+
     public function __construct(
         TableCellBackgroundFill|array $tableCellBackgroundFill,
         ContentAlignment|string $contentAlignment

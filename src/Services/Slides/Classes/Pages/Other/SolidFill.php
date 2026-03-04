@@ -13,7 +13,7 @@ class SolidFill implements Jsonable
 {
     public OpaqueColor|array $color;
     public float $alpha;
-    
+
     public function __construct(
         OpaqueColor|array $color,
         float $alpha = 1.0

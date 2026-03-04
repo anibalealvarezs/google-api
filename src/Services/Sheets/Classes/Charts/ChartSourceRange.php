@@ -14,7 +14,7 @@ use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\GridRange;
 class ChartSourceRange implements Jsonable
 {
     public array $sources;
-    
+
     public function __construct(
         array $sources
     ) {

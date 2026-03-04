@@ -15,7 +15,7 @@ class PageBackgroundFill implements Jsonable
     public SolidFill|array|null $solidFill;
     public StretchedPictureFill|array|null $stretchedPictureFill;
     public PropertyState|string $propertyState;
-    
+
     public function __construct(
         SolidFill|array|null $solidFill = null,
         StretchedPictureFill|array|null $stretchedPictureFill = null,
@@ -24,7 +24,7 @@ class PageBackgroundFill implements Jsonable
         $this->solidFill = $this->arrayToObject(class: SolidFill::class, var: $solidFill);
         $this->stretchedPictureFill = $this->arrayToObject(class: StretchedPictureFill::class, var: $stretchedPictureFill);
         $this->propertyState = $this->stringToEnum(enum: PropertyState::class, var: $propertyState);
-        
+
         $this->keepOneOfKind([
             'solidFill',
             'stretchedPictureFill'

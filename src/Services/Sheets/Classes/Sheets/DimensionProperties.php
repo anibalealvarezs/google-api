@@ -16,7 +16,7 @@ class DimensionProperties implements Jsonable
     public readonly DataSourceColumnReference|array|null $dataSourceColumnReference;
     public readonly bool $hiddenByFilter;
     public bool $hiddenByUser;
-    
+
     public function __construct(
         int $pixelSize,
         array $developerMetadata = null,

@@ -14,7 +14,7 @@ class SlideProperties implements Jsonable
     public readonly string $masterObjectId;
     public readonly Page|array $notesPage;
     public bool $isSkipped;
-    
+
     public function __construct(
         string $layoutObjectId,
         string $masterObjectId,

@@ -40,7 +40,7 @@ class BasicChartSpec implements Jsonable
     public bool $threeDimensional;
     public bool $interpolateNulls;
     public bool $lineSmoothing;
-    
+
     public function __construct(
         array $axis,
         array $domains,

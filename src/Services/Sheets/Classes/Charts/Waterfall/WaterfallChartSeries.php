@@ -19,7 +19,7 @@ class WaterfallChartSeries implements Jsonable
     public WaterfallChartColumnStyle|array $negativeColumnsStyle;
     public WaterfallChartColumnStyle|array $subtotalColumnsStyle;
     public bool $hideTrailingSubtotal;
-    
+
     public function __construct(
         ChartData|array $data,
         array $customSubtotals,

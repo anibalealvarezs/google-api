@@ -11,7 +11,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class NestingLevel implements Jsonable
 {
     public TextStyle|array $bulletStyle;
-    
+
     public function __construct(
         TextStyle|array $bulletStyle,
     ) {

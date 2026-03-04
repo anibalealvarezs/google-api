@@ -5,7 +5,7 @@
 /.phpunit.result.cache
 /phpstan.neon
 /.vscode/
-/.bin/
+/bin/
 /config/google_tokens.json
 /scripts/
 /tmp/

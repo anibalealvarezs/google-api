@@ -18,7 +18,7 @@ class AffineTransform implements Jsonable
     public ?float $translateX;
     public ?float $translateY;
     public Unit|string $unit;
-    
+
     public function __construct(
         float $scaleX = 1,
         float $scaleY = 1,

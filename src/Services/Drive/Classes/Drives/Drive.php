@@ -23,7 +23,7 @@ class Drive implements Jsonable
     public string $orgUnitId;
     public bool $hidden;
     public Restrictions|array|null $restrictions;
-    
+
     public function __construct(
         string $kind = 'drive#drive',
         string $id = '',

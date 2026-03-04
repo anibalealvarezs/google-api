@@ -13,7 +13,7 @@ class LayoutProperties implements Jsonable
     public string $masterObjectId;
     public string $name;
     public string $displayName;
-    
+
     public function __construct(
         string $masterObjectId,
         string $name,

@@ -17,7 +17,7 @@ class PieChartSpec implements Jsonable
     public float $pieHole;
     public PieChartLegendPosition|string $legendPosition;
     public bool $threeDimensional;
-    
+
     public function __construct(
         ChartData|array $domain,
         ChartData|array $series,

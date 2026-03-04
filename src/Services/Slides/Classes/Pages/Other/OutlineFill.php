@@ -11,7 +11,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class OutlineFill implements Jsonable
 {
     public SolidFill|array $solidFill;
-    
+
     public function __construct(
         SolidFill|array $solidFill
     ) {

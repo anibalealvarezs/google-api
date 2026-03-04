@@ -16,7 +16,7 @@ class InsertTextRequest implements Jsonable
     public string $text;
     public int $insertionIndex;
     public TableCellLocation|array|null $cellLocation;
-    
+
     public function __construct(
         string $objectId,
         string $text,

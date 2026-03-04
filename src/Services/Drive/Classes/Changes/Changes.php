@@ -21,7 +21,7 @@ class Changes implements Jsonable
     public ChangeType|string $changeType;
     public ?string $driveId;
     public Drive|array|null $drive;
-    
+
     public function __construct(
         string $kind = 'drive#change',
         ?string $fileId = null,

@@ -16,7 +16,7 @@ class DeveloperMetadataLocation implements Jsonable
     public ?bool $spreadsheet;
     public DimensionRange|array|null $dimensionRange;
     public DeveloperMetadataLocationType|string $locationType;
-    
+
     public function __construct(
         ?int $sheetId = null,
         ?bool $spreadsheet = null,

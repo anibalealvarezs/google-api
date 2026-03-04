@@ -31,7 +31,7 @@ class PageElement implements Jsonable
     public Table|array|null $table;
     public WordArt|array|null $wordArt;
     public SheetsChart|array|null $sheetsChart;
-    
+
     public function __construct(
         string $objectId,
         Size|array|null $size = null,
@@ -60,7 +60,7 @@ class PageElement implements Jsonable
         $this->table = $this->arrayToObject(class: Table::class, var: $table);
         $this->wordArt = $this->arrayToObject(class: WordArt::class, var: $wordArt);
         $this->sheetsChart = $this->arrayToObject(class: SheetsChart::class, var: $sheetsChart);
-        
+
         $this->keepOneOfKind([
             'elementGroup',
             'shape',

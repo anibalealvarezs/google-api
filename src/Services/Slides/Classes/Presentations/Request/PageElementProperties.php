@@ -15,7 +15,7 @@ class PageElementProperties implements Jsonable
     public string $pageObjectId;
     public Size|array|null $size;
     public AffineTransform|array|null $transform;
-    
+
     public function __construct(
         string $pageObjectId,
         Size|array|null $size = null,

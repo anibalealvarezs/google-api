@@ -14,7 +14,7 @@ class BasicFilter implements Jsonable
     public GridRange|array $range;
     public array $sortSpecs;
     public array $filterSpecs;
-    
+
     public function __construct(
         GridRange|array $range,
         array $sortSpecs,

@@ -12,7 +12,7 @@ class TableBorderCell implements Jsonable
 {
     public TableCellLocation|array $location;
     public TableBorderProperties|array $tableBorderProperties;
-    
+
     public function __construct(
         TableCellLocation|array $location,
         TableBorderProperties|array $tableBorderProperties

@@ -18,7 +18,7 @@ class TextFormat implements Jsonable
     public ?bool $strikethrough;
     public ?bool $underline;
     public Link|array|null $link;
-    
+
     public function __construct(
         ColorStyle|array $foregroundColorStyle,
         string $fontFamily = 'Roboto',

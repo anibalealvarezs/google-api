@@ -13,7 +13,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class Group implements Jsonable
 {
     public array $children;
-    
+
     public function __construct(
         array $children,
     ) {

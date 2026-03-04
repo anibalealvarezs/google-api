@@ -15,7 +15,7 @@ class BandingProperties implements Jsonable
     public ColorStyle|array $secondBandColorStyle;
     public ColorStyle|array|null $headerColorStyle;
     public ColorStyle|array|null $footerColorStyle;
-    
+
     public function __construct(
         ColorStyle|array $firstBandColorStyle,
         ColorStyle|array $secondBandColorStyle,

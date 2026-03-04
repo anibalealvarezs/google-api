@@ -13,7 +13,7 @@ class FilterSpec implements Jsonable
     public FilterCriteria|array $filterCriteria;
     public int $columnIndex;
     public DataSourceColumnReference|array $dataSourceColumnReference;
-    
+
     public function __construct(
         FilterCriteria|array $filterCriteria,
         int $columnIndex,

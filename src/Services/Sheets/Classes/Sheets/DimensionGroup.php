@@ -14,7 +14,7 @@ class DimensionGroup implements Jsonable
     public DimensionRange|array $range;
     public int $depth;
     public bool $collapsed;
-    
+
     public function __construct(
         DimensionRange|array $range,
         int $depth,

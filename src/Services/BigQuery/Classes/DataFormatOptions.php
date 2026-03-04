@@ -13,7 +13,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class DataFormatOptions implements Jsonable
 {
     public bool $useInt64Timestamp;
-    
+
     public function __construct(
         bool $useInt64Timestamp = false,
     ) {

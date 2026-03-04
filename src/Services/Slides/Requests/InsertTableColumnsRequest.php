@@ -15,7 +15,7 @@ class InsertTableColumnsRequest implements Jsonable
     public TableCellLocation|array $cellLocation;
     public int $number;
     public bool $insertRight;
-    
+
     public function __construct(
         string $tableObjectId,
         TableCellLocation|array $cellLocation,

@@ -15,7 +15,7 @@ class BandedRange implements Jsonable
     public GridRange|array $range;
     public BandingProperties|array|null $rowProperties = null;
     public BandingProperties|array|null $columnProperties = null;
-    
+
     public function __construct(
         int $bandedRangeId,
         GridRange|array $range,

@@ -11,7 +11,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class DeleteObjectRequest implements Jsonable
 {
     public string $objectId;
-    
+
     public function __construct(
         string $objectId
     ) {

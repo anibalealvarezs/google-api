@@ -12,7 +12,7 @@ use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\ChartDateTimeRuleType
 class ChartDateTimeRule implements Jsonable
 {
     public ChartDateTimeRuleType|string $type;
-    
+
     public function __construct(
         ChartDateTimeRuleType|string $type = ChartDateTimeRuleType::DAY_MONTH
     ) {

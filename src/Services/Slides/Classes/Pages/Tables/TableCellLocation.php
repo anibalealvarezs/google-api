@@ -12,7 +12,7 @@ class TableCellLocation implements Jsonable
 {
     public int $rowIndex;
     public int $columnIndex;
-    
+
     public function __construct(
         int $rowIndex,
         int $columnIndex

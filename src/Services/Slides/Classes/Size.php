@@ -12,7 +12,7 @@ class Size implements Jsonable
 {
     public Dimension|array $width;
     public Dimension|array $height;
-    
+
     public function __construct(
         Dimension|array $width,
         Dimension|array $height

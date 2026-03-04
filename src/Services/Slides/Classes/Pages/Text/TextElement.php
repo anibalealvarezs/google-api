@@ -16,7 +16,7 @@ class TextElement implements Jsonable
     public ParagraphMarker|array|null $paragraphMarker;
     public TextRun|array|null $textRun;
     public AutoText|array|null $autoText;
-    
+
     public function __construct(
         ?int $startIndex = null,
         ?int $endIndex = null,

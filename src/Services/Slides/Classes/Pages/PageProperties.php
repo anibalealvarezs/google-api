@@ -12,7 +12,7 @@ class PageProperties implements Jsonable
 {
     public PageBackgroundFill|array|null $pageBackgroundFill = null;
     public ColorScheme|array|null $colorScheme = null;
-    
+
     public function __construct(
         PageBackgroundFill|array|null $pageBackgroundFill = null,
         ColorScheme|array|null $colorScheme = null,

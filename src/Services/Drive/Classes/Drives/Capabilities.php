@@ -29,7 +29,7 @@ class Capabilities implements Jsonable
     public bool $canResetDriveRestrictions = false;
     public bool $canShare = false;
     public bool $canTrashChildren = false;
-    
+
     public function __construct(
         bool $canAddChildren = false,
         bool $canChangeCopyRequiresWriterPermissionRestriction = false,

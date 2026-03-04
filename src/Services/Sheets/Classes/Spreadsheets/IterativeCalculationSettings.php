@@ -12,7 +12,7 @@ class IterativeCalculationSettings implements Jsonable
 {
     public int $maxIterations;
     public float $convergenceThreshold;
-    
+
     public function __construct(
         int $maxIterations,
         float $convergenceThreshold,

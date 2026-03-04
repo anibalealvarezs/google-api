@@ -15,7 +15,7 @@ class BasicSeriesDataPointStyleOverride implements Jsonable
     public ColorStyle|array $colorStyle;
     public PointStyle|array|null $pointStyle;
     public int $index;
-    
+
     public function __construct(
         ColorStyle|array $colorStyle,
         PointStyle|array|null $pointStyle = null,

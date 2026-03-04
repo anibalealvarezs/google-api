@@ -17,7 +17,7 @@ class CopyPasteRequest implements Jsonable
     public GridRange|array|null $destination;
     public PasteType $pasteType;
     public PasteOrientation $pasteOrientation;
-    
+
     public function __construct(
         GridRange|array|null $source = null,
         GridRange|array|null $destination = null,

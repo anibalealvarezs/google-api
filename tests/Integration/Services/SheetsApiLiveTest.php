@@ -35,7 +35,7 @@ class SheetsApiLiveTest extends TestCase
             scopes: ["https://www.googleapis.com/auth/spreadsheets"],
             tokenPath: $config['google_token_path'] ?? ''
         );
-        
+
         // We will create a spreadsheet for testing if not provided
         if (isset($config['sheets_test_spreadsheet_id']) && $config['sheets_test_spreadsheet_id']) {
             self::$spreadsheetId = $config['sheets_test_spreadsheet_id'];
@@ -53,11 +53,11 @@ class SheetsApiLiveTest extends TestCase
                 'title' => $title
             ]
         ]);
-        
+
         $this->assertIsArray($response);
         $this->assertArrayHasKey('spreadsheetId', $response);
         $this->assertEquals($title, $response['properties']['title']);
-        
+
         // Use this ID for subsequent tests in this run if no ID was provided in config
         if (!self::$spreadsheetId) {
             self::$spreadsheetId = $response['spreadsheetId'];
@@ -80,13 +80,13 @@ class SheetsApiLiveTest extends TestCase
             ['Append Row 1 Col 1', 'Append Row 1 Col 2'],
             ['Append Row 2 Col 1', 'Append Row 2 Col 2']
         ];
-        
+
         $response = $this->api->appendCells(
             spreadsheetId: self::$spreadsheetId,
             data: $data,
             range: self::$sheetTitle . '!A1'
         );
-        
+
         $this->assertIsArray($response);
         $this->assertArrayHasKey('spreadsheetId', $response);
         $this->assertArrayHasKey('updates', $response);
@@ -106,7 +106,7 @@ class SheetsApiLiveTest extends TestCase
             spreadsheetId: self::$spreadsheetId,
             ranges: $ranges
         );
-        
+
         $this->assertIsArray($response);
         $this->assertArrayHasKey('spreadsheetId', $response);
         $this->assertArrayHasKey('valueRanges', $response);
@@ -135,12 +135,12 @@ class SheetsApiLiveTest extends TestCase
                 ]
             ]
         ];
-        
+
         $response = $this->api->updateMultipleCellsValues(
             spreadsheetId: self::$spreadsheetId,
             request: $request
         );
-        
+
         $this->assertIsArray($response);
         $this->assertArrayHasKey('spreadsheetId', $response);
         $this->assertArrayHasKey('responses', $response);
@@ -159,12 +159,12 @@ class SheetsApiLiveTest extends TestCase
         $request = [
             'ranges' => $ranges
         ];
-        
+
         $response = $this->api->clearMultipleCells(
             spreadsheetId: self::$spreadsheetId,
             request: $request
         );
-        
+
         $this->assertIsArray($response);
         $this->assertArrayHasKey('spreadsheetId', $response);
         $this->assertArrayHasKey('clearedRanges', $response);

@@ -15,7 +15,7 @@ class ConnectionProperty implements Jsonable
 {
     public string $key;
     public string $value;
-    
+
     public function __construct(
         string $key,
         string $value,

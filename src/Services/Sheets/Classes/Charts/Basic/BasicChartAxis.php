@@ -19,7 +19,7 @@ class BasicChartAxis implements Jsonable
     public TextPosition|array|null $titleTextPosition;
     public ChartAxisViewWindowOptions|array|null $viewWindowOptions;
     public BasicChartAxisPosition|string $position;
-    
+
     public function __construct(
         string $title,
         TextFormat|array|null $format = null,

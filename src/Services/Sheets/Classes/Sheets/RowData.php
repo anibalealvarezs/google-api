@@ -14,7 +14,7 @@ use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Cells\CellData;
 class RowData implements Jsonable
 {
     public array $values;
-    
+
     public function __construct(
         array $values,
     ) {

@@ -13,7 +13,7 @@ class BasicChartDomain implements Jsonable
 {
     public ChartData|array $domain;
     public bool $reversed;
-    
+
     public function __construct(
         ChartData|array $domain,
         bool $reversed = false,

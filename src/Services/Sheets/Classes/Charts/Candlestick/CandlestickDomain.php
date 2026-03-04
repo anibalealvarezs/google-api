@@ -13,7 +13,7 @@ class CandlestickDomain implements Jsonable
 {
     public ChartData|array $data;
     public bool $reversed;
-    
+
     public function __construct(
         ChartData|array $data,
         bool $reversed = false,

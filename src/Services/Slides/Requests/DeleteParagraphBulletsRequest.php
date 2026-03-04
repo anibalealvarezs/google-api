@@ -15,7 +15,7 @@ class DeleteParagraphBulletsRequest implements Jsonable
     public string $objectId;
     public Range|array|null $textRange;
     public TableCellLocation|array|null $cellLocation;
-    
+
     public function __construct(
         string $objectId,
         Range|array|null $textRange = null,

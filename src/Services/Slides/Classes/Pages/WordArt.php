@@ -11,7 +11,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class WordArt implements Jsonable
 {
     public string $renderedText;
-    
+
     public function __construct(
         string $renderedText,
     ) {

@@ -12,7 +12,7 @@ use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other\OpaqueColor;
 class OptionalColor implements Jsonable
 {
     public OpaqueColor|array|null $opaqueColor;
-    
+
     public function __construct(
         OpaqueColor|array|null $opaqueColor = null,
     ) {

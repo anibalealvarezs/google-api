@@ -12,7 +12,7 @@ use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Sheets\SheetProperties;
 class AddSheetRequest implements Jsonable
 {
     public SheetProperties|array $properties;
-    
+
     public function __construct(
         SheetProperties|array $properties
     ) {

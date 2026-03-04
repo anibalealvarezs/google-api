@@ -14,7 +14,7 @@ class TableRange implements Jsonable
     public TableCellLocation|array $location;
     public int $rowSpan;
     public int $columnSpan;
-    
+
     public function __construct(
         TableCellLocation|array $location,
         int $rowSpan = 1,

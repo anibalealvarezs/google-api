@@ -1640,11 +1640,11 @@ class SheetsApi extends GoogleApi
                     underline: null, // Not supported for title
                 ),
                 dataSourceChartProperties: ( // Not supported for BASIC charts
-                $chartType == ChartTypes::BASIC ?
-                    null :
-                    new DataSourceChartProperties(
-                        dataSourceId: $dataSourceId,
-                    )
+                    $chartType == ChartTypes::BASIC ?
+                        null :
+                        new DataSourceChartProperties(
+                            dataSourceId: $dataSourceId,
+                        )
                 ),
                 filterSpecs: $formattedFilterSpecs,
                 sortSpecs: $formattedSortSpecs,
@@ -1830,24 +1830,35 @@ class SheetsApi extends GoogleApi
         ValueRenderOption $valueRenderOption = ValueRenderOption::FORMATTED_VALUE,
         DateTimeRenderOption $dateTimeRenderOption = DateTimeRenderOption::SERIAL_NUMBER,
     ): array {
-        $valueRanges = [];
-        foreach ($ranges as $range) {
-            // Exec request
-            $response = $this->performRequest(
-                method: "GET",
-                endpoint: $spreadsheetId . '/values:batchGet',
-                query: [
-                    "ranges" => $range,
-                    "majorDimension" => $majorDimension->name,
-                    "valueRenderOption" => $valueRenderOption->name,
-                    "dateTimeRenderOption" => $dateTimeRenderOption->name,
-                ],
-            );
-            $decoded = json_decode($response->getBody()->getContents(), true);
-            if (isset($decoded['valueRanges'][0])) {
-                $valueRanges[] = $decoded['valueRanges'][0];
-            }
+        $queryParams = [
+            "majorDimension" => $majorDimension->name,
+            "valueRenderOption" => $valueRenderOption->name,
+            "dateTimeRenderOption" => $dateTimeRenderOption->name,
+        ];
+
+        $queryStringParts = [];
+        foreach ($queryParams as $key => $val) {
+            $queryStringParts[] = urlencode($key) . '=' . urlencode($val);
         }
+        foreach ($ranges as $range) {
+            $queryStringParts[] = 'ranges=' . urlencode($range);
+        }
+
+        $endpoint = $spreadsheetId . '/values:batchGet?' . implode('&', $queryStringParts);
+
+        // Exec request
+        $response = $this->performRequest(
+            method: "GET",
+            endpoint: $endpoint,
+            query: [],
+        );
+        $decoded = json_decode($response->getBody()->getContents(), true);
+
+        $valueRanges = [];
+        if (isset($decoded['valueRanges'])) {
+            $valueRanges = $decoded['valueRanges'];
+        }
+
         // Return response
         return [
             'spreadsheetId' => $spreadsheetId,

@@ -14,7 +14,7 @@ class ThemeColorPair implements Jsonable
 {
     public ThemeColorType|string $colorType;
     public ColorStyle|array $color;
-    
+
     public function __construct(
         ThemeColorType|string $colorType,
         ColorStyle|array $color,

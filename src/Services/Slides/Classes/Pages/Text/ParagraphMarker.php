@@ -12,7 +12,7 @@ class ParagraphMarker implements Jsonable
 {
     public ParagraphStyle|array $style;
     public Bullet|array|null $bullet;
-    
+
     public function __construct(
         ParagraphStyle|array $style,
         Bullet|array|null $bullet = null,

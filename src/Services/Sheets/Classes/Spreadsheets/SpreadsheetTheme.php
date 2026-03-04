@@ -12,7 +12,7 @@ class SpreadsheetTheme implements Jsonable
 {
     public string $primaryFontFamily;
     public array $themeColors;
-    
+
     public function __construct(
         string $primaryFontFamily,
         array $themeColors,

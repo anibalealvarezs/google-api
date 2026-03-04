@@ -14,7 +14,7 @@ class Slicer implements Jsonable
     public int $slicerId;
     public SlicerSpec|array $spec;
     public EmbeddedObjectPosition|array $position;
-    
+
     public function __construct(
         int $slicerId,
         SlicerSpec|array $spec,

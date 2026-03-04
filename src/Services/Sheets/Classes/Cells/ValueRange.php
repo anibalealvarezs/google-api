@@ -14,7 +14,7 @@ class ValueRange implements Jsonable
     public string $range;
     public array $values;
     public Dimension|string $majorDimension;
-    
+
     public function __construct(
         string $range,
         array $values = [],

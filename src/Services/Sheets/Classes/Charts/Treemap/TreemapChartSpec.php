@@ -25,7 +25,7 @@ class TreemapChartSpec implements Jsonable
     public ?float $minValue;
     public ?float $maxValue;
     public bool $hideTooltips;
-    
+
     public function __construct(
         ChartData|array $labels,
         ChartData|array $parentLabels,

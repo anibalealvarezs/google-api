@@ -25,7 +25,7 @@ class BasicChartSeries implements Jsonable
     public LineStyle|array|null $lineStyle;
     public BasicChartAxisPosition|string|null $targetAxis;
     public BasicChartType|string $type;
-    
+
     public function __construct(
         ChartData|array $series,
         ColorStyle|array|null $colorStyle = null,

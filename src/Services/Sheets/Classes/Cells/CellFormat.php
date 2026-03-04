@@ -28,7 +28,7 @@ class CellFormat implements Jsonable
     public WrapStrategy|string $wrapStrategy;
     public TextDirection|string $textDirection;
     public HyperlinkDisplayType|string|null $hyperlinkDisplayType;
-    
+
     public function __construct(
         ColorStyle|array $backgroundColorStyle,
         TextFormat|array|null $textFormat = null,

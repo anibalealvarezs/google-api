@@ -25,7 +25,7 @@ class BubbleChartSpec implements Jsonable
     public float $bubbleOpacity;
     public ?int $bubbleMaxRadiusSize;
     public ?int $bubbleMinRadiusSize;
-    
+
     public function __construct(
         ChartData|array $bubbleLabels,
         ChartData|array $domain,

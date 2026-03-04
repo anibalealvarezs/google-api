@@ -13,7 +13,7 @@ class RgbColor implements Jsonable
     public ?float $red;
     public ?float $green;
     public ?float $blue;
-    
+
     public function __construct(
         ?float $red = null,
         ?float $green = null,

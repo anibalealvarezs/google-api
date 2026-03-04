@@ -14,7 +14,7 @@ class KeyValueFormat implements Jsonable
 {
     public TextFormat|array $textFormat;
     public TextPosition|array $position;
-    
+
     public function __construct(
         TextFormat|array $textFormat,
         TextPosition|array $position,
