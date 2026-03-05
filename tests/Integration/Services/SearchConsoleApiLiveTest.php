@@ -33,9 +33,10 @@ class SearchConsoleApiLiveTest extends TestCase
             redirectUrl: $config['google_redirect_uri'],
             clientId: $config['google_client_id'],
             clientSecret: $config['google_client_secret'],
-            refreshToken: $config['google_refresh_token'],
+            refreshToken: !empty($config['search_console_refresh_token']) ? $config['search_console_refresh_token'] : $config['google_refresh_token'],
             userId: $config['google_user_id'],
             scopes: [$config['search_console_scope']],
+            token: !empty($config['search_console_token']) ? $config['search_console_token'] : ($config['google_token'] ?? ''),
         );
     }
 

@@ -58,6 +58,7 @@ class GoogleApiLiveTest extends TestCase
         $this->googleApi->setToken($token);
 
         $this->assertFileExists($tokenPath, 'Token file should be created');
-        $this->assertStringEqualsFile($tokenPath, json_encode([$config['google_user_id'] => ['Google\GoogleApi' => $token]], JSON_PRETTY_PRINT));
+        $expectedTokenKey = 'RefreshToken_' . substr(md5($config['google_refresh_token']), 0, 16);
+        $this->assertStringEqualsFile($tokenPath, json_encode([$config['google_user_id'] => [$expectedTokenKey => $token]], JSON_PRETTY_PRINT));
     }
 }

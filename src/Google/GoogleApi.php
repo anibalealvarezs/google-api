@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 class GoogleApi extends OAuthV2Client
 {
     protected string $tokenPath = "";
+    protected string $tokenIdentifier = "";
 
     /**
      * @param string $baseUrl
@@ -21,6 +22,7 @@ class GoogleApi extends OAuthV2Client
      * @param string $token
      * @param Client|null $guzzleClient
      * @param string $tokenPath
+     * @param string $tokenIdentifier
      * @throws Exception
      */
     public function __construct(
@@ -33,9 +35,11 @@ class GoogleApi extends OAuthV2Client
         array $scopes = [],
         string $token = "",
         ?Client $guzzleClient = null,
-        string $tokenPath = ""
+        string $tokenPath = "",
+        string $tokenIdentifier = ""
     ) {
         $this->tokenPath = $tokenPath;
+        $this->tokenIdentifier = $tokenIdentifier ?: ($refreshToken ? 'RefreshToken_' . substr(md5($refreshToken), 0, 16) : "");
 
         // Load token from storage if not provided
         if (!$token && $this->tokenPath && file_exists($this->tokenPath)) {
@@ -117,6 +121,6 @@ class GoogleApi extends OAuthV2Client
      */
     protected function getServiceKey(): string
     {
-        return str_replace('Anibalealvarezs\\GoogleApi\\', '', get_class($this));
+        return $this->tokenIdentifier ?: str_replace('Anibalealvarezs\\GoogleApi\\', '', get_class($this));
     }
 }

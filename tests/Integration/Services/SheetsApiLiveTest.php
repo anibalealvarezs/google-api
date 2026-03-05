@@ -30,9 +30,10 @@ class SheetsApiLiveTest extends TestCase
             redirectUrl: $config['google_redirect_uri'],
             clientId: $config['google_client_id'],
             clientSecret: $config['google_client_secret'],
-            refreshToken: $config['google_refresh_token'],
+            refreshToken: !empty($config['sheets_refresh_token']) ? $config['sheets_refresh_token'] : $config['google_refresh_token'],
             userId: $config['google_user_id'],
             scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+            token: !empty($config['sheets_token']) ? $config['sheets_token'] : ($config['google_token'] ?? ''),
             tokenPath: $config['google_token_path'] ?? ''
         );
 

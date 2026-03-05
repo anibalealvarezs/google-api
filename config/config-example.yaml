@@ -2,35 +2,44 @@
 google_client_id: # client_id_string
 google_client_secret: # client_secret_string
 google_redirect_uri: # https://oauth.pstmn.io/v1/browser-callback
+# The google_token acts as a global fallback. If a service-specific token is set, it overrides this global token.
+google_token: # access_token_string
+# The google_refresh_token acts as a global fallback. If a service-specific refresh_token is set, it overrides this global token.
 google_refresh_token: # refresh_token_string
 google_user_id: # your@email.com
 google_token_path: # ./config/google_tokens.json
 
 # Slides
 slides_scope: # [scope1, scope2]
-slides_token: # token_string
+# slides_token: # token_string (overrides google_token if set)
+# slides_refresh_token: # overrides google_refresh_token if set
 slides_themes: # {"SimpleLight2":{"id":"simple-light-2","layouts":{"Cover":"p2","Agenda":"p12","TitleRed":"gc17cfde283_0_16","TitleDiamond":"gc17cfde283_1_2","Text":"gc17cfde283_1_62","Canvas":"gc17cfde283_1_14","CanvasRed":"gc17cfde283_1_68","End":"gc17cfde283_1_76","Creatives":"g118c5aca048_2_0"}}}
 
 # Sheets
 sheets_scope: # [scope1, scope2]
-sheets_token: # token_string
+# sheets_token: # token_string (overrides google_token if set)
+# sheets_refresh_token: # overrides google_refresh_token if set
 sheets_themes: # {"SimpleLight2":{"id":"simple-light-2","layouts":{"Cover":"p2","Agenda":"p12","TitleRed":"gc17cfde283_0_16","TitleDiamond":"gc17cfde283_1_2","Text":"gc17cfde283_1_62","Canvas":"gc17cfde283_1_14","CanvasRed":"gc17cfde283_1_68","End":"gc17cfde283_1_76","Creatives":"g118c5aca048_2_0"}}}
 
 # Gmail
 gmail_scope: # [scope1, scope2]
-gmail_token: # token_string
+# gmail_token: # token_string (overrides google_token if set)
+# gmail_refresh_token: # overrides google_refresh_token if set
 
 #Drive
 drive_scope: # [scope1, scope2]
-drive_token: # token_string
+# drive_token: # token_string (overrides google_token if set)
+# drive_refresh_token: # overrides google_refresh_token if set
 
 # BigQuery
 bigquery_scope: # [scope1, scope2]
-bigquery_token: # token_string
+# bigquery_token: # token_string (overrides google_token if set)
+# bigquery_refresh_token: # overrides google_refresh_token if set
 
 # SearchConsole
 search_console_scope: # [scope1, scope2]
-search_console_token: # token_string
+# search_console_token: # token_string (overrides google_token if set)
+# search_console_refresh_token: # overrides google_refresh_token if set
 search_console_test_site_url: # https://www.example.com
 search_console_test_removable_site_url: # sc-domain:secondary-example.com
 search_console_test_sitemap_url: # https://www.example.com/sitemap.xml
