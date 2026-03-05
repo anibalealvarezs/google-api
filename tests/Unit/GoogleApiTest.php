@@ -304,7 +304,8 @@ class GoogleApiTest extends TestCase
 
         $this->assertFileExists($tokenPath);
         $data = json_decode(json: (string) file_get_contents($tokenPath), associative: true);
-        $this->assertEquals($newToken, $data[$this->userId]['Google\GoogleApi']);
+        $expectedKey = 'RefreshToken_' . substr(md5($this->refreshToken), 0, 16);
+        $this->assertEquals($newToken, $data[$this->userId][$expectedKey]);
 
         // Test loading
         $newClient = new GoogleApi(
@@ -330,7 +331,8 @@ class GoogleApiTest extends TestCase
     {
         $tokenPath = __DIR__ . '/token_load_test.json';
         $storedToken = 'stored-token-from-file';
-        file_put_contents($tokenPath, json_encode([$this->userId => ['Google\GoogleApi' => $storedToken]], JSON_PRETTY_PRINT));
+        $expectedKey = 'RefreshToken_' . substr(md5($this->refreshToken), 0, 16);
+        file_put_contents($tokenPath, json_encode([$this->userId => [$expectedKey => $storedToken]], JSON_PRETTY_PRINT));
 
         // Mock a single successful API response
         $mock = new MockHandler([

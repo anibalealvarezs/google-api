@@ -37,13 +37,15 @@ class MultiServiceTokenTest extends TestCase
 
         $sheetsToken = 'sheets-token-' . $this->faker->uuid;
         $slidesToken = 'slides-token-' . $this->faker->uuid;
+        $sheetsRefreshToken = 'refresh-' . $this->faker->uuid;
+        $slidesRefreshToken = 'refresh-' . $this->faker->uuid;
 
         // 1. Create Sheets client and set token
         $sheetsClient = new SheetsApi(
             redirectUrl: $this->redirectUrl,
             clientId: $this->clientId,
             clientSecret: $this->clientSecret,
-            refreshToken: $this->refreshToken,
+            refreshToken: $sheetsRefreshToken,
             userId: $this->userId,
             tokenPath: $tokenPath
         );
@@ -54,7 +56,7 @@ class MultiServiceTokenTest extends TestCase
             redirectUrl: $this->redirectUrl,
             clientId: $this->clientId,
             clientSecret: $this->clientSecret,
-            refreshToken: $this->refreshToken,
+            refreshToken: $slidesRefreshToken,
             userId: $this->userId,
             tokenPath: $tokenPath
         );
@@ -64,19 +66,22 @@ class MultiServiceTokenTest extends TestCase
         $this->assertFileExists($tokenPath);
         $data = json_decode(file_get_contents($tokenPath), true);
 
-        $this->assertArrayHasKey($this->userId, $data);
-        $this->assertArrayHasKey('Services\Sheets\SheetsApi', $data[$this->userId]);
-        $this->assertArrayHasKey('Services\Slides\SlidesApi', $data[$this->userId]);
+        $sheetsKey = 'RefreshToken_' . substr(md5($sheetsRefreshToken), 0, 16);
+        $slidesKey = 'RefreshToken_' . substr(md5($slidesRefreshToken), 0, 16);
 
-        $this->assertEquals($sheetsToken, $data[$this->userId]['Services\Sheets\SheetsApi']);
-        $this->assertEquals($slidesToken, $data[$this->userId]['Services\Slides\SlidesApi']);
+        $this->assertArrayHasKey($this->userId, $data);
+        $this->assertArrayHasKey($sheetsKey, $data[$this->userId]);
+        $this->assertArrayHasKey($slidesKey, $data[$this->userId]);
+
+        $this->assertEquals($sheetsToken, $data[$this->userId][$sheetsKey]);
+        $this->assertEquals($slidesToken, $data[$this->userId][$slidesKey]);
 
         // 4. Verify loading independent tokens
         $newSheetsClient = new SheetsApi(
             redirectUrl: $this->redirectUrl,
             clientId: $this->clientId,
             clientSecret: $this->clientSecret,
-            refreshToken: $this->refreshToken,
+            refreshToken: $sheetsRefreshToken,
             userId: $this->userId,
             tokenPath: $tokenPath
         );
@@ -86,7 +91,7 @@ class MultiServiceTokenTest extends TestCase
             redirectUrl: $this->redirectUrl,
             clientId: $this->clientId,
             clientSecret: $this->clientSecret,
-            refreshToken: $this->refreshToken,
+            refreshToken: $slidesRefreshToken,
             userId: $this->userId,
             tokenPath: $tokenPath
         );
