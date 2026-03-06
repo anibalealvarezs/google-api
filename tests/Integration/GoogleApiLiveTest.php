@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Integration;
 
 use Anibalealvarezs\GoogleApi\Google\GoogleApi;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
@@ -27,7 +28,7 @@ class GoogleApiLiveTest extends TestCase
             clientSecret: $config['google_client_secret'],
             refreshToken: $config['google_refresh_token'],
             userId: $config['google_user_id'],
-            scopes: [$config['search_console_scope']],
+            scopes: Helpers::parseScopes($config['google_scope'] ?? $config['search_console_scope'] ?? null),
             tokenPath: $config['google_token_path'] ?? "",
         );
     }

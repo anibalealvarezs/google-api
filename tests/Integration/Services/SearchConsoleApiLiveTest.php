@@ -2,6 +2,7 @@
 
 namespace Tests\Integration\Services;
 
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
 use Anibalealvarezs\GoogleApi\Services\SearchConsole\SearchConsoleApi;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
@@ -35,7 +36,7 @@ class SearchConsoleApiLiveTest extends TestCase
             clientSecret: $config['google_client_secret'],
             refreshToken: !empty($config['search_console_refresh_token']) ? $config['search_console_refresh_token'] : $config['google_refresh_token'],
             userId: $config['google_user_id'],
-            scopes: [$config['search_console_scope']],
+            scopes: Helpers::parseScopes($config['search_console_scope'] ?? $config['google_scope'] ?? null, ['https://www.googleapis.com/auth/webmasters']),
             token: !empty($config['search_console_token']) ? $config['search_console_token'] : ($config['google_token'] ?? ''),
         );
     }
