@@ -3,6 +3,7 @@
 namespace Anibalealvarezs\GoogleApi\Services\Gmail;
 
 use Anibalealvarezs\GoogleApi\Google\GoogleApi;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -26,7 +27,7 @@ class GmailApi extends GoogleApi
         string $clientSecret,
         string $refreshToken,
         string $userId,
-        array $scopes = [],
+        string|array $scopes = [],
         string $token = "",
         ?Client $guzzleClient = null,
         string $tokenPath = ""
@@ -38,7 +39,7 @@ class GmailApi extends GoogleApi
             clientSecret: $clientSecret,
             refreshToken: $refreshToken,
             userId: $userId,
-            scopes: ($scopes ?: ["https://www.googleapis.com/auth/gmail.modify"]),
+            scopes: Helpers::parseScopes($scopes, ["https://www.googleapis.com/auth/gmail.modify"]),
             token: $token,
             guzzleClient: $guzzleClient,
             tokenPath: $tokenPath,

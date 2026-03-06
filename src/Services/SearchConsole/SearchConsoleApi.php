@@ -23,7 +23,7 @@ class SearchConsoleApi extends GoogleApi
      * @param string $clientSecret
      * @param string $refreshToken
      * @param string $userId
-     * @param array $scopes
+     * @param string|array $scopes
      * @param string $token
      * @param Client|null $guzzleClient
      * @param Client|null $defaultSitemapClient
@@ -36,7 +36,7 @@ class SearchConsoleApi extends GoogleApi
         string $clientSecret,
         string $refreshToken,
         string $userId,
-        array $scopes = [],
+        string|array $scopes = [],
         string $token = "",
         ?Client $guzzleClient = null,
         ?Client $defaultSitemapClient = null,
@@ -49,7 +49,7 @@ class SearchConsoleApi extends GoogleApi
             clientSecret: $clientSecret,
             refreshToken: $refreshToken,
             userId: $userId,
-            scopes: ($scopes ?: ["https://www.googleapis.com/auth/webmasters"]),
+            scopes: Helpers::parseScopes($scopes, ["https://www.googleapis.com/auth/webmasters"]),
             token: $token,
             guzzleClient: $guzzleClient,
             tokenPath: $tokenPath,

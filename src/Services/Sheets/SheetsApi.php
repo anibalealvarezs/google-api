@@ -53,7 +53,7 @@ class SheetsApi extends GoogleApi
      * @param string $clientSecret
      * @param string $refreshToken
      * @param string $userId
-     * @param array $scopes
+     * @param string|array $scopes
      * @param string $token
      * @param Client|null $guzzleClient
      * @param string $tokenPath
@@ -65,7 +65,7 @@ class SheetsApi extends GoogleApi
         string $clientSecret,
         string $refreshToken,
         string $userId,
-        array $scopes = [],
+        string|array $scopes = [],
         string $token = "",
         ?Client $guzzleClient = null,
         string $tokenPath = ""
@@ -77,7 +77,7 @@ class SheetsApi extends GoogleApi
             clientSecret: $clientSecret,
             refreshToken: $refreshToken,
             userId: $userId,
-            scopes: ($scopes ?: ["https://www.googleapis.com/auth/spreadsheets"]),
+            scopes: Helpers::parseScopes($scopes, ["https://www.googleapis.com/auth/spreadsheets"]),
             token: $token,
             guzzleClient: $guzzleClient,
             tokenPath: $tokenPath,

@@ -19,7 +19,7 @@ class BigQueryApi extends GoogleApi
      * @param string $clientSecret
      * @param string $refreshToken
      * @param string $userId
-     * @param array $scopes
+     * @param string|array $scopes
      * @param string $token
      * @param Client|null $guzzleClient
      * @param string $tokenPath
@@ -31,7 +31,7 @@ class BigQueryApi extends GoogleApi
         string $clientSecret,
         string $refreshToken,
         string $userId,
-        array $scopes = [],
+        string|array $scopes = [],
         string $token = "",
         ?Client $guzzleClient = null,
         string $tokenPath = ""
@@ -43,7 +43,7 @@ class BigQueryApi extends GoogleApi
             clientSecret: $clientSecret,
             refreshToken: $refreshToken,
             userId: $userId,
-            scopes: ($scopes ?: [
+            scopes: Helpers::parseScopes($scopes, [
                 "https://www.googleapis.com/auth/bigquery",
             ]),
             token: $token,

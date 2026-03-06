@@ -39,6 +39,33 @@ class Helpers
     }
 
     /**
+     * Normalise a scope value into a clean string[] with no duplicates.
+     *
+     * Accepts:
+     *   - A space-separated string  (OAuth 2.0 standard)
+     *   - A comma-separated string
+     *   - An array of strings
+     *   - null / empty             → returns $default
+     *
+     * @param string|array|null $scopes
+     * @param string[] $default
+     * @return string[]
+     */
+    public static function parseScopes(string|array|null $scopes, array $default = []): array
+    {
+        if (empty($scopes)) {
+            return $default;
+        }
+
+        if (is_string($scopes)) {
+            $scopes = array_values(array_filter(array_map('trim', preg_split('/[\s,]+/', $scopes))));
+        }
+
+        // Deduplicate while preserving order
+        return array_values(array_unique($scopes));
+    }
+
+    /**
      * @param object $object
      * @param string $key
      */
