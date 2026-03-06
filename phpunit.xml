@@ -23,6 +23,11 @@
     </coverage>
 
     <php>
-        <env name="CONFIG_FILE" value="config/config.yaml"/>
+        <!-- Path to the YAML config file for integration tests.
+             Leave empty to fall back to config/config.yaml, or set to a
+             custom path. If the file doesn't exist, credentials will be
+             read from individual GOOGLE_*, SEARCH_CONSOLE_*, etc. env vars. -->
+        <env name="CONFIG_FILE" value=""/>
+
     </php>
 </phpunit>
