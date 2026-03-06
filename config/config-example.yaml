@@ -9,35 +9,55 @@ google_refresh_token: # refresh_token_string
 google_user_id: # your@email.com
 google_token_path: # ./config/google_tokens.json
 
+# Global OAuth scopes — requested together when generating/refreshing tokens.
+# List ALL scopes needed across all services you intend to use, so a single
+# refresh token covers them all. Individual services fall back to this list
+# unless they declare their own scope/scopes.
+google_scope:
+  - https://www.googleapis.com/auth/webmasters
+  # - https://www.googleapis.com/auth/analytics.readonly
+  # - https://www.googleapis.com/auth/spreadsheets
+  # - https://mail.google.com/
+  # - https://www.googleapis.com/auth/drive
+  # - https://www.googleapis.com/auth/bigquery
+  # - https://www.googleapis.com/auth/presentations
+
 # Slides
-slides_scope: # [scope1, scope2]
+slides_scope: # list of scopes (overrides google_scope for this service)
+  # - https://www.googleapis.com/auth/presentations
+  # - https://www.googleapis.com/auth/drive
 # slides_token: # token_string (overrides google_token if set)
 # slides_refresh_token: # overrides google_refresh_token if set
 slides_themes: # {"SimpleLight2":{"id":"simple-light-2","layouts":{"Cover":"p2","Agenda":"p12","TitleRed":"gc17cfde283_0_16","TitleDiamond":"gc17cfde283_1_2","Text":"gc17cfde283_1_62","Canvas":"gc17cfde283_1_14","CanvasRed":"gc17cfde283_1_68","End":"gc17cfde283_1_76","Creatives":"g118c5aca048_2_0"}}}
 
 # Sheets
-sheets_scope: # [scope1, scope2]
+sheets_scope: # list of scopes (overrides google_scope for this service)
+  # - https://www.googleapis.com/auth/spreadsheets
 # sheets_token: # token_string (overrides google_token if set)
 # sheets_refresh_token: # overrides google_refresh_token if set
 sheets_themes: # {"SimpleLight2":{"id":"simple-light-2","layouts":{"Cover":"p2","Agenda":"p12","TitleRed":"gc17cfde283_0_16","TitleDiamond":"gc17cfde283_1_2","Text":"gc17cfde283_1_62","Canvas":"gc17cfde283_1_14","CanvasRed":"gc17cfde283_1_68","End":"gc17cfde283_1_76","Creatives":"g118c5aca048_2_0"}}}
 
 # Gmail
-gmail_scope: # [scope1, scope2]
+gmail_scope: # list of scopes (overrides google_scope for this service)
+  # - https://www.googleapis.com/auth/gmail.modify
 # gmail_token: # token_string (overrides google_token if set)
 # gmail_refresh_token: # overrides google_refresh_token if set
 
-#Drive
-drive_scope: # [scope1, scope2]
+# Drive
+drive_scope: # list of scopes (overrides google_scope for this service)
+  # - https://www.googleapis.com/auth/drive
 # drive_token: # token_string (overrides google_token if set)
 # drive_refresh_token: # overrides google_refresh_token if set
 
 # BigQuery
-bigquery_scope: # [scope1, scope2]
+bigquery_scope: # list of scopes (overrides google_scope for this service)
+  # - https://www.googleapis.com/auth/bigquery
 # bigquery_token: # token_string (overrides google_token if set)
 # bigquery_refresh_token: # overrides google_refresh_token if set
 
 # SearchConsole
-search_console_scope: # [scope1, scope2]
+search_console_scope: # list of scopes (overrides google_scope for this service)
+  - https://www.googleapis.com/auth/webmasters
 # search_console_token: # token_string (overrides google_token if set)
 # search_console_refresh_token: # overrides google_refresh_token if set
 search_console_test_site_url: # https://www.example.com
