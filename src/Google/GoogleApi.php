@@ -3,6 +3,7 @@
 namespace Anibalealvarezs\GoogleApi\Google;
 
 use Anibalealvarezs\ApiSkeleton\Clients\OAuthV2Client;
+use Anibalealvarezs\GoogleApi\Google\Exceptions\GoogleQuotaExceededException;
 use Exception;
 use GuzzleHttp\Client;
 
@@ -122,5 +123,23 @@ class GoogleApi extends OAuthV2Client
     protected function getServiceKey(): string
     {
         return $this->tokenIdentifier ?: str_replace('Anibalealvarezs\\GoogleApi\\', '', get_class($this));
+    }
+
+    /**
+     * @param Exception $exception
+     * @param mixed $onFailure
+     * @return mixed
+     * @throws Exception
+     */
+    protected function handleException(Exception $exception, mixed $onFailure = null): mixed
+    {
+        if (
+            str_contains(strtolower($exception->getMessage()), 'quota exceeded')
+            || str_contains(strtolower($exception->getMessage()), 'rate limit exceeded')
+        ) {
+            throw new GoogleQuotaExceededException($exception->getMessage(), $exception->getCode(), $exception);
+        }
+
+        return parent::handleException($exception, $onFailure);
     }
 }
