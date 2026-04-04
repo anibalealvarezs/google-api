@@ -16,7 +16,7 @@ class BooleanCondition implements Jsonable
 {
     public array $values;
     public ConditionType|string $type;
-    
+
     public function __construct(
         array $values = [],
         ConditionType|string $type = ConditionType::BOOLEAN

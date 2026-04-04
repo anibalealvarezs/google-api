@@ -15,7 +15,7 @@ class CropProperties implements Jsonable
     public float $topOffset;
     public float $bottomOffset;
     public float $angle;
-    
+
     public function __construct(
         float $leftOffset = 0.0,
         float $rightOffset = 0.0,

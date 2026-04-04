@@ -14,7 +14,7 @@ class ShapeBackgroundFill implements Jsonable
 {
     public SolidFill|array|null $solidFill;
     public PropertyState|string $propertyState;
-    
+
     public function __construct(
         SolidFill|array|null $solidFill = null,
         PropertyState|string $propertyState = PropertyState::RENDERED

@@ -17,7 +17,7 @@ class UpdateDimensionPropertiesRequest implements Jsonable
     public string $fields;
     public DimensionRange|array|null $range;
     public DataSourceSheetDimensionRange|array|null $dataSourceSheetRange;
-    
+
     public function __construct(
         DimensionProperties $properties,
         string $fields = '*',

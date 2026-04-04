@@ -5,7 +5,6 @@ namespace Anibalealvarezs\GoogleApi\Google\Helpers;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
-use JetBrains\PhpStorm\NoReturn;
 
 class Helpers
 {
@@ -37,6 +36,33 @@ class Helpers
             }
         }
         return $array;
+    }
+
+    /**
+     * Normalise a scope value into a clean string[] with no duplicates.
+     *
+     * Accepts:
+     *   - A space-separated string  (OAuth 2.0 standard)
+     *   - A comma-separated string
+     *   - An array of strings
+     *   - null / empty             → returns $default
+     *
+     * @param string|array|null $scopes
+     * @param string[] $default
+     * @return string[]
+     */
+    public static function parseScopes(string|array|null $scopes, array $default = []): array
+    {
+        if (empty($scopes)) {
+            return $default;
+        }
+
+        if (is_string($scopes)) {
+            $scopes = array_values(array_filter(array_map('trim', preg_split('/[\s,]+/', $scopes))));
+        }
+
+        // Deduplicate while preserving order
+        return array_values(array_unique($scopes));
     }
 
     /**
@@ -73,26 +99,28 @@ class Helpers
 
     /**
      * @param string $string
-     * @return void
+     * @return never
      */
-    #[NoReturn]
     public static function printJsonObject(
         string $string
-    ): void {
+    ): never {
         header('Content-Type: application/json');
         die($string);
     }
 
     /**
-     * @param string $id
+     * @param string|int $id
      * @param array $ids
-     * @return string
+     * @return string|int
      */
     public static function getFirstValid(
-        string $id,
+        string|int $id,
         array $ids
-    ): string {
+    ): string|int {
         if (in_array($id, $ids)) {
+            if (is_int($id)) {
+                return self::getFirstValid($id + 1, $ids);
+            }
             return self::getFirstValid($id . '_1', $ids);
         }
         return $id;

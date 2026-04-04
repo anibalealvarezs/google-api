@@ -15,7 +15,7 @@ class OverlayPosition implements Jsonable
     public int $offsetYPixels;
     public int $widthPixels;
     public int $heightPixels;
-    
+
     public function __construct(
         GridCoordinate|array $anchorCell,
         int $offsetXPixels,

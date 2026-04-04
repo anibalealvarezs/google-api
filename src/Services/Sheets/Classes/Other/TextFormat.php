@@ -18,7 +18,7 @@ class TextFormat implements Jsonable
     public ?bool $strikethrough;
     public ?bool $underline;
     public Link|array|null $link;
-    
+
     public function __construct(
         ColorStyle|array $foregroundColorStyle,
         string $fontFamily = 'Roboto',
@@ -27,8 +27,7 @@ class TextFormat implements Jsonable
         bool $italic = false,
         ?bool $strikethrough = false,
         ?bool $underline = false,
-        Link|array|null $link = null,
-        mixed $foregroundColor = null,
+        Link|array|null $link = null
     ) {
         $this->foregroundColorStyle = $this->arrayToObject(class: ColorStyle::class, var: $foregroundColorStyle);
         $this->fontFamily = $fontFamily;

@@ -12,7 +12,7 @@ use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Spreadsheets\EmbeddedChart
 class AddChartRequest implements Jsonable
 {
     public EmbeddedChart|array $chart;
-    
+
     public function __construct(
         EmbeddedChart|array $chart
     ) {

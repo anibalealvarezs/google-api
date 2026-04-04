@@ -12,7 +12,7 @@ class ChartCustomNumberFormatOptions implements Jsonable
 {
     public ?string $prefix;
     public ?string $suffix;
-    
+
     public function __construct(
         ?string $prefix = null,
         ?string $suffix = null,

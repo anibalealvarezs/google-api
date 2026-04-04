@@ -13,7 +13,7 @@ class DataSourceChartProperties implements Jsonable
 {
     public string $dataSourceId;
     public DataExecutionState|string|null $dataExecutionStatus;
-    
+
     public function __construct(
         string $dataSourceId,
         DataExecutionState|string|null $dataExecutionStatus = null,

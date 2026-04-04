@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Integration;
 
 use Anibalealvarezs\GoogleApi\Google\GoogleApi;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\TestCase;
@@ -27,7 +28,8 @@ class GoogleApiLiveTest extends TestCase
             clientSecret: $config['google_client_secret'],
             refreshToken: $config['google_refresh_token'],
             userId: $config['google_user_id'],
-            scopes: [$config['search_console_scope']],
+            scopes: Helpers::parseScopes($config['google_scope'] ?? $config['search_console_scope'] ?? null),
+            tokenPath: $config['google_token_path'] ?? "",
         );
     }
 
@@ -41,5 +43,23 @@ class GoogleApiLiveTest extends TestCase
         $this->assertIsString($token, 'Token must be a string');
         $this->assertNotEmpty($token, 'Token should not be empty');
         $this->assertStringNotContainsString('error', strtolower($token), 'Token should not contain errors');
+    }
+
+    public function testItSavesTokenToFileAfterRefresh(): void
+    {
+        $config = app_config();
+        $tokenPath = $config['google_token_path'] ?? "";
+
+        if ($tokenPath && file_exists($tokenPath)) {
+            unlink($tokenPath);
+        }
+
+        // Force a token refresh manually by calling getNewToken and setToken
+        $token = $this->googleApi->getNewToken();
+        $this->googleApi->setToken($token);
+
+        $this->assertFileExists($tokenPath, 'Token file should be created');
+        $expectedTokenKey = 'RefreshToken_' . substr(md5($config['google_refresh_token']), 0, 16);
+        $this->assertStringEqualsFile($tokenPath, json_encode([$config['google_user_id'] => [$expectedTokenKey => $token]], JSON_PRETTY_PRINT));
     }
 }

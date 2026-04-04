@@ -13,7 +13,7 @@ class WaterfallChartCustomSubtotal implements Jsonable
     public int $subtotalIndex;
     public string $label;
     public bool $dataIsSubtotal;
-    
+
     public function __construct(
         int $subtotalIndex,
         string $label,

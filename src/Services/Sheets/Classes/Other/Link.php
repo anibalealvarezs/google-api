@@ -11,7 +11,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class Link implements Jsonable
 {
     public string $uri;
-    
+
     public function __construct(
         string $uri
     ) {

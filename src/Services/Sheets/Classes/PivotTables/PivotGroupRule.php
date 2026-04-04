@@ -13,7 +13,7 @@ class PivotGroupRule implements Jsonable
     public ManualRule|array|null $manualRule;
     public HistogramRule|array|null $histogramRule;
     public DateTimeRule|array|null $dateTimeRule;
-    
+
     public function __construct(
         ManualRule|array|null $manualRule = null,
         HistogramRule|array|null $histogramRule = null,

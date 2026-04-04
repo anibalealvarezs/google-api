@@ -12,7 +12,7 @@ use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\PivotTables\DateTimeRuleType
 class DateTimeRule implements Jsonable
 {
     public DateTimeRuleType|string $type;
-    
+
     public function __construct(
         DateTimeRuleType|string $type = DateTimeRuleType::DAY_OF_MONTH,
     ) {

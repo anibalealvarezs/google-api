@@ -11,7 +11,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class DataSourceColumnReference implements Jsonable
 {
     public string $name;
-    
+
     public function __construct(
         string $name
     ) {

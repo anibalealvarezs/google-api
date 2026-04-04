@@ -13,7 +13,7 @@ class DeleteTableRowRequest implements Jsonable
 {
     public string $tableObjectId;
     public TableCellLocation|array $cellLocation;
-    
+
     public function __construct(
         string $tableObjectId,
         TableCellLocation|array $cellLocation

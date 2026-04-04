@@ -17,7 +17,7 @@ class QueryParameterValue implements Jsonable
     public StructValues|array $structValues; // Values most be an array of key/value pairs under the main key "values"
     public array $arrayValues;
     public string $value;
-    
+
     public function __construct(
         array $structValues,
         ?array $arrayValues,

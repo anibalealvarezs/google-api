@@ -13,7 +13,7 @@ class PivotGroupValueMetadata implements Jsonable
 {
     public ExtendedValue|array $value;
     public bool $collapsed;
-    
+
     public function __construct(
         ExtendedValue|array $value,
         bool $collapsed = false,

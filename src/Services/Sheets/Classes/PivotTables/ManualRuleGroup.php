@@ -13,7 +13,7 @@ class ManualRuleGroup implements Jsonable
 {
     public ExtendedValue|array $groupName;
     public array $items;
-    
+
     public function __construct(
         ExtendedValue|array $groupName,
         array $items,

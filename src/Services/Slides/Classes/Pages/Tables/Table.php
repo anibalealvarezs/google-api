@@ -23,7 +23,7 @@ class Table implements Jsonable
     public array $tableColumns;
     public array $horizontalBorderRows;
     public array $verticalBorderRows;
-    
+
     public function __construct(
         int $rows = 1,
         int $columns = 1,

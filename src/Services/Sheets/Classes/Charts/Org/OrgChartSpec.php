@@ -19,7 +19,7 @@ class OrgChartSpec implements Jsonable
     public ChartData|array|null $parentLabels;
     public ChartData|array|null $tooltips;
     public OrgChartNodeSize|string $nodeSize;
-    
+
     public function __construct(
         ColorStyle|array $nodeColorStyle,
         ColorStyle|array $selectedNodeColorStyle,

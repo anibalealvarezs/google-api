@@ -14,7 +14,7 @@ class AutoText implements Jsonable
     public string $content;
     public TextStyle|array $style;
     public Type|string $type;
-    
+
     public function __construct(
         string $content,
         TextStyle|array $style,

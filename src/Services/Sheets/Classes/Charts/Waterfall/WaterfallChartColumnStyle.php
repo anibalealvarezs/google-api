@@ -14,7 +14,7 @@ class WaterfallChartColumnStyle implements Jsonable
 {
     public string $label;
     public ColorStyle|array $colorStyle;
-    
+
     public function __construct(
         string $label,
         ColorStyle|array $colorStyle,

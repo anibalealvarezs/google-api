@@ -14,7 +14,7 @@ class CandlestickData implements Jsonable
     public CandlestickSeries|array $openSeries;
     public CandlestickSeries|array $closeSeries;
     public CandlestickSeries|array $highSeries;
-    
+
     public function __construct(
         CandlestickSeries|array $lowSeries,
         CandlestickSeries|array $openSeries,

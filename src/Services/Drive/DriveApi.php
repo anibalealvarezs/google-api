@@ -3,6 +3,7 @@
 namespace Anibalealvarezs\GoogleApi\Services\Drive;
 
 use Anibalealvarezs\GoogleApi\Google\GoogleApi;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
 use Anibalealvarezs\GoogleApi\Services\Drive\Enums\Corpora;
 use Exception;
 use GuzzleHttp\Client;
@@ -16,8 +17,9 @@ class DriveApi extends GoogleApi
      * @param string $clientSecret
      * @param string $refreshToken
      * @param string $userId
-     * @param array $scopes
+     * @param string $token
      * @param Client|null $guzzleClient
+     * @param string $tokenPath
      * @throws Exception
      */
     public function __construct(
@@ -26,8 +28,10 @@ class DriveApi extends GoogleApi
         string $clientSecret,
         string $refreshToken,
         string $userId,
-        array $scopes = [],
-        ?Client $guzzleClient = null
+        string|array $scopes = [],
+        string $token = "",
+        ?Client $guzzleClient = null,
+        string $tokenPath = ""
     ) {
         parent::__construct(
             baseUrl: "https://www.googleapis.com/drive/v3/",
@@ -36,8 +40,10 @@ class DriveApi extends GoogleApi
             clientSecret: $clientSecret,
             refreshToken: $refreshToken,
             userId: $userId,
-            scopes: ($scopes ?: ["https://www.googleapis.com/auth/drive"]),
+            scopes: Helpers::parseScopes($scopes, ["https://www.googleapis.com/auth/drive"]),
+            token: $token,
             guzzleClient: $guzzleClient,
+            tokenPath: $tokenPath,
         );
     }
 
@@ -45,6 +51,7 @@ class DriveApi extends GoogleApi
      * @param string $fileId
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/files/get
      */
     public function getFileMetadata(
         string $fileId
@@ -85,6 +92,7 @@ class DriveApi extends GoogleApi
      * @param bool $stream
      * @return bool
      * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/files/get
      */
     public function getFile(
         string $fileId,
@@ -113,6 +121,7 @@ class DriveApi extends GoogleApi
      * @param bool $stream
      * @return bool
      * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/files/export
      */
     public function exportFile(
         string $fileId,
@@ -145,6 +154,7 @@ class DriveApi extends GoogleApi
      * @param bool $supportsAllDrives
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/files/copy
      */
     public function copyFile(
         string $fileId,
@@ -182,13 +192,14 @@ class DriveApi extends GoogleApi
      * @param string $q
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/files/list
      */
     public function getFilesMetadata(
-        string $pageToken = null,
-        string $driveId = null,
+        ?string $pageToken = null,
+        ?string $driveId = null,
         int $pageSize = 1000,
         array $orderBy = [],
-        string $q = ''
+        ?string $q = null
     ): array {
         $fields = [
             'md5Checksum',
@@ -207,7 +218,7 @@ class DriveApi extends GoogleApi
             'trashedTime',
         ];
 
-        $query =[
+        $query = [
             "corpora" => $driveId ? Corpora::drive->name : Corpora::allDrives->name,
             "supportsAllDrives" => "true",
             "includeItemsFromAllDrives" => "true",
@@ -243,11 +254,12 @@ class DriveApi extends GoogleApi
      * @param string|null $driveId
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/changes/getStartPageToken
      */
     public function getStartPageToken(
         string $driveId = null
     ): array {
-        $query =[
+        $query = [
             "includeCorpusRemovals" => "true",
             "supportsAllDrives" => "true",
             "includeItemsFromAllDrives" => "true",
@@ -275,13 +287,14 @@ class DriveApi extends GoogleApi
      * @param int $pageSize
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/changes/list
      */
     public function getChanges(
         int $pageToken,
-        string $driveId = null,
+        ?string $driveId = null,
         int $pageSize = 1000
     ): array {
-        $query =[
+        $query = [
             "includeCorpusRemovals" => "true",
             "supportsAllDrives" => "true",
             "includeItemsFromAllDrives" => "true",
@@ -303,5 +316,21 @@ class DriveApi extends GoogleApi
         );
         // Return response
         return json_decode($response->getBody()->getContents(), true);
+    }
+
+    /**
+     * @param string $fileId
+     * @return bool
+     * @throws GuzzleException
+     * @link https://developers.google.com/drive/api/v3/reference/files/delete
+     */
+    public function deleteFile(
+        string $fileId
+    ): bool {
+        $this->performRequest(
+            method: "DELETE",
+            endpoint: "files/" . $fileId,
+        );
+        return true;
     }
 }

@@ -16,7 +16,7 @@ class CreateVideoRequest implements Jsonable
     public string $id;
     public Source|string $source;
     public string $objectId;
-    
+
     public function __construct(
         PageElementProperties|array $elementProperties,
         string $id,

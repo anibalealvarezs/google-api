@@ -16,7 +16,7 @@ class TableCell implements Jsonable
     public int $columnSpan;
     public TextContent|array $text;
     public TableCellProperties|array $tableCellProperties;
-    
+
     public function __construct(
         TableCellLocation|array $location,
         int $rowSpan,

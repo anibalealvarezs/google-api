@@ -17,7 +17,7 @@ class QueryParameterType implements Jsonable
     public string $type;
     public QueryParameterType|array|null $arrayType;
     public array $structTypes;
-    
+
     public function __construct(
         string $type,
         QueryParameterType|array|null $arrayType = null,

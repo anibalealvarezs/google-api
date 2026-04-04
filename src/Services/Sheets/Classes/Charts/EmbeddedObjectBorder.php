@@ -12,7 +12,7 @@ use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Other\ColorStyle;
 class EmbeddedObjectBorder implements Jsonable
 {
     public ColorStyle|array $colorStyle;
-    
+
     public function __construct(
         ColorStyle|array $colorStyle
     ) {

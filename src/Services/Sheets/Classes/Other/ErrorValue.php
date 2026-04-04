@@ -13,7 +13,7 @@ class ErrorValue implements Jsonable
 {
     public string $message;
     public ErrorType|string $type;
-    
+
     public function __construct(
         string $message,
         ErrorType|string $type = ErrorType::ERROR,

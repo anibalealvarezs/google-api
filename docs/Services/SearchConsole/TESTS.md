@@ -3,10 +3,13 @@
 This document provides instructions for running unit and integration tests for the `SearchConsoleApi` class in the `anibalealvarezs/google-api` package. The `SearchConsoleApi` class extends the `GoogleApi` class (which inherits from `OAuthV2Client` in the `anibalealvarezs/api-client-skeleton` package) to interact with the Google Search Console API, offering methods for managing sites, sitemaps, search analytics queries, and URL inspections. The unit tests, located in `tests/Unit/Services/SearchConsoleApiTest.php`, verify the constructor’s OAuth v2 configuration and the functionality of key public methods. The integration tests, located in `tests/Integration/Services/SearchConsoleApiLiveTest.php`, verify live API interactions, such as retrieving sites, sitemaps, search analytics, and URL inspection results.
 
 ---
+
 **NOTE**:
+
 - Information about the `GoogleApi` class can be found in the [GoogleApi](../../../README.md) documentation.
 - Information about the `GoogleApiTest` class can be found in the [GoogleApiTest](../../TESTS.md) documentation.
 - Information about the `SearchConsoleApi` class can be found in the [SearchConsoleApi](README.md) documentation.
+
 ---
 
 ## Prerequisites
@@ -24,7 +27,8 @@ Before running the tests, ensure the following requirements are met:
   - Google Refresh Token
   - Google User ID
   - Google Redirect URI
-    These should be configured in your application's configuration (e.g., `config/app.php` in Laravel).
+  - Google Token Path (Optional: path to save/load tokens)
+    These should be configured in your application's configuration.
 - **Internet Access (Integration Tests)**: Integration tests make real HTTP requests to Google APIs (e.g., `https://www.googleapis.com/webmasters/v3/`, `https://searchconsole.googleapis.com/`).
 - **Test Data (Integration Tests)**: Integration tests use specific site URLs (e.g., `sc-domain:anibalalvarez.com`, `sc-domain:loquesea.com`), sitemap URLs (e.g., `https://anibalalvarez.com/sitemap_index.xml`), and an inspection URL (e.g., `https://anibalalvarez.com/ecommerce-conversion-optimization-businesses/`). Ensure the account associated with the credentials has access to these sites in Google Search Console, or update the test data in `SearchConsoleApiLiveTest.php`.
 
@@ -34,21 +38,21 @@ To set up the tests, add PHPUnit and required dependencies to your project’s `
 
 ```json
 {
-    "require": {
-        "php": ">=8.1",
-        "anibalealvarezs/google-api": "@dev",
-        "anibalealvarezs/api-skeleton": "@dev"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://satis.anibalalvarez.com/"
-        }
-    ],
-    "require-dev": {
-        "phpunit/phpunit": "^9.5",
-        "fakerphp/faker": "^1.23"
+  "require": {
+    "php": ">=8.1",
+    "anibalealvarezs/google-api": "@dev",
+    "anibalealvarezs/api-skeleton": "@dev"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://satis.anibalalvarez.com/"
     }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "^9.5",
+    "fakerphp/faker": "^1.23"
+  }
 }
 ```
 
@@ -67,6 +71,7 @@ return [
     'google_refresh_token' => env('GOOGLE_REFRESH_TOKEN'),
     'google_user_id' => env('GOOGLE_USER_ID'),
     'google_redirect_uri' => env('GOOGLE_REDIRECT_URI'),
+    'google_token_path' => env('GOOGLE_TOKEN_PATH', './config/google_tokens.json'),
 ];
 ```
 
@@ -78,11 +83,13 @@ GOOGLE_CLIENT_SECRET=your-client-secret
 GOOGLE_REFRESH_TOKEN=your-refresh-token
 GOOGLE_USER_ID=your-user-id
 GOOGLE_REDIRECT_URI=https://your-app.com/callback
+GOOGLE_TOKEN_PATH=./config/google_tokens.json
 ```
 
 ## Test Setup
 
 ### Unit Tests
+
 The `SearchConsoleApiTest.php` test class, located in `tests/Unit/Services/SearchConsoleApiTest.php`, verifies the `SearchConsoleApi` class. The test class uses:
 
 - **Faker**: Generates random test data (e.g., UUIDs for client IDs, tokens, site URLs).
@@ -90,6 +97,7 @@ The `SearchConsoleApiTest.php` test class, located in `tests/Unit/Services/Searc
 - **PHPUnit**: Provides the testing framework for assertions and test execution.
 
 The `setUp` method initializes the test environment by:
+
 - Creating a Faker instance for generating test data.
 - Setting a Search Console-specific base URL (`https://www.googleapis.com/webmasters/v3/`) and redirect URL (`https://example.com/callback`).
 - Defining OAuth v2 parameters, including scopes (`https://www.googleapis.com/auth/webmasters`), client ID, client secret, refresh token, user ID, and token.
@@ -98,6 +106,7 @@ The `setUp` method initializes the test environment by:
 No additional configuration is required, as the unit tests are self-contained and do not rely on external services.
 
 ### Integration Tests
+
 The `SearchConsoleApiLiveTest.php` test class, located in `tests/Integration/Services/SearchConsoleApiLiveTest.php`, verifies live interactions with the Google Search Console API. The test class uses:
 
 - **PHPUnit**: Provides the testing framework for assertions and test execution.
@@ -105,6 +114,7 @@ The `SearchConsoleApiLiveTest.php` test class, located in `tests/Integration/Ser
 - **Guzzle**: Makes real HTTP requests to Google APIs (e.g., Search Console API endpoints, sitemap submissions).
 
 The `setUp` method initializes the test environment by:
+
 - Loading configuration from `app_config()` (e.g., client ID, client secret, refresh token, user ID, redirect URI).
 - Defining test data for site URLs (`sc-domain:anibalalvarez.com`, `sc-domain:loquesea.com`), sitemap URLs (`https://anibalalvarez.com/sitemap_index.xml`, `https://anibalalvarez.com/geo-sitemap.xml`), and an inspection URL (`https://anibalalvarez.com/ecommerce-conversion-optimization-businesses/`).
 - Instantiating a `SearchConsoleApi` object with the loaded credentials and default Search Console settings.
@@ -114,6 +124,7 @@ Integration tests require valid API credentials, internet access, and access to 
 ## Running the Tests
 
 ### Unit Tests
+
 To run the unit tests for the `SearchConsoleApi` class, use the following command from the root directory of your project:
 
 ```bash
@@ -121,11 +132,13 @@ To run the unit tests for the `SearchConsoleApi` class, use the following comman
 ```
 
 #### Command Breakdown
+
 - `./vendor/bin/phpunit`: Executes the PHPUnit binary installed via Composer.
 - `--verbose`: Enables verbose output, displaying detailed information about each test case, including test names and results.
 - `tests/Unit/Services/SearchConsoleApiTest.php`: Specifies the test file for the `SearchConsoleApi` class.
 
 #### Expected Output
+
 When running the command, you will see output similar to the following (assuming all 17 tests pass):
 
 ```
@@ -145,6 +158,7 @@ OK (17 tests, 78 assertions)
 - With `--verbose`, additional details about each test method (e.g., `testConstructorWithValidParameters`, `testGetSitesSuccess`) will be displayed.
 
 ### Integration Tests
+
 To run the integration tests for the `SearchConsoleApi` class, use the following command from the root directory of your project:
 
 ```bash
@@ -152,11 +166,13 @@ To run the integration tests for the `SearchConsoleApi` class, use the following
 ```
 
 #### Command Breakdown
+
 - `./vendor/bin/phpunit`: Executes the PHPUnit binary installed via Composer.
 - `--verbose`: Enables verbose output, displaying detailed information about each test case.
 - `tests/Integration/Services/SearchConsoleApiLiveTest.php`: Specifies the test file for the `SearchConsoleApi` live tests.
 
 #### Expected Output
+
 When running the command with valid API credentials and access to the test sites, you will see output similar to the following (assuming all 8 tests pass):
 
 ```
@@ -176,9 +192,11 @@ OK (8 tests, 15 assertions)
 - With `--verbose`, details about each test method (e.g., `testGetSites`, `testAddAndRemoveSite`) will be displayed.
 
 ### Troubleshooting
+
 If tests fail, check the following:
 
 #### Unit Tests
+
 - **Dependencies**: Ensure all dependencies are installed (`composer install`) and match the required versions. Verify that `anibalealvarezs/google-api`, `anibalealvarezs/api-client-skeleton`, and `anibalealvarezs/api-skeleton` are correctly installed.
 - **PHP Version**: Confirm PHP 8.1 or higher is used (`php -v`).
 - **Composer Autoloader**: Run `composer dump-autoload` to regenerate the autoloader if classes (e.g., `ApiRequestException`) are not found.
@@ -187,6 +205,7 @@ If tests fail, check the following:
 - **Mock Responses**: Ensure the `MockHandler` responses align with the expected request flow (e.g., token refresh, API calls, sitemap checks). Check test logs for response mismatches.
 
 #### Integration Tests
+
 - **API Credentials**: Verify that Google API credentials (client ID, client secret, refresh token, user ID, redirect URI) are correctly set in your configuration (e.g., `.env` file). Check for typos or missing values.
 - **Site Access**: Ensure the Google account associated with the credentials has access to the test sites (`sc-domain:anibalalvarez.com`, `sc-domain:loquesea.com`) in Google Search Console. If not, update the test data in `SearchConsoleApiLiveTest.php` to use accessible sites.
 - **Sitemap URLs**: Confirm that the sitemap URLs (`https://anibalalvarez.com/sitemap_index.xml`, `https://anibalalvarez.com/geo-sitemap.xml`) are valid and accessible. If they are not, update the test data or ensure the site supports these sitemaps.
@@ -199,6 +218,7 @@ If tests fail, check the following:
 ## Test Coverage
 
 ### Unit Tests
+
 The `SearchConsoleApiTest.php` class, located in `tests/Unit/Services/SearchConsoleApiTest.php`, includes 17 test methods that cover the `SearchConsoleApi` class’s constructor and key public methods for interacting with the Google Search Console API. The tests include:
 
 - **Constructor Validation**:
@@ -233,6 +253,7 @@ The `SearchConsoleApiTest.php` class, located in `tests/Unit/Services/SearchCons
   - `testGuzzleExceptionHandling`: Verifies that API errors (simulated via `GuzzleException`) are wrapped in `ApiRequestException`.
 
 ### Integration Tests
+
 The `SearchConsoleApiLiveTest.php` class, located in `tests/Integration/Services/SearchConsoleApiLiveTest.php`, includes 8 test methods that verify live interactions with the Google Search Console API:
 
 - **Site Management**:
@@ -272,6 +293,7 @@ For integration tests, coverage can be generated similarly:
 This generates reports detailing coverage for the `SearchConsoleApi` class (requires PHPUnit to be configured with coverage reporting). Note that integration test coverage may be limited due to external API dependencies.
 
 ## Additional Notes
+
 - **Mocking (Unit Tests)**: Unit tests use Guzzle’s `MockHandler` to simulate API responses, including token refresh, Search Console API endpoints, and sitemap URL checks (via `Helpers::isSitemapUrl`), ensuring no real network calls are made.
 - **Live API Calls (Integration Tests)**: Integration tests make real HTTP requests to Google APIs, requiring valid credentials, internet access, and access to the specified test sites. Use these tests cautiously in CI/CD environments to avoid rate limiting or credential exposure.
 - **Isolation**: Each test method (unit and integration) is isolated, with the `setUp` method resetting the test environment to prevent state leakage.

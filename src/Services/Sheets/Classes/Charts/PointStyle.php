@@ -13,7 +13,7 @@ class PointStyle implements Jsonable
 {
     public float $size;
     public PointShape|string $shape;
-    
+
     public function __construct(
         float $size,
         PointShape|string $shape = PointShape::POINT_SHAPE_UNSPECIFIED,

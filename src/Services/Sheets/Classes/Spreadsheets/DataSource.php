@@ -11,7 +11,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class DataSource implements Jsonable
 {
     public string $spreadsheetId;
-    
+
     public function __construct(
         string $spreadsheetId,
     ) {

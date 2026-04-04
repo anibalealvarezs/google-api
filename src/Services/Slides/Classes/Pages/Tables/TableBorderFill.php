@@ -12,7 +12,7 @@ use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Pages\Other\SolidFill;
 class TableBorderFill implements Jsonable
 {
     public SolidFill|array $solidFill;
-    
+
     public function __construct(
         SolidFill|array $solidFill,
     ) {

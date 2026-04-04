@@ -14,7 +14,7 @@ class UpdateImagePropertiesRequest implements Jsonable
     public string $objectId;
     public ImageProperties|array $imageProperties;
     public string $fields;
-    
+
     public function __construct(
         string $objectId,
         ImageProperties|array $imageProperties,

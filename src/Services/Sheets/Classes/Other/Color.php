@@ -14,7 +14,7 @@ class Color implements Jsonable
     public float $green;
     public float $blue;
     public float $alpha;
-    
+
     public function __construct(
         float $red = 0.0,
         float $green = 0.0,

@@ -15,7 +15,7 @@ class BulletsList implements Jsonable
 {
     public string $listId;
     public array $nestingLevel; // Keyed NestingLevel elements by nesting level (from 0 to 8): https://developers.google.com/slides/api/reference/rest/v1/presentations.pages/text#Page.NestingLevel
-    
+
     public function __construct(
         string $listId,
         array $nestingLevel = [],

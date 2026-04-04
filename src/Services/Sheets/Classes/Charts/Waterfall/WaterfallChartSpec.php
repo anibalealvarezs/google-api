@@ -28,7 +28,7 @@ class WaterfallChartSpec implements Jsonable
     public WaterfallChartStackedType|string $stackedType;
     public bool $firstValueIsTotal;
     public bool $hideConnectorLines;
-    
+
     public function __construct(
         WaterfallChartDomain|array $domain,
         array $series,

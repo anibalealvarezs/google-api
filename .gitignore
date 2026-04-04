@@ -3,3 +3,8 @@
 /config/config.yaml
 /api-skeleton/
 /.phpunit.result.cache
+/.vscode/
+/bin/
+/config/google_tokens.json
+/scripts/
+/tmp/

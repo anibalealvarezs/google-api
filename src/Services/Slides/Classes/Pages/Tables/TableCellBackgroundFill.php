@@ -16,7 +16,7 @@ class TableCellBackgroundFill implements Jsonable
 {
     public SolidFill|array $solidFill;
     public PropertyState|string $propertyState;
-    
+
     public function __construct(
         SolidFill|array $solidFill,
         PropertyState|string $propertyState = PropertyState::RENDERED

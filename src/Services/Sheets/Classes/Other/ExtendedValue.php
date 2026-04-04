@@ -16,7 +16,7 @@ class ExtendedValue implements Jsonable
     public int|float|null $numberValue;
     public readonly ErrorValue|array|null $errorValue;
     public ?bool $boolValue;
-    
+
     public function __construct(
         ?string $stringValue = null,
         ?string $formulaValue = null,

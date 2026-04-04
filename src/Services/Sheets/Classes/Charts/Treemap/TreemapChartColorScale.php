@@ -15,7 +15,7 @@ class TreemapChartColorScale implements Jsonable
     public ColorStyle|array|null $midValueColorStyle;
     public ColorStyle|array|null $maxValueColorStyle;
     public ColorStyle|array|null $noDataColorStyle;
-    
+
     public function __construct(
         ColorStyle|array|null $minValueColorStyle = null, // Default: #dc3912
         ColorStyle|array|null $midValueColorStyle = null, // Default: #efe6dc

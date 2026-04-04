@@ -22,7 +22,7 @@ class Shadow implements Jsonable
     public float $alpha;
     public readonly bool $rotateWithShape;
     public PropertyState|string $propertyState;
-    
+
     public function __construct(
         AffineTransform|array|null $transform = null,
         Dimension|array|null $blurRadius = null,

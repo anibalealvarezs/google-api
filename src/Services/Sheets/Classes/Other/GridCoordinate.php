@@ -13,7 +13,7 @@ class GridCoordinate implements Jsonable
     public int $sheetId;
     public int $rowIndex;
     public int $columnIndex;
-    
+
     public function __construct(
         int $sheetId,
         int $rowIndex,

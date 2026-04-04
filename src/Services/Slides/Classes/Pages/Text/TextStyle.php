@@ -25,7 +25,7 @@ class TextStyle implements Jsonable
     public bool $strikethrough;
     public bool $underline;
     public WeightedFontFamily|array|null $weightedFontFamily;
-    
+
     public function __construct(
         OptionalColor|array|null $backgroundColor = null,
         OptionalColor|array|null $foregroundColor = null,

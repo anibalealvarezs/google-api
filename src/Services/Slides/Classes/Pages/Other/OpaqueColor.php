@@ -14,14 +14,14 @@ class OpaqueColor implements Jsonable
 {
     public RgbColor|array|null $rgbColor;
     public ThemeColorType|string|null $themeColor;
-    
+
     public function __construct(
         RgbColor|array|null $rgbColor = null,
         ThemeColorType|string|null $themeColor = ThemeColorType::DARK1
     ) {
         $this->rgbColor = $this->arrayToObject(class: RgbColor::class, var: $rgbColor);
         $this->themeColor = $this->stringToEnum(enum: ThemeColorType::class, var: $themeColor);
-        
+
         $this->keepOneOfKind([
             'rgbColor',
             'themeColor'

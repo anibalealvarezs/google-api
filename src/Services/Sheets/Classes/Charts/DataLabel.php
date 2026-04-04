@@ -17,7 +17,7 @@ class DataLabel implements Jsonable
     public ChartData|array $customLabelData;
     public DataLabelType|string $type;
     public DataLabelPlacement|string $placement;
-    
+
     public function __construct(
         TextFormat|array $textFormat,
         ChartData|array $customLabelData,

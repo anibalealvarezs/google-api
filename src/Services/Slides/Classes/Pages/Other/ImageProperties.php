@@ -23,7 +23,7 @@ class ImageProperties implements Jsonable
     public readonly Outline|array|null $outline;
     public readonly Shadow|array|null $shadow;
     public Link|array|null $link;
-    
+
     public function __construct(
         CropProperties|array|null $cropProperties = null,
         float $transparency = 0,

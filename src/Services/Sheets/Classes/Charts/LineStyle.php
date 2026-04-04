@@ -13,7 +13,7 @@ class LineStyle implements Jsonable
 {
     public int $width;
     public LineDashType|string $type;
-    
+
     public function __construct(
         int $width,
         LineDashType|string $type = LineDashType::SOLID,

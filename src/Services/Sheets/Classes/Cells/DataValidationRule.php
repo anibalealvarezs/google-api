@@ -15,7 +15,7 @@ class DataValidationRule implements Jsonable
     public string $inputMessage;
     public bool $strict;
     public bool $showCustomUi;
-    
+
     public function __construct(
         BooleanCondition|array $condition,
         string $inputMessage,

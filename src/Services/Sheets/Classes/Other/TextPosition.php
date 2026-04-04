@@ -12,7 +12,7 @@ use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Other\HorizontalAlign;
 class TextPosition implements Jsonable
 {
     public HorizontalAlign|string $horizontalAlignment;
-    
+
     public function __construct(
         HorizontalAlign|string $horizontalAlignment = HorizontalAlign::CENTER
     ) {

@@ -16,7 +16,7 @@ class UpdateTableCellPropertiesRequest implements Jsonable
     public TableCellProperties|array $tableCellProperties;
     public string $fields;
     public TableRange|array|null $tableRange;
-    
+
     public function __construct(
         string $objectId,
         TableCellProperties|array $tableCellProperties,

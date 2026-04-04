@@ -16,7 +16,7 @@ class CreateSlideRequest implements Jsonable
     public ?int $index;
     public LayoutReference|array|null $slideLayoutReference;
     public LayoutPlaceholderIdMapping|array|null $placeholderIdMappings;
-    
+
     public function __construct(
         ?string $objectId = null,
         ?int $index = null,

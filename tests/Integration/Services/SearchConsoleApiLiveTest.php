@@ -2,6 +2,7 @@
 
 namespace Tests\Integration\Services;
 
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
 use Anibalealvarezs\GoogleApi\Services\SearchConsole\SearchConsoleApi;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
@@ -23,6 +24,15 @@ class SearchConsoleApiLiveTest extends TestCase
     {
         $config = app_config();
 
+        if (
+            empty($config['google_client_id']) || 
+            str_contains($config['google_client_id'], 'YOUR_') ||
+            empty($config['google_refresh_token']) ||
+            str_contains($config['google_refresh_token'], 'YOUR_')
+        ) {
+            $this->markTestSkipped('Google credentials not available or using placeholders.');
+        }
+
         $this->testSiteUrl = $config['search_console_test_site_url'];
         $this->testRemovableSiteUrl = $config['search_console_test_removable_site_url'];
         $this->testSitemapUrl = $config['search_console_test_sitemap_url'];
@@ -33,9 +43,10 @@ class SearchConsoleApiLiveTest extends TestCase
             redirectUrl: $config['google_redirect_uri'],
             clientId: $config['google_client_id'],
             clientSecret: $config['google_client_secret'],
-            refreshToken: $config['google_refresh_token'],
+            refreshToken: !empty($config['search_console_refresh_token']) ? $config['search_console_refresh_token'] : $config['google_refresh_token'],
             userId: $config['google_user_id'],
-            scopes: [$config['search_console_scope']],
+            scopes: Helpers::parseScopes($config['search_console_scope'] ?? $config['google_scope'] ?? null, ['https://www.googleapis.com/auth/webmasters']),
+            token: !empty($config['search_console_token']) ? $config['search_console_token'] : ($config['google_token'] ?? ''),
         );
     }
 

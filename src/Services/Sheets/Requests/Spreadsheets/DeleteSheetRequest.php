@@ -11,7 +11,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class DeleteSheetRequest implements Jsonable
 {
     public int $sheetId;
-    
+
     public function __construct(
         int $sheetId
     ) {

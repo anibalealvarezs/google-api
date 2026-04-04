@@ -13,7 +13,7 @@ class EmbeddedObjectPosition implements Jsonable
     public ?int $sheetId;
     public OverlayPosition|array|null $overlayPosition;
     public ?bool $newSheet;
-    
+
     public function __construct(
         ?int $sheetId = null,
         OverlayPosition|array|null $overlayPosition = null,

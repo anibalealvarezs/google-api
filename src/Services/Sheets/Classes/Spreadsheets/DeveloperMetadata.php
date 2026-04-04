@@ -16,7 +16,7 @@ class DeveloperMetadata implements Jsonable
     public string $metadataValue;
     public DeveloperMetadataLocation|array $location;
     public DeveloperMetadataVisibility|string $visibility;
-    
+
     public function __construct(
         int $metadataId,
         string $metadataKey,

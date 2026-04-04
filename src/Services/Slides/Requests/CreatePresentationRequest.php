@@ -32,7 +32,7 @@ class CreatePresentationRequest implements Jsonable
     public ?string $locale;
     public ?string $revisionId;
     public readonly Page|array|null $notesMaster;
-    
+
     public function __construct(
         ?string $presentationId = null,
         Size|array|null $pageSize = null,

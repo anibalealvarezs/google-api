@@ -14,7 +14,7 @@ class FilterCriteria implements Jsonable
     public ColorStyle|array $visibleBackgroundColorStyle;
     public ColorStyle|array $visibleForegroundColorStyle;
     public array $hiddenValues;
-    
+
     public function __construct(
         BooleanCondition|array $condition,
         ColorStyle|array $visibleBackgroundColorStyle,

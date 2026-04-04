@@ -19,7 +19,7 @@ class ProtectedRange implements Jsonable
     public Editors|array $editors;
     public bool $warningOnly;
     public readonly bool $requestingUserCanEdit;
-    
+
     public function __construct(
         int $protectedRangeId,
         GridRange|array $range,

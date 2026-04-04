@@ -16,7 +16,7 @@ class VideoProperties implements Jsonable
     public ?int $start;
     public ?int $end;
     public bool $mute;
-    
+
     public function __construct(
         Outline|array $outline,
         bool $autoPlay = false,

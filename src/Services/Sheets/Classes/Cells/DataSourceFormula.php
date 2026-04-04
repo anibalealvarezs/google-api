@@ -13,7 +13,7 @@ class DataSourceFormula implements Jsonable
 {
     public string $dataSourceId;
     public readonly DataExecutionStatus|array $dataExecutionStatus;
-    
+
     public function __construct(
         string $dataSourceId,
         DataExecutionStatus|array $dataExecutionStatus,

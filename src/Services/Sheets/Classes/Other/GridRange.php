@@ -15,7 +15,7 @@ class GridRange implements Jsonable
     public ?int $endRowIndex;
     public ?int $startColumnIndex;
     public ?int $endColumnIndex;
-    
+
     public function __construct(
         int $sheetId,
         ?int $startRowIndex = null,

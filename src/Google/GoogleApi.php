@@ -3,11 +3,15 @@
 namespace Anibalealvarezs\GoogleApi\Google;
 
 use Anibalealvarezs\ApiSkeleton\Clients\OAuthV2Client;
+use Anibalealvarezs\GoogleApi\Google\Exceptions\GoogleQuotaExceededException;
 use Exception;
 use GuzzleHttp\Client;
 
 class GoogleApi extends OAuthV2Client
 {
+    protected string $tokenPath = "";
+    protected string $tokenIdentifier = "";
+
     /**
      * @param string $baseUrl
      * @param string $redirectUrl
@@ -18,6 +22,8 @@ class GoogleApi extends OAuthV2Client
      * @param array $scopes
      * @param string $token
      * @param Client|null $guzzleClient
+     * @param string $tokenPath
+     * @param string $tokenIdentifier
      * @throws Exception
      */
     public function __construct(
@@ -29,9 +35,23 @@ class GoogleApi extends OAuthV2Client
         string $userId,
         array $scopes = [],
         string $token = "",
-        ?Client $guzzleClient = null
+        ?Client $guzzleClient = null,
+        string $tokenPath = "",
+        string $tokenIdentifier = ""
     ) {
-        return parent::__construct(
+        $this->tokenPath = $tokenPath;
+        $this->tokenIdentifier = $tokenIdentifier ?: ($refreshToken ? 'RefreshToken_' . substr(md5($refreshToken), 0, 16) : "");
+
+        // Load token from storage if not provided
+        if (!$token && $this->tokenPath && file_exists($this->tokenPath)) {
+            $data = json_decode(json: (string) file_get_contents($this->tokenPath), associative: true);
+            $serviceKey = $this->getServiceKey();
+            if (isset($data[$userId][$serviceKey])) {
+                $token = $data[$userId][$serviceKey];
+            }
+        }
+
+        parent::__construct(
             baseUrl: $baseUrl,
             authUrl: "https://accounts.google.com/o/oauth2/auth",
             tokenUrl: "https://oauth2.googleapis.com/token",
@@ -52,5 +72,74 @@ class GoogleApi extends OAuthV2Client
             token: $token,
             guzzleClient: $guzzleClient,
         );
+
+        $this->setResponseErrorDetector('error');
+        $this->setErrorMessageParser(fn ($data) => $data['error']['message'] ?? json_encode($data));
+    }
+
+    /**
+     * @param string $token
+     * @return void
+     */
+    public function setToken(string $token): void
+    {
+        parent::setToken($token);
+
+        if ($this->tokenPath && $token) {
+            $this->persistToken($token);
+        }
+    }
+
+    /**
+     * @param string $token
+     * @return void
+     */
+    protected function persistToken(string $token): void
+    {
+        $data = [];
+        if (file_exists($this->tokenPath)) {
+            $data = json_decode(json: (string) file_get_contents($this->tokenPath), associative: true) ?: [];
+        }
+
+        $userId = $this->getUserId();
+        if (!isset($data[$userId]) || !is_array($data[$userId])) {
+            $data[$userId] = [];
+        }
+
+        $data[$userId][$this->getServiceKey()] = $token;
+
+        // Ensure directory exists
+        $dir = dirname($this->tokenPath);
+        if (!is_dir($dir)) {
+            mkdir(directory: $dir, permissions: 0755, recursive: true);
+        }
+
+        file_put_contents(filename: $this->tokenPath, data: json_encode(value: $data, flags: JSON_PRETTY_PRINT));
+    }
+
+    /**
+     * @return string
+     */
+    protected function getServiceKey(): string
+    {
+        return $this->tokenIdentifier ?: str_replace('Anibalealvarezs\\GoogleApi\\', '', get_class($this));
+    }
+
+    /**
+     * @param Exception $exception
+     * @param mixed $onFailure
+     * @return mixed
+     * @throws Exception
+     */
+    protected function handleException(Exception $exception, mixed $onFailure = null): mixed
+    {
+        if (
+            str_contains(strtolower($exception->getMessage()), 'quota exceeded')
+            || str_contains(strtolower($exception->getMessage()), 'rate limit exceeded')
+        ) {
+            throw new GoogleQuotaExceededException($exception->getMessage(), $exception->getCode(), $exception);
+        }
+
+        return parent::handleException($exception, $onFailure);
     }
 }

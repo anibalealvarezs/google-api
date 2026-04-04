@@ -13,7 +13,7 @@ class TextFormatRun implements Jsonable
 {
     public int $startIndex;
     public TextFormat|array|null $format;
-    
+
     public function __construct(
         int $startIndex,
         TextFormat|array|null $format = null,

@@ -15,7 +15,7 @@ class CreateShapeRequest implements Jsonable
     public PageElementProperties|array $elementProperties;
     public Type|string $shapeType;
     public ?string $objectId;
-    
+
     public function __construct(
         PageElementProperties|array $elementProperties,
         Type|string $shapeType = Type::RECTANGLE,

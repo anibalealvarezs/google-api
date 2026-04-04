@@ -13,7 +13,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class ColorScheme implements Jsonable
 {
     public array $colors;
-    
+
     public function __construct(
         array $colors,
     ) {

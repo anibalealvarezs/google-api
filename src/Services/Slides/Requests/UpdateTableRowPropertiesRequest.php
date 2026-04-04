@@ -20,7 +20,7 @@ class UpdateTableRowPropertiesRequest implements Jsonable
     public array $rowIndices;
     public TableRowProperties|array $tableRowProperties;
     public string $fields;
-    
+
     public function __construct(
         string $objectId,
         array $rowIndices,
@@ -34,8 +34,8 @@ class UpdateTableRowPropertiesRequest implements Jsonable
         $formattedRowIndices = [];
         if ($rowIndices) {
             foreach ($rowIndices as $rowIndex) {
-                if(is_nan($rowIndex)) {
-                    throw new \Exception("Invalid value for row index");                    
+                if (is_nan($rowIndex)) {
+                    throw new \Exception("Invalid value for row index");
                 }
                 $formattedRowIndices[] = (int) $rowIndex;
             }

@@ -14,7 +14,7 @@ class PivotFilterCriteria implements Jsonable
     public array $visibleValues;
     public BooleanCondition|array|null $condition;
     public bool $visibleByDefault;
-    
+
     public function __construct(
         array $visibleValues = [],
         BooleanCondition|array|null $condition = null,

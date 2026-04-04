@@ -13,7 +13,7 @@ class Editors implements Jsonable
     public array $users;
     public array $groups;
     public bool $domainUsersCanEdit;
-    
+
     public function __construct(
         array $users,
         array $groups,

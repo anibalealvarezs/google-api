@@ -12,7 +12,7 @@ use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\DimensionRange;
 class DeleteDimensionRequest implements Jsonable
 {
     public DimensionRange|array|null $range;
-    
+
     public function __construct(
         DimensionRange|array|null $range = null,
     ) {

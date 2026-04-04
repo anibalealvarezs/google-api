@@ -3,6 +3,7 @@
 namespace Anibalealvarezs\GoogleApi\Services\Gmail;
 
 use Anibalealvarezs\GoogleApi\Google\GoogleApi;
+use Anibalealvarezs\GoogleApi\Google\Helpers\Helpers;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -15,8 +16,9 @@ class GmailApi extends GoogleApi
      * @param string $clientSecret
      * @param string $refreshToken
      * @param string $userId
-     * @param array $scopes
+     * @param string $token
      * @param Client|null $guzzleClient
+     * @param string $tokenPath
      * @throws Exception
      */
     public function __construct(
@@ -25,8 +27,10 @@ class GmailApi extends GoogleApi
         string $clientSecret,
         string $refreshToken,
         string $userId,
-        array $scopes = [],
-        ?Client $guzzleClient = null
+        string|array $scopes = [],
+        string $token = "",
+        ?Client $guzzleClient = null,
+        string $tokenPath = ""
     ) {
         parent::__construct(
             baseUrl: "https://gmail.googleapis.com/gmail/v1/",
@@ -35,8 +39,10 @@ class GmailApi extends GoogleApi
             clientSecret: $clientSecret,
             refreshToken: $refreshToken,
             userId: $userId,
-            scopes: ($scopes ?: ["https://www.googleapis.com/auth/gmail.modify"]),
+            scopes: Helpers::parseScopes($scopes, ["https://www.googleapis.com/auth/gmail.modify"]),
+            token: $token,
             guzzleClient: $guzzleClient,
+            tokenPath: $tokenPath,
         );
     }
 
@@ -244,8 +250,7 @@ class GmailApi extends GoogleApi
      */
     public function hasTextBody(
         object $message
-    ): bool
-    {
+    ): bool {
         return !empty($message->text);
     }
 
@@ -376,8 +381,7 @@ class GmailApi extends GoogleApi
      */
     public function replaceChars(
         string $data
-    ): string
-    {
+    ): string {
         $data = base64_decode(str_replace(array('-', '_'), array('+', '/'), $data));
         //from php.net/manual/es/function.base64-decode.php#118244
 
@@ -390,8 +394,7 @@ class GmailApi extends GoogleApi
      */
     public function gmailBodyDecode(
         string $data
-    ): string|bool
-    {
+    ): string|bool {
         $data = $this->replaceChars(data: $data);
         //from php.net/manual/es/function.base64-decode.php#118244
 

@@ -14,7 +14,7 @@ class Range implements Jsonable
     public ?int $startIndex;
     public ?int $endIndex;
     public RangeType|string $type;
-    
+
     public function __construct(
         ?int $startIndex = null,
         ?int $endIndex = null,

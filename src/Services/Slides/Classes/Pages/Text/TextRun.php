@@ -12,7 +12,7 @@ class TextRun implements Jsonable
 {
     public string $content;
     public TextStyle|array $style;
-    
+
     public function __construct(
         string $content,
         TextStyle|array $style,

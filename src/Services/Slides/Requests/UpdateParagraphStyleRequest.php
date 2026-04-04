@@ -18,9 +18,9 @@ class UpdateParagraphStyleRequest implements Jsonable
     public TableCellLocation|array|null $cellLocation;
     public Range|array|null $textRange;
     public string $fields;
-    
+
     public function __construct(
-        string $objectId,        
+        string $objectId,
         ParagraphStyle|array $style,
         TableCellLocation|array|null $cellLocation = null,
         Range|array|null $textRange = null,

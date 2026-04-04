@@ -14,7 +14,7 @@ class DataSourceSheetProperties implements Jsonable
     public string $dataSourceId;
     public array $columns;
     public DataExecutionStatus|array $dataExecutionStatus;
-    
+
     public function __construct(
         string $dataSourceId,
         array $columns,

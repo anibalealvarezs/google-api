@@ -14,7 +14,7 @@ class BooleanRule implements Jsonable
 {
     public BooleanCondition|array $condition;
     public CellFormat|array $format;
-    
+
     public function __construct(
         BooleanCondition|array $condition,
         CellFormat|array $format,

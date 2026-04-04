@@ -13,7 +13,7 @@ class ConditionValue implements Jsonable
 {
     public RelativeDate|string|null $relativeDate;
     public ?string $userEnteredValue;
-    
+
     public function __construct(
         RelativeDate|string|null $relativeDate = null,
         ?string $userEnteredValue = null,

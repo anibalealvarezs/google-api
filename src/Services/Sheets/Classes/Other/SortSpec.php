@@ -16,7 +16,7 @@ class SortSpec implements Jsonable
     public SortOrder $sortOrder;
     public ?int $dimensionIndex;
     public DataSourceColumnReference|array|null $dataSourceColumnReference;
-    
+
     public function __construct(
         ColorStyle|array $foregroundColorStyle,
         ColorStyle|array $backgroundColorStyle,

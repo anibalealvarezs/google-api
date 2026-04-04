@@ -18,7 +18,7 @@ class TableRow implements Jsonable
     public Dimension|array $rowHeight;
     public TableRowProperties|array $tableRowProperties;
     public array $tableCells;
-    
+
     public function __construct(
         Dimension|array $rowHeight,
         TableRowProperties|array $tableRowProperties,

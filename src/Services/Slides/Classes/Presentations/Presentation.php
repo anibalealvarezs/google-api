@@ -31,7 +31,7 @@ class Presentation implements Jsonable
     public ?string $locale;
     public Page|array|null $notesMaster;
     public ?string $revisionId;
-    
+
     public function __construct(
         string $presentationId,
         Size|array $pageSize,

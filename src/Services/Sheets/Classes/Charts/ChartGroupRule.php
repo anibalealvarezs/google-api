@@ -12,7 +12,7 @@ class ChartGroupRule implements Jsonable
 {
     public ChartDateTimeRule|array|null $dateTimeRule;
     public ChartHistogramRule|array|null $histogramRule;
-    
+
     public function __construct(
         ChartDateTimeRule|array|null $dateTimeRule = null,
         ChartHistogramRule|array|null $histogramRule = null,

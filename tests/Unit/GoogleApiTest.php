@@ -276,4 +276,100 @@ class GoogleApiTest extends TestCase
         $this->assertEquals($this->scopes, $client->getScopes());
         $this->assertEquals($this->token, $client->getToken());
     }
+
+    /**
+     * @throws Exception
+     */
+    public function testTokenPersistence(): void
+    {
+        $tokenPath = __DIR__ . '/token_test.json';
+        if (file_exists($tokenPath)) {
+            unlink($tokenPath);
+        }
+
+        $newToken = 'new-access-token';
+
+        $client = new GoogleApi(
+            baseUrl: $this->baseUrl,
+            redirectUrl: $this->redirectUrl,
+            clientId: $this->clientId,
+            clientSecret: $this->clientSecret,
+            refreshToken: $this->refreshToken,
+            userId: $this->userId,
+            scopes: $this->scopes,
+            tokenPath: $tokenPath
+        );
+
+        $client->setToken($newToken);
+
+        $this->assertFileExists($tokenPath);
+        $data = json_decode(json: (string) file_get_contents($tokenPath), associative: true);
+        $expectedKey = 'RefreshToken_' . substr(md5($this->refreshToken), 0, 16);
+        $this->assertEquals($newToken, $data[$this->userId][$expectedKey]);
+
+        // Test loading
+        $newClient = new GoogleApi(
+            baseUrl: $this->baseUrl,
+            redirectUrl: $this->redirectUrl,
+            clientId: $this->clientId,
+            clientSecret: $this->clientSecret,
+            refreshToken: $this->refreshToken,
+            userId: $this->userId,
+            scopes: $this->scopes,
+            tokenPath: $tokenPath
+        );
+
+        $this->assertEquals($newToken, $newClient->getToken());
+
+        unlink($tokenPath);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testTokenLoadingFromFileAndNoRefresh(): void
+    {
+        $tokenPath = __DIR__ . '/token_load_test.json';
+        $storedToken = 'stored-token-from-file';
+        $expectedKey = 'RefreshToken_' . substr(md5($this->refreshToken), 0, 16);
+        file_put_contents($tokenPath, json_encode([$this->userId => [$expectedKey => $storedToken]], JSON_PRETTY_PRINT));
+
+        // Mock a single successful API response
+        $mock = new MockHandler([
+            new \GuzzleHttp\Psr7\Response(200, [], json_encode(['success' => true]))
+        ]);
+        $container = [];
+        $history = \GuzzleHttp\Middleware::history($container);
+        $handlerStack = HandlerStack::create($mock);
+        $handlerStack->push($history);
+        $guzzleClient = new GuzzleClient(['handler' => $handlerStack]);
+
+        $client = new GoogleApi(
+            baseUrl: $this->baseUrl,
+            redirectUrl: $this->redirectUrl,
+            clientId: $this->clientId,
+            clientSecret: $this->clientSecret,
+            refreshToken: $this->refreshToken,
+            userId: $this->userId,
+            scopes: $this->scopes,
+            guzzleClient: $guzzleClient,
+            tokenPath: $tokenPath
+        );
+
+        // 1. Verify token was correctly loaded on instantiation
+        $this->assertEquals($storedToken, $client->getToken());
+
+        // 2. Perform a request
+        $client->performRequest('GET', '/test-endpoint');
+
+        // 3. Verify exactly 1 request was made (no refresh request)
+        $this->assertCount(1, $container);
+        $request = $container[0]['request'];
+
+        // 4. Verify the request used the token from the file
+        $this->assertEquals('Bearer ' . $storedToken, $request->getHeaderLine('Authorization'));
+        $this->assertStringContainsString('/test-endpoint', (string) $request->getUri());
+
+        unlink($tokenPath);
+    }
 }

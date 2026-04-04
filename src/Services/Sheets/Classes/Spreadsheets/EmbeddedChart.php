@@ -17,7 +17,7 @@ class EmbeddedChart implements Jsonable
     public ChartSpec|array $spec;
     public EmbeddedObjectPosition|array $position;
     public EmbeddedObjectBorder|array|null $border;
-    
+
     public function __construct(
         int $chartId,
         ChartSpec|array $spec,

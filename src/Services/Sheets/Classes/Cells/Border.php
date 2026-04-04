@@ -14,12 +14,10 @@ class Border implements Jsonable
 {
     public ColorStyle|array $colorStyle;
     public Style|string $style;
-    
+
     public function __construct(
         ColorStyle|array $colorStyle,
-        Style|string $style = Style::SOLID,
-        mixed $width = null,
-        mixed $color = null,
+        Style|string $style = Style::SOLID
     ) {
         $this->colorStyle = $this->arrayToObject(class: ColorStyle::class, var: $colorStyle);
         $this->style = $this->stringToEnum(enum: Style::class, var: $style);

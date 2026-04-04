@@ -13,7 +13,7 @@ class ColorStop implements Jsonable
     public OpaqueColor|array $color;
     public float $alpha;
     public float $position;
-    
+
     public function __construct(
         OpaqueColor|array $color,
         float $alpha = 1.0,

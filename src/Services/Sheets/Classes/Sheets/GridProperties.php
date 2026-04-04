@@ -17,7 +17,7 @@ class GridProperties implements Jsonable
     public bool $hideGridlines;
     public bool $rowGroupControlAfter;
     public bool $columnGroupControlAfter;
-    
+
     public function __construct(
         int $rowCount = 1000,
         int $columnCount = 26,

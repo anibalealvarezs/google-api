@@ -23,10 +23,11 @@ class SearchConsoleApi extends GoogleApi
      * @param string $clientSecret
      * @param string $refreshToken
      * @param string $userId
-     * @param array $scopes
+     * @param string|array $scopes
      * @param string $token
      * @param Client|null $guzzleClient
      * @param Client|null $defaultSitemapClient
+     * @param string $tokenPath
      * @throws Exception
      */
     public function __construct(
@@ -35,10 +36,11 @@ class SearchConsoleApi extends GoogleApi
         string $clientSecret,
         string $refreshToken,
         string $userId,
-        array $scopes = [],
+        string|array $scopes = [],
         string $token = "",
         ?Client $guzzleClient = null,
-        ?Client $defaultSitemapClient = null
+        ?Client $defaultSitemapClient = null,
+        string $tokenPath = ""
     ) {
         parent::__construct(
             baseUrl: "https://www.googleapis.com/webmasters/v3/",
@@ -47,9 +49,10 @@ class SearchConsoleApi extends GoogleApi
             clientSecret: $clientSecret,
             refreshToken: $refreshToken,
             userId: $userId,
-            scopes: ($scopes ?: ["https://www.googleapis.com/auth/webmasters"]),
+            scopes: Helpers::parseScopes($scopes, ["https://www.googleapis.com/auth/webmasters"]),
             token: $token,
             guzzleClient: $guzzleClient,
+            tokenPath: $tokenPath,
         );
         $this->setDefaultSitemapClient($defaultSitemapClient);
     }
@@ -84,11 +87,12 @@ class SearchConsoleApi extends GoogleApi
      * @param DataState $dataState
      * @param array|null $dimensions
      * @param string|null $type
-     * @param DimensionFilterGroup[]|null $dimensionFilterGroups
+     * @param array<int, DimensionFilterGroup|array>|null $dimensionFilterGroups
      * @param AggregationType $aggregationType
      * @return array
      * @throws GuzzleException
      * @throws Exception
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/searchanalytics/query
      */
     public function getSearchQueryResults(
         string $siteUrl,
@@ -98,7 +102,7 @@ class SearchConsoleApi extends GoogleApi
         int $startRow = 0,
         DataState $dataState = DataState::ALL,
         ?array $dimensions = null,
-        string $type = null,
+        ?string $type = null,
         ?array $dimensionFilterGroups = null,
         AggregationType $aggregationType = AggregationType::AUTO,
     ): array {
@@ -121,19 +125,23 @@ class SearchConsoleApi extends GoogleApi
         }
         if ($dimensionFilterGroups) {
             $groups = [];
-            foreach($dimensionFilterGroups as $dimensionFilterGroup) {
-                if (!empty($dimensionFilterGroup["filters"])) {
-                    $groups[] = Helpers::getJsonableArray(new DimensionFilterGroup(
-                        filters: $dimensionFilterGroup["filters"],
-                        groupType: $dimensionFilterGroup["groupType"] ?? GroupType::AND,
-                    ));
+            foreach ($dimensionFilterGroups as $dimensionFilterGroup) {
+                if ($dimensionFilterGroup instanceof DimensionFilterGroup) {
+                    if (!empty($dimensionFilterGroup->filters)) {
+                        $groups[] = Helpers::getJsonableArray($dimensionFilterGroup);
+                    }
+                } elseif (is_array($dimensionFilterGroup)) {
+                    if (!empty($dimensionFilterGroup["filters"])) {
+                        $groups[] = Helpers::getJsonableArray(new DimensionFilterGroup(
+                            filters: $dimensionFilterGroup["filters"],
+                            groupType: $dimensionFilterGroup["groupType"] ?? GroupType::AND,
+                        ));
+                    }
                 }
             }
             $request["dimensionFilterGroups"] = $groups;
         }
-        if ($aggregationType) {
-            $request["aggregationType"] = $aggregationType->value;
-        }
+        $request["aggregationType"] = $aggregationType->value;
         // Request the spreadsheet data
         $response = $this->performRequest(
             method: "POST",
@@ -153,10 +161,11 @@ class SearchConsoleApi extends GoogleApi
      * @param DataState $dataState
      * @param array|null $dimensions
      * @param string|null $type
-     * @param DimensionFilterGroup[]|null $dimensionFilterGroups
+     * @param array<int, DimensionFilterGroup|array>|null $dimensionFilterGroups
      * @param AggregationType $aggregationType
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/searchanalytics/query
      */
     public function getAllSearchQueryResults(
         string $siteUrl,
@@ -166,7 +175,7 @@ class SearchConsoleApi extends GoogleApi
         int $startRow = 0,
         DataState $dataState = DataState::ALL,
         ?array $dimensions = null,
-        string $type = null,
+        ?string $type = null,
         ?array $dimensionFilterGroups = null,
         AggregationType $aggregationType = AggregationType::AUTO,
     ): array {
@@ -198,6 +207,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sites/list
      */
     public function getSites(): array
     {
@@ -210,6 +220,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sites/get
      */
     public function getSite(string $siteUrl): array
     {
@@ -226,6 +237,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sites/add
      */
     public function addSite(string $siteUrl): array
     {
@@ -242,6 +254,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sites/delete
      */
     public function removeSite(string $siteUrl): array
     {
@@ -258,6 +271,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sitemaps/list
      */
     public function getSitemaps(string $siteUrl): array
     {
@@ -274,6 +288,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sitemaps/get
      */
     public function getSitemap(string $siteUrl, string $sitemap): array
     {
@@ -290,6 +305,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sitemaps/submit
      */
     public function addSitemap(string $siteUrl, string $sitemap, ?Client $client = null): array
     {
@@ -310,6 +326,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/sitemaps/delete
      */
     public function removeSitemap(string $siteUrl, string $sitemap): array
     {
@@ -326,6 +343,7 @@ class SearchConsoleApi extends GoogleApi
 
     /**
      * @throws GuzzleException
+     * @link https://developers.google.com/search-console/api/reference/rest/v1/urlInspection.index/inspect
      */
     public function inspectUrl(string $siteUrl, string $url, string $languageCode = "en-US"): array
     {

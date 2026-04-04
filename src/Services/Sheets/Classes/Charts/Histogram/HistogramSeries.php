@@ -14,7 +14,7 @@ class HistogramSeries implements Jsonable
 {
     public ColorStyle|array $barColorStyle;
     public ChartData|array $data;
-    
+
     public function __construct(
         ColorStyle|array $barColorStyle,
         ChartData|array $data

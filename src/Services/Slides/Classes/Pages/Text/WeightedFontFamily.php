@@ -12,7 +12,7 @@ class WeightedFontFamily implements Jsonable
 {
     public ?string $fontFamily;
     public int $weight;
-    
+
     public function __construct(
         string $fontFamily = 'Arial',
         int $weight = 400,

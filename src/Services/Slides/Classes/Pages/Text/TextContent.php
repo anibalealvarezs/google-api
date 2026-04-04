@@ -15,7 +15,7 @@ class TextContent implements Jsonable
 {
     public array $textElements;
     public array $lists; // Keyed List elements by list ID: https://developers.google.com/slides/api/reference/rest/v1/presentations.pages/text#Page.List
-    
+
     public function __construct(
         array $textElements,
         array $lists = [],

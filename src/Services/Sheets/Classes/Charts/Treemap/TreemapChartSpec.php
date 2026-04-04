@@ -24,8 +24,8 @@ class TreemapChartSpec implements Jsonable
     public ?int $hintedLevels;
     public ?float $minValue;
     public ?float $maxValue;
-    public float $hideTooltips;
-    
+    public bool $hideTooltips;
+
     public function __construct(
         ChartData|array $labels,
         ChartData|array $parentLabels,
@@ -38,7 +38,7 @@ class TreemapChartSpec implements Jsonable
         ?int $hintedLevels = null,
         ?float $minValue = null,
         ?float $maxValue = null,
-        float $hideTooltips = false,
+        bool $hideTooltips = false,
     ) {
         $this->labels = $this->arrayToObject(class: ChartData::class, var: $labels);
         $this->parentLabels = $this->arrayToObject(class: ChartData::class, var: $parentLabels);

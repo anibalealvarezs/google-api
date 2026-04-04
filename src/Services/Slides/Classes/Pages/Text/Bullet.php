@@ -14,7 +14,7 @@ class Bullet implements Jsonable
     public TextStyle|array $bulletStyle;
     public ?string $glyph;
     public ?int $nestingLevel;
-    
+
     public function __construct(
         string $listId,
         TextStyle|array $bulletStyle,

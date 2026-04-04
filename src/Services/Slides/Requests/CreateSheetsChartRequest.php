@@ -17,7 +17,7 @@ class CreateSheetsChartRequest implements Jsonable
     public int $chartId;
     public LinkingMode|string $linkingMode;
     public ?string $objectId;
-    
+
     public function __construct(
         PageElementProperties|array $elementProperties,
         string $spreadsheetId,

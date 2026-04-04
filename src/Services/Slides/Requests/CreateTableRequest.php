@@ -15,7 +15,7 @@ class CreateTableRequest implements Jsonable
     public int $rows;
     public int $columns;
     public string $objectId;
-    
+
     public function __construct(
         PageElementProperties|array $elementProperties,
         int $rows,

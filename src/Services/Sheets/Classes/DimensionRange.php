@@ -15,7 +15,7 @@ class DimensionRange implements Jsonable
     public ?int $startIndex;
     public ?int $endIndex;
     public Dimension|string $dimension;
-    
+
     public function __construct(
         int $sheetId,
         ?int $startIndex = null,

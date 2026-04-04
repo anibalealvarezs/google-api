@@ -83,7 +83,7 @@ class ChartSpec implements Jsonable
     public TextPosition|array|null $titleTextPosition;
     public TextPosition|array|null $subtitleTextPosition;
     public bool $maximized;
-    
+
     public function __construct(
         string $title,
         string $subtitle,
@@ -161,7 +161,7 @@ class ChartSpec implements Jsonable
     public function setChartData(ChartTypes $chartType, array $data): void
     {
         $formattedChartType = $this->stringToEnum(enum: ChartTypes::class, var: $chartType);
-        switch($formattedChartType) {
+        switch ($formattedChartType) {
             case ChartTypes::BASIC:
                 $this->basicChart = $this->setBasicChart(...$data);
                 break;

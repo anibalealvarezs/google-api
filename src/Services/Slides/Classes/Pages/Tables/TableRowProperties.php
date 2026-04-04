@@ -12,7 +12,7 @@ use Anibalealvarezs\GoogleApi\Services\Slides\Classes\Dimension;
 class TableRowProperties implements Jsonable
 {
     public Dimension|array $minRowHeight;
-    
+
     public function __construct(
         Dimension|array $minRowHeight
     ) {

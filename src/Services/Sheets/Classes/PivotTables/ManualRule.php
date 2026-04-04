@@ -13,7 +13,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class ManualRule implements Jsonable
 {
     public array $groups;
-    
+
     public function __construct(
         array $groups,
     ) {

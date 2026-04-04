@@ -16,7 +16,7 @@ class DataExecutionStatus implements Jsonable
     public string $lastRefreshTime;
     public DataExecutionState|string $state;
     public DataExecutionErrorCode|string $errorCode;
-    
+
     public function __construct(
         string $errorMessage,
         string $lastRefreshTime,

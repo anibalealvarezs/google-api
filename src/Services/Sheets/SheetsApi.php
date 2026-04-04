@@ -21,6 +21,7 @@ use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Sheets\RowData;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Sheets\SheetProperties;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Spreadsheets\ChartSpec;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Spreadsheets\EmbeddedChart;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Classes\Spreadsheets\Spreadsheet;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Charts\ChartTypes;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\ClearSheetMethods;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\DateTimeRenderOption;
@@ -37,6 +38,9 @@ use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\AddChartRequ
 use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\AddSheetRequest;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\CopyPasteRequest;
 use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Spreadsheets\DeleteSheetRequest;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Enums\Cells\InsertDataOption;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Cells\BatchClearValuesRequest;
+use Anibalealvarezs\GoogleApi\Services\Sheets\Requests\Cells\BatchUpdateValuesRequest;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -49,9 +53,10 @@ class SheetsApi extends GoogleApi
      * @param string $clientSecret
      * @param string $refreshToken
      * @param string $userId
-     * @param array $scopes
+     * @param string|array $scopes
      * @param string $token
      * @param Client|null $guzzleClient
+     * @param string $tokenPath
      * @throws Exception
      */
     public function __construct(
@@ -60,9 +65,10 @@ class SheetsApi extends GoogleApi
         string $clientSecret,
         string $refreshToken,
         string $userId,
-        array $scopes = [],
+        string|array $scopes = [],
         string $token = "",
-        ?Client $guzzleClient = null
+        ?Client $guzzleClient = null,
+        string $tokenPath = ""
     ) {
         parent::__construct(
             baseUrl: "https://sheets.googleapis.com/v4/spreadsheets/",
@@ -71,9 +77,10 @@ class SheetsApi extends GoogleApi
             clientSecret: $clientSecret,
             refreshToken: $refreshToken,
             userId: $userId,
-            scopes: ($scopes ?: ["https://www.googleapis.com/auth/spreadsheets"]),
+            scopes: Helpers::parseScopes($scopes, ["https://www.googleapis.com/auth/spreadsheets"]),
             token: $token,
             guzzleClient: $guzzleClient,
+            tokenPath: $tokenPath,
         );
     }
 
@@ -82,6 +89,7 @@ class SheetsApi extends GoogleApi
      * @param string $fields
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get
      */
     public function getSpreadsheetData(
         string $spreadsheetId,
@@ -105,11 +113,13 @@ class SheetsApi extends GoogleApi
      * @param int|null $sheetId
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AddSheetRequest
      */
     public function createSheetAtStart(
         string $spreadsheetId,
         string $title = "New Sheet",
-        int $sheetId = null,
+        ?int $sheetId = null,
     ): array {
         // Create a new sheet at index 0
         return $this->createSheet(
@@ -127,12 +137,14 @@ class SheetsApi extends GoogleApi
      * @param array|null $spreadsheetData
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AddSheetRequest
      */
     public function createSheetAtTheEnd(
         string $spreadsheetId,
         string $title = "New Sheet",
-        int $sheetId = null,
-        array $spreadsheetData = null,
+        ?int $sheetId = null,
+        ?array $spreadsheetData = null,
     ): array {
         // Get spreadsheet data if not provided
         if (is_null($spreadsheetData)) {
@@ -164,13 +176,15 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AddSheetRequest
      */
     public function createSheet(
         string $spreadsheetId,
         int $index,
         string $title = "New Sheet",
-        int $sheetId = null,
-        array $spreadsheetData = null,
+        ?int $sheetId = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -182,7 +196,7 @@ class SheetsApi extends GoogleApi
             $spreadsheetData = $this->getSpreadsheetData($spreadsheetId);
         }
         if (isset($spreadsheetData["sheets"])) {
-            if ($sheetId) {
+            if (!is_null($sheetId)) {
                 // Check sheet ID
                 $sheetId = Helpers::getFirstValid(
                     id: $sheetId,
@@ -238,11 +252,13 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectsOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AddSheetRequest
      */
     public function createMultipleSheets(
         string $spreadsheetId,
         array $sheetsData,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectsOnly = false,
     ): array {
         // Initialize requests array
@@ -305,11 +321,13 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteSheetRequest
      */
     public function deleteSheet(
         string $spreadsheetId,
         int $sheetId,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -355,11 +373,13 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectsOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteSheetRequest
      */
     public function deleteMultipleSheets(
         string $spreadsheetId,
         array $sheetIds,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectsOnly = false,
     ): array {
         // Initialize requests array
@@ -408,11 +428,13 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectsOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteSheetRequest
      */
     public function deleteAllSheetsBut(
         string $spreadsheetId,
         array $keepSheetIds,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectsOnly = false,
     ): array {
         // Initialize requests array
@@ -466,11 +488,12 @@ class SheetsApi extends GoogleApi
      * @param string|null $destinySpreadsheetId
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.sheets/copyTo
      */
     public function copySheet(
         string $sourceSpreadsheetId,
         int $sheetId,
-        string $destinySpreadsheetId = null,
+        ?string $destinySpreadsheetId = null,
     ): array {
         // Build request
         $request = [
@@ -503,19 +526,21 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateCellsRequest
      */
     public function updateCells(
         string $spreadsheetId,
         array $rows = [],
         string $fields = "*",
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
         string|int $startColumnIndex = 1,
         int $startRowIndex = 1,
         string|int $endColumnIndex = 1000000,
         int $endRowIndex = 1000000,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -598,11 +623,13 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectsOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateCellsRequest
      */
     public function updateMultipleSheetsCells(
         string $spreadsheetId,
         array $sheetsData,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectsOnly = false,
     ): array {
         // Initialize requests array
@@ -706,17 +733,18 @@ class SheetsApi extends GoogleApi
      * @param array|null $spreadsheetData
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/clear
      */
     public function clearCells(
         string $spreadsheetId,
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
         string|int $startColumnIndex = 'A',
         int $startRowIndex = 1,
         string|int $endColumnIndex = 'ZZ',
         int $endRowIndex = 1000000,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
     ): array {
         // Get spreadsheet data if not provided
         if (is_null($spreadsheetData)) {
@@ -755,12 +783,15 @@ class SheetsApi extends GoogleApi
      * @param ClearSheetMethods $method
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/clear
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateCellsRequest
      */
     public function clearSheet(
         string $spreadsheetId,
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
         ClearSheetMethods $method = ClearSheetMethods::CLEAR_CELLS,
     ): array {
         return match ($method) {
@@ -782,7 +813,6 @@ class SheetsApi extends GoogleApi
                 sheetIndex: $sheetIndex,
                 sheetTitle: $sheetTitle,
             ),
-            default => false,
         };
     }
 
@@ -798,17 +828,18 @@ class SheetsApi extends GoogleApi
      * @param array|null $spreadsheetData
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get
      */
     public function readCells(
         string $spreadsheetId,
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
         string|int $startColumnIndex = 'A',
         int $startRowIndex = 1,
         string|int $endColumnIndex = 'ZZ',
         int $endRowIndex = 1000000,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
     ): array {
         // Get spreadsheet data if not provided
         if (is_null($spreadsheetData)) {
@@ -857,19 +888,20 @@ class SheetsApi extends GoogleApi
      * @param DateTimeRenderOption $responseDateTimeRenderOption
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/update
      */
     public function writeCells(
         string $spreadsheetId,
         array $data = [],
         Dimension $majorDimension = Dimension::ROWS,
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
         string|int $startColumnIndex = 'A',
         int $startRowIndex = 1,
         string|int $endColumnIndex = 'ZZ',
         int $endRowIndex = 1000000,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         ValueInputOption $valueInputOption = ValueInputOption::USER_ENTERED,
         ValueRenderOption $responseValueRenderOption = ValueRenderOption::FORMATTED_VALUE,
         DateTimeRenderOption $responseDateTimeRenderOption = DateTimeRenderOption::SERIAL_NUMBER,
@@ -920,7 +952,7 @@ class SheetsApi extends GoogleApi
      * @param GridProperties|array $gridProperties
      * @param ColorStyle|array $tabColorStyle
      * @param string $title
-     * @param string|null $index
+     * @param int|null $index
      * @param string $fields
      * @param int|null $sheetId
      * @param int|null $sheetIndex
@@ -929,18 +961,20 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest
      */
     public function updateSheetProperties(
         string $spreadsheetId,
         GridProperties|array $gridProperties,
         ColorStyle|array $tabColorStyle = ['rgbColor' => []],
         string $title = "",
-        ?string $index = null,
+        ?int $index = null,
         string $fields = "*",
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
-        array $spreadsheetData = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -997,7 +1031,7 @@ class SheetsApi extends GoogleApi
      *                          - 'gridProperties' (GridProperties|array): The grid properties to update.
      *                          - 'tabColorStyle' (ColorStyle|array, optional): The tab color style. Default is ['rgbColor' => []].
      *                          - 'title' (string, optional): The title of the sheet. Default is "".
-     *                          - 'index' (string|null, optional): The index of the sheet. Default is null.
+     *                          - 'index' (int|null, optional): The index of the sheet. Default is null.
      *                          - 'fields' (string, optional): The fields to update. Default is "*".
      *                          - 'sheetId' (int, optional): The ID of the sheet. Default is null.
      *                          - 'sheetIndex' (int, optional): The index of the sheet. Default is null.
@@ -1006,11 +1040,13 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectsOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest
      */
     public function updateMultipleSheetsProperties(
         string $spreadsheetId,
         array $sheetsData,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectsOnly = false,
     ): array {
         // Initialize requests array
@@ -1098,6 +1134,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteDimensionRequest
      */
     public function deleteDimension(
         string $spreadsheetId,
@@ -1105,10 +1143,10 @@ class SheetsApi extends GoogleApi
         ?int $startIndex = null,
         ?int $endIndex = null,
         string $fields = "*",
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
-        array $spreadsheetData = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -1173,11 +1211,13 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectsOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteDimensionRequest
      */
     public function deleteMultipleDimensions(
         string $spreadsheetId,
         array $dimensionsData,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectsOnly = false,
     ): array {
         // Initialize requests array
@@ -1257,6 +1297,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateDimensionPropertiesRequest
      */
     public function updateDimensionProperties(
         string $spreadsheetId,
@@ -1265,10 +1307,10 @@ class SheetsApi extends GoogleApi
         ?int $startIndex = null,
         ?int $endIndex = null,
         string $fields = "*",
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
-        array $spreadsheetData = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -1339,11 +1381,13 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectsOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateDimensionPropertiesRequest
      */
     public function updateMultipleDimensionsProperties(
         string $spreadsheetId,
         array $dimensionsData,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectsOnly = false,
     ): array {
         // Initialize requests array
@@ -1433,17 +1477,19 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateCellsRequest
      */
     public function addPivotTable(
         string $spreadsheetId,
         array $rows = [],
         string $fields = "*",
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
         int $rowIndex = 1,
         int $columnIndex = 1,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -1513,21 +1559,23 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AddChartRequest
      */
     public function addChart(
         string $spreadsheetId,
         int $chartId,
         array $chartData,
-        string $dataSourceId = null,
-        array $filterSpecs = null,
-        array $sortSpecs = null,
+        ?string $dataSourceId = null,
+        ?array $filterSpecs = null,
+        ?array $sortSpecs = null,
         string $title = 'New Chart',
         string $subtitle = '',
         string $fontName = 'Roboto',
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
-        array $spreadsheetData = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
+        ?array $spreadsheetData = null,
         ChartTypes $chartType = ChartTypes::BASIC,
         bool $getRequestObjectOnly = false,
     ): array {
@@ -1592,11 +1640,11 @@ class SheetsApi extends GoogleApi
                     underline: null, // Not supported for title
                 ),
                 dataSourceChartProperties: ( // Not supported for BASIC charts
-                $chartType == ChartTypes::BASIC ?
-                    null :
-                    new DataSourceChartProperties(
-                        dataSourceId: $dataSourceId,
-                    )
+                    $chartType == ChartTypes::BASIC ?
+                        null :
+                        new DataSourceChartProperties(
+                            dataSourceId: $dataSourceId,
+                        )
                 ),
                 filterSpecs: $formattedFilterSpecs,
                 sortSpecs: $formattedSortSpecs,
@@ -1650,6 +1698,8 @@ class SheetsApi extends GoogleApi
      * @param bool $getRequestObjectOnly
      * @return array
      * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/batchUpdate
+     * @see https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#CopyPasteRequest
      */
     public function copyAndPaste(
         string $spreadsheetId,
@@ -1657,7 +1707,7 @@ class SheetsApi extends GoogleApi
         GridRange|array $destinationRange,
         PasteType|string $pasteType = PasteType::PASTE_NORMAL,
         bool $transpose = false,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
         bool $getRequestObjectOnly = false,
     ): array {
         // Initialize requests array
@@ -1700,6 +1750,171 @@ class SheetsApi extends GoogleApi
     }
 
     /**
+     * @param Spreadsheet|array $spreadsheet
+     * @return array
+     * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create
+     */
+    public function createSpreadsheet(
+        Spreadsheet|array $spreadsheet = []
+    ): array {
+        // Request the spreadsheet data
+        $response = $this->performRequest(
+            method: "POST",
+            endpoint: "",
+            body: json_encode(is_object($spreadsheet) ? Helpers::getJsonableArray($spreadsheet) : $spreadsheet),
+        );
+        // Return response
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    /**
+     * @param string $spreadsheetId
+     * @param array $data
+     * @param string $range
+     * @param ValueInputOption $valueInputOption
+     * @param InsertDataOption $insertDataOption
+     * @param bool $includeValuesInResponse
+     * @param ValueRenderOption $responseValueRenderOption
+     * @param DateTimeRenderOption $responseDateTimeRenderOption
+     * @return array
+     * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/append
+     */
+    public function appendCells(
+        string $spreadsheetId,
+        array $data = [],
+        string $range = 'A1',
+        ValueInputOption $valueInputOption = ValueInputOption::USER_ENTERED,
+        InsertDataOption $insertDataOption = InsertDataOption::INSERT_ROWS,
+        bool $includeValuesInResponse = false,
+        ValueRenderOption $responseValueRenderOption = ValueRenderOption::FORMATTED_VALUE,
+        DateTimeRenderOption $responseDateTimeRenderOption = DateTimeRenderOption::SERIAL_NUMBER,
+    ): array {
+        // Build request
+        $request = Helpers::getJsonableArray(new ValueRange(
+            range: $range,
+            values: $data,
+        ));
+        // Exec request
+        $response = $this->performRequest(
+            method: "POST",
+            endpoint: $spreadsheetId . '/values/' . $range . ':append',
+            query: [
+                "valueInputOption" => $valueInputOption->name,
+                "insertDataOption" => $insertDataOption->name,
+                "includeValuesInResponse" => $includeValuesInResponse ? 'true' : 'false',
+                "responseValueRenderOption" => $responseValueRenderOption->name,
+                "responseDateTimeRenderOption" => $responseDateTimeRenderOption->name,
+            ],
+            body: json_encode($request),
+        );
+        // Return response
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    /**
+     * @param string $spreadsheetId
+     * @param array $ranges
+     * @param Dimension $majorDimension
+     * @param ValueRenderOption $valueRenderOption
+     * @param DateTimeRenderOption $dateTimeRenderOption
+     * @return array
+     * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchGet
+     */
+    public function readMultipleCells(
+        string $spreadsheetId,
+        array $ranges = [],
+        Dimension $majorDimension = Dimension::ROWS,
+        ValueRenderOption $valueRenderOption = ValueRenderOption::FORMATTED_VALUE,
+        DateTimeRenderOption $dateTimeRenderOption = DateTimeRenderOption::SERIAL_NUMBER,
+    ): array {
+        $queryParams = [
+            "majorDimension" => $majorDimension->name,
+            "valueRenderOption" => $valueRenderOption->name,
+            "dateTimeRenderOption" => $dateTimeRenderOption->name,
+        ];
+
+        $queryStringParts = [];
+        foreach ($queryParams as $key => $val) {
+            $queryStringParts[] = urlencode($key) . '=' . urlencode($val);
+        }
+        foreach ($ranges as $range) {
+            $queryStringParts[] = 'ranges=' . urlencode($range);
+        }
+
+        $endpoint = $spreadsheetId . '/values:batchGet?' . implode('&', $queryStringParts);
+
+        // Exec request
+        $response = $this->performRequest(
+            method: "GET",
+            endpoint: $endpoint,
+            query: [],
+        );
+        $decoded = json_decode($response->getBody()->getContents(), true);
+
+        $valueRanges = [];
+        if (isset($decoded['valueRanges'])) {
+            $valueRanges = $decoded['valueRanges'];
+        }
+
+        // Return response
+        return [
+            'spreadsheetId' => $spreadsheetId,
+            'valueRanges' => $valueRanges
+        ];
+    }
+
+    /**
+     * @param string $spreadsheetId
+     * @param BatchUpdateValuesRequest|array $request
+     * @return array
+     * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchUpdate
+     */
+    public function updateMultipleCellsValues(
+        string $spreadsheetId,
+        BatchUpdateValuesRequest|array $request
+    ): array {
+        if (is_array($request)) {
+            $request = new BatchUpdateValuesRequest(...$request);
+        }
+        // Exec request
+        $response = $this->performRequest(
+            method: "POST",
+            endpoint: $spreadsheetId . '/values:batchUpdate',
+            body: json_encode(Helpers::getJsonableArray($request)),
+        );
+        // Return response
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    /**
+     * @param string $spreadsheetId
+     * @param BatchClearValuesRequest|array $request
+     * @return array
+     * @throws GuzzleException
+     * @link https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchClear
+     */
+    public function clearMultipleCells(
+        string $spreadsheetId,
+        BatchClearValuesRequest|array $request
+    ): array {
+        if (is_array($request)) {
+            $request = new BatchClearValuesRequest(...$request);
+        }
+        // Exec request
+        $response = $this->performRequest(
+            method: "POST",
+            endpoint: $spreadsheetId . '/values:batchClear',
+            body: json_encode(Helpers::getJsonableArray($request)),
+        );
+        // Return response
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    /**
      * @param array $spreadsheetData
      * @return array
      */
@@ -1731,8 +1946,8 @@ class SheetsApi extends GoogleApi
      */
     public function getSheetTitle(
         array $spreadsheetData,
-        int $sheetId = null,
-        int $sheetIndex = null
+        ?int $sheetId = null,
+        ?int $sheetIndex = null
     ): string {
         if ($sheetId) {
             foreach ($spreadsheetData["sheets"] as $sheet) {
@@ -1754,8 +1969,8 @@ class SheetsApi extends GoogleApi
      */
     public function getSheetId(
         array $spreadsheetData,
-        string $sheetTitle = null,
-        int $sheetIndex = null
+        ?string $sheetTitle = null,
+        ?int $sheetIndex = null
     ): string {
         if ($sheetTitle) {
             foreach ($spreadsheetData["sheets"] as $sheet) {
@@ -1773,13 +1988,13 @@ class SheetsApi extends GoogleApi
      * @param array $spreadsheetData
      * @param string|null $sheetTitle
      * @param int|null $sheetId
-     * @return string
+     * @return int
      */
     public function getSheetIndex(
         array $spreadsheetData,
-        string $sheetTitle = null,
-        int $sheetId = null
-    ): string {
+        ?string $sheetTitle = null,
+        ?int $sheetId = null
+    ): int {
         if ($sheetTitle) {
             foreach ($spreadsheetData["sheets"] as $key => $sheet) {
                 if ($sheet["properties"]["title"] == $sheetTitle) {
@@ -1807,10 +2022,10 @@ class SheetsApi extends GoogleApi
      */
     public function getSheetDimensions(
         string $spreadsheetId,
-        int $sheetId = null,
-        int $sheetIndex = null,
-        string $sheetTitle = null,
-        array $spreadsheetData = null,
+        ?int $sheetId = null,
+        ?int $sheetIndex = null,
+        ?string $sheetTitle = null,
+        ?array $spreadsheetData = null,
     ): array {
         // Get the current spreadsheet data if not provided
         if (is_null($spreadsheetData)) {
@@ -1851,7 +2066,7 @@ class SheetsApi extends GoogleApi
      */
     public function getAllSheetsDimensions(
         string $spreadsheetId,
-        array $spreadsheetData = null,
+        ?array $spreadsheetData = null,
     ): array {
         // Get the current spreadsheet data if not provided
         if (is_null($spreadsheetData)) {
@@ -1888,10 +2103,10 @@ class SheetsApi extends GoogleApi
      */
     public function checkSheetId(
         string $spreadsheetId,
-        int $sheetId = null,
-        array $spreadsheetData = null,
-        string $sheetTitle = null,
-        int $sheetIndex = null
+        ?int $sheetId = null,
+        ?array $spreadsheetData = null,
+        ?string $sheetTitle = null,
+        ?int $sheetIndex = null
     ): int {
         if (!$sheetId) {
             // Get spreadsheet data if not provided

@@ -14,7 +14,7 @@ class CreateImageRequest implements Jsonable
     public PageElementProperties|array $elementProperties;
     public string $url;
     public ?string $objectId;
-    
+
     public function __construct(
         PageElementProperties|array $elementProperties,
         string $url,

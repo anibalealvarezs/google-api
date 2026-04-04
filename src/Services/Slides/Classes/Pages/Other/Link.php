@@ -16,7 +16,7 @@ class Link implements Jsonable, Kindable
     public RelativeSlideLink|string $relativeLink;
     public ?string $pageObjectId;
     public ?int $slideIndex;
-    
+
     public function __construct(
         ?string $url = null,
         RelativeSlideLink|string $relativeLink = RelativeSlideLink::RELATIVE_SLIDE_LINK_UNSPECIFIED,

@@ -12,7 +12,7 @@ class PivotGroupSortValueBucket implements Jsonable
 {
     public int $valuesIndex;
     public array $buckets;
-    
+
     public function __construct(
         int $valuesIndex,
         array $buckets = [],

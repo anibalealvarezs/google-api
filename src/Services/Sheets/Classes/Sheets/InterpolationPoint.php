@@ -15,7 +15,7 @@ class InterpolationPoint implements Jsonable
     public ColorStyle|array $colorStyle;
     public InterpolationPointType|string $type;
     public ?string $value;
-    
+
     public function __construct(
         ColorStyle|array $colorStyle,
         InterpolationPointType|string $type = InterpolationPointType::MIN,

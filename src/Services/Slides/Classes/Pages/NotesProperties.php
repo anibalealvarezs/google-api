@@ -11,7 +11,7 @@ use Anibalealvarezs\GoogleApi\Google\Interfaces\Jsonable;
 class NotesProperties implements Jsonable
 {
     public string $speakerNotesObjectId;
-    
+
     public function __construct(
         string $speakerNotesObjectId,
     ) {

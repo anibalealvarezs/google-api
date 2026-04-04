@@ -24,7 +24,7 @@ class Sheet implements Jsonable
     public array $rowGroups;
     public array $columnGroups;
     public array $slicers;
-    
+
     public function __construct(
         SheetProperties|array $properties,
         array $data,
