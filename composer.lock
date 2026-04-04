@@ -4,29 +4,36 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "54cc3abf408ab379dffff313a5c75d3d",
+    "content-hash": "1eb67c9dcba1fcd20d6cec1b2229ee68",
     "packages": [
         {
             "name": "anibalealvarezs/api-client-skeleton",
             "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:anibalealvarezs/api-client-skeleton.git",
+                "reference": "a8cfb0f54983965366b34efdeac1abcf597dd128"
+            },
             "dist": {
-                "type": "path",
-                "url": "../api-client-skeleton",
-                "reference": "5c122ef04bff64fb764eadb33b738d13574f4394"
+                "type": "zip",
+                "url": "https://satis.anibalalvarez.com/dist/anibalealvarezs/api-client-skeleton/anibalealvarezs-api-client-skeleton-a8cfb0f54983965366b34efdeac1abcf597dd128-zip-e55889.zip",
+                "reference": "a8cfb0f54983965366b34efdeac1abcf597dd128",
+                "shasum": "be74dccdcd025231acab4d1fbe1062010d4dfa2e"
             },
             "require": {
                 "anibalealvarezs/oauth-v1": "@dev",
                 "ext-json": "*",
                 "guzzlehttp/guzzle": "^7.0",
-                "nesbot/carbon": "^2.61",
+                "nesbot/carbon": "^2.61 || ^3.0",
                 "php": ">=8.1",
-                "symfony/yaml": "^5.4.10"
+                "symfony/yaml": "^5.4.10 || ^6.0 || ^7.0"
             },
             "require-dev": {
                 "fakerphp/faker": "^1.20",
                 "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^9"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -47,27 +54,44 @@
                     "email": "anibalealvarezs@gmail.com"
                 }
             ],
-            "description": "description",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "description": "Base skeleton for standardizing PHP API clients with advanced error handling and data normalization.",
+            "homepage": "https://github.com/anibalealvarezs/api-client-skeleton",
+            "keywords": [
+                "api",
+                "client",
+                "error-handling",
+                "normalization",
+                "sdk",
+                "skeleton"
+            ],
+            "support": {
+                "issues": "https://github.com/anibalealvarezs/api-client-skeleton/issues"
+            },
+            "time": "2026-04-04T01:13:08+00:00"
         },
         {
             "name": "anibalealvarezs/oauth-v1",
             "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:anibalealvarezs/oauth-v1.git",
+                "reference": "c42fa2cd07e1bc9206f039092bdcbbd99ac2aea3"
+            },
             "dist": {
-                "type": "path",
-                "url": "../OAuth-v1",
-                "reference": "c47bb38647f4e331c33ff1fc1a0968d6aec00350"
+                "type": "zip",
+                "url": "https://satis.anibalalvarez.com/dist/anibalealvarezs/oauth-v1/anibalealvarezs-oauth-v1-c42fa2cd07e1bc9206f039092bdcbbd99ac2aea3-zip-13c64e.zip",
+                "reference": "c42fa2cd07e1bc9206f039092bdcbbd99ac2aea3",
+                "shasum": "da3fc10c694f7cd5e2d8ca138b3ba70713e170c4"
             },
             "require": {
                 "php": ">=8.1"
             },
             "require-dev": {
                 "fakerphp/faker": "^1.20",
+                "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^9"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -88,11 +112,20 @@
                     "email": "anibalealvarezs@gmail.com"
                 }
             ],
-            "description": "description",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "description": "A lightweight PHP library for handling OAuth 1.0a authentication and request signing.",
+            "homepage": "https://github.com/anibalealvarezs/OAuth-v1",
+            "keywords": [
+                "api",
+                "authentication",
+                "guzzle-middleware",
+                "oauth",
+                "oauth1",
+                "signing"
+            ],
+            "support": {
+                "issues": "https://github.com/anibalealvarezs/OAuth-v1/issues"
+            },
+            "time": "2026-03-07T00:03:43+00:00"
         },
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -121,6 +154,11 @@
             },
             "default-branch": true,
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Carbon\\Doctrine\\": "src/Carbon/Doctrine/"
@@ -273,7 +311,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.10.0"
+                "source": "https://github.com/guzzle/guzzle/tree/7.10"
             },
             "funding": [
                 {
@@ -357,7 +395,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/2.3.0"
+                "source": "https://github.com/guzzle/promises/tree/2.3"
             },
             "funding": [
                 {
@@ -407,7 +445,6 @@
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -474,7 +511,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.8.0"
+                "source": "https://github.com/guzzle/psr7/tree/2.8"
             },
             "funding": [
                 {
