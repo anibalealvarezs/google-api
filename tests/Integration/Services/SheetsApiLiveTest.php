@@ -26,6 +26,15 @@ class SheetsApiLiveTest extends TestCase
     {
         $config = app_config();
 
+        if (
+            empty($config['google_client_id']) || 
+            str_contains($config['google_client_id'], 'YOUR_') ||
+            empty($config['google_refresh_token']) ||
+            str_contains($config['google_refresh_token'], 'YOUR_')
+        ) {
+            $this->markTestSkipped('Google credentials not available or using placeholders.');
+        }
+
         $this->api = new SheetsApi(
             redirectUrl: $config['google_redirect_uri'],
             clientId: $config['google_client_id'],

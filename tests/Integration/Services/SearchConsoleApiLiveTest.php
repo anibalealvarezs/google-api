@@ -24,6 +24,15 @@ class SearchConsoleApiLiveTest extends TestCase
     {
         $config = app_config();
 
+        if (
+            empty($config['google_client_id']) || 
+            str_contains($config['google_client_id'], 'YOUR_') ||
+            empty($config['google_refresh_token']) ||
+            str_contains($config['google_refresh_token'], 'YOUR_')
+        ) {
+            $this->markTestSkipped('Google credentials not available or using placeholders.');
+        }
+
         $this->testSiteUrl = $config['search_console_test_site_url'];
         $this->testRemovableSiteUrl = $config['search_console_test_removable_site_url'];
         $this->testSitemapUrl = $config['search_console_test_sitemap_url'];
