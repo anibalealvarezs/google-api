@@ -139,7 +139,7 @@ class GoogleSearchConsoleConvert
                     'query' => $data['dimensionValues']['query'] ?? null,
                     'countryCode' => $data['dimensionValues']['country'] ?? 'UNK',
                     'deviceType' => $data['dimensionValues']['device'] ?? 'UNKNOWN',
-                    'page' => $pageUrl,
+                    'page' => $page,
                 ],
             ], $logger);
 
