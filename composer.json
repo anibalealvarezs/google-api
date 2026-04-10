@@ -2,11 +2,17 @@
     "name": "anibalealvarezs/google-api",
     "description": "Standardized Google API client for APIs Hub, supporting Search Console and Analytics data extraction.",
     "license": "MIT",
-    "keywords": ["google-api", "google-search-console", "analytics", "apis-hub", "php"],
+    "keywords": [
+        "google-api",
+        "google-search-console",
+        "analytics",
+        "apis-hub",
+        "php"
+    ],
     "homepage": "https://github.com/anibalealvarezs/google-api",
     "authors": [
         {
-            "name": "Aníbal Álvarez",
+            "name": "An\u00edbal \u00c1lvarez",
             "email": "anibalealvarezs@gmail.com"
         }
     ],
@@ -19,12 +25,13 @@
         "ext-json": "*",
         "symfony/yaml": "^5.4.10 || ^6.0 || ^7.0",
         "nesbot/carbon": "^2.61 || ^3.0",
-        "anibalealvarezs/api-client-skeleton": "@dev",
+        "anibalealvarezs/api-client-skeleton": "dev-main",
         "ext-imap": "*"
     },
     "repositories": [
         {
-            "type": "composer", "url": "https://satis.anibalalvarez.com/"
+            "type": "composer",
+            "url": "https://satis.anibalalvarez.com/"
         }
     ],
     "autoload": {
