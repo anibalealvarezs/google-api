@@ -19,7 +19,8 @@
         "ext-json": "*",
         "symfony/yaml": "^5.4.10 || ^6.0 || ^7.0",
         "nesbot/carbon": "^2.61 || ^3.0",
-        "anibalealvarezs/api-client-skeleton": "@dev",
+        "anibalealvarezs/api-client-skeleton": "dev-main",
+        "anibalealvarezs/api-driver-core": "dev-main",
         "ext-imap": "*"
     },
     "repositories": [

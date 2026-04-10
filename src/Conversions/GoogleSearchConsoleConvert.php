@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Anibalealvarezs\GoogleApi\Conversions;
 
-use Anibalealvarezs\ApiSkeleton\Conversions\UniversalMetricConverter;
+use Anibalealvarezs\ApiDriverCore\Conversions\UniversalMetricConverter;
 use Anibalealvarezs\ApiSkeleton\Classes\KeyGenerator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Psr\Log\LoggerInterface;
