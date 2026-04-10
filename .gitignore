@@ -8,3 +8,4 @@
 /config/google_tokens.json
 /scripts/
 /tmp/
+**/.php-cs-fixer.dist.php
