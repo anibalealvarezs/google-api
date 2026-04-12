@@ -57,12 +57,17 @@ This allows multiple services to share the same token file while maintaining iso
 
 ## Services
 
+- [AnalyticsData (GA4)](docs/Services/AnalyticsData/README.md)
 - [BigQuery](docs/Services/BigQuery/README.md)
+- [BusinessProfilePerformance](docs/Services/BusinessProfilePerformance/README.md)
 - [Drive](docs/Services/Drive/README.md)
 - [Gmail](docs/Services/Gmail/README.md)
+- [GoogleAds](docs/Services/GoogleAds/README.md)
+- [MerchantCenter](docs/Services/MerchantCenter/README.md)
 - [SearchConsole](docs/Services/SearchConsole/README.md)
 - [Sheets](docs/Services/Sheets/README.md)
 - [Slides](docs/Services/Slides/README.md)
+- [YouTubeAnalytics](docs/Services/YouTubeAnalytics/README.md)
 
 ## Testing
 
