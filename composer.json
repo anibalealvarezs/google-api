@@ -12,7 +12,7 @@
     "homepage": "https://github.com/anibalealvarezs/google-api",
     "authors": [
         {
-            "name": "An\u00edbal \u00c1lvarez",
+            "name": "Aníbal Álvarez",
             "email": "anibalealvarezs@gmail.com"
         }
     ],
@@ -47,10 +47,11 @@
         }
     },
     "require-dev": {
+        "doctrine/instantiator": "^1.5",
         "fakerphp/faker": "^1.20",
-        "phpunit/phpunit": "^9",
+        "friendsofphp/php-cs-fixer": "dev-master",
         "phpstan/phpstan": "^1.10",
-        "friendsofphp/php-cs-fixer": "dev-master"
+        "phpunit/phpunit": "^9"
     },
     "scripts": {
         "phpstan": "phpstan analyse"
