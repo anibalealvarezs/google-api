@@ -4,8 +4,10 @@ namespace Anibalealvarezs\GoogleApi\Google;
 
 use Anibalealvarezs\ApiSkeleton\Clients\OAuthV2Client;
 use Anibalealvarezs\GoogleApi\Google\Exceptions\GoogleQuotaExceededException;
+use Anibalealvarezs\GoogleApi\Google\Support\GoogleErrorClassifier;
 use Exception;
 use GuzzleHttp\Client;
+use Psr\Log\LoggerInterface;
 
 class GoogleApi extends OAuthV2Client
 {
@@ -24,6 +26,7 @@ class GoogleApi extends OAuthV2Client
      * @param Client|null $guzzleClient
      * @param string $tokenPath
      * @param string $tokenIdentifier
+     * @param LoggerInterface|null $logger
      * @throws Exception
      */
     public function __construct(
@@ -77,6 +80,21 @@ class GoogleApi extends OAuthV2Client
 
         $this->setResponseErrorDetector('error');
         $this->setErrorMessageParser(fn ($data) => $data['error']['message'] ?? json_encode($data));
+        $this->setRateLimitDetector([
+            'Quota',
+            'quota',
+            'Rate limit',
+            'rate limit',
+            'Too Many Requests',
+            'too many requests',
+            'RESOURCE_EXHAUSTED',
+            'resource_exhausted',
+            'Backend Error',
+            'backend error',
+            'temporarily unavailable',
+            'UNAVAILABLE',
+            'INTERNAL',
+        ]);
     }
 
     /**
@@ -128,6 +146,19 @@ class GoogleApi extends OAuthV2Client
     }
 
     /**
+     * Keep retry detection semantic and resilient even if the base client detector
+     * implementation differs across installed api-client-skeleton versions.
+     */
+    protected function isRateLimit(mixed $input): bool
+    {
+        if (GoogleErrorClassifier::isRetryable($input)) {
+            return true;
+        }
+
+        return parent::isRateLimit($input);
+    }
+
+    /**
      * @param Exception $exception
      * @param mixed $onFailure
      * @return mixed
@@ -135,10 +166,7 @@ class GoogleApi extends OAuthV2Client
      */
     protected function handleException(Exception $exception, mixed $onFailure = null): mixed
     {
-        if (
-            str_contains(strtolower($exception->getMessage()), 'quota exceeded')
-            || str_contains(strtolower($exception->getMessage()), 'rate limit exceeded')
-        ) {
+        if (GoogleErrorClassifier::isQuotaExceeded($exception)) {
             throw new GoogleQuotaExceededException($exception->getMessage(), $exception->getCode(), $exception);
         }
 
