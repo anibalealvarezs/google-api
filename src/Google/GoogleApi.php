@@ -132,6 +132,19 @@ class GoogleApi extends OAuthV2Client
     }
 
     /**
+     * Keep retry detection semantic and resilient even if the base client detector
+     * implementation differs across installed api-client-skeleton versions.
+     */
+    protected function isRateLimit(mixed $input): bool
+    {
+        if (GoogleErrorClassifier::isRetryable($input)) {
+            return true;
+        }
+
+        return parent::isRateLimit($input);
+    }
+
+    /**
      * @param Exception $exception
      * @param mixed $onFailure
      * @return mixed
