@@ -80,7 +80,8 @@
             $this->assertEquals(['location' => 'header', 'headerPrefix' => 'Bearer '], $client->getAuthSettings());
             $this->assertEquals(['Content-Type' => 'application/json'], $client->getHeaders());
             $this->assertInstanceOf(GuzzleClient::class, $client->getGuzzleClient());
-            $this->assertTrue(is_callable($client->getRateLimitDetector()));
+            $this->assertIsArray($client->getRateLimitDetector());
+            $this->assertContains('quota', $client->getRateLimitDetector());
         }
 
         /**

@@ -80,7 +80,21 @@ class GoogleApi extends OAuthV2Client
 
         $this->setResponseErrorDetector('error');
         $this->setErrorMessageParser(fn ($data) => $data['error']['message'] ?? json_encode($data));
-        $this->setRateLimitDetector([GoogleErrorClassifier::class, 'isRetryable']);
+        $this->setRateLimitDetector([
+            'Quota',
+            'quota',
+            'Rate limit',
+            'rate limit',
+            'Too Many Requests',
+            'too many requests',
+            'RESOURCE_EXHAUSTED',
+            'resource_exhausted',
+            'Backend Error',
+            'backend error',
+            'temporarily unavailable',
+            'UNAVAILABLE',
+            'INTERNAL',
+        ]);
     }
 
     /**

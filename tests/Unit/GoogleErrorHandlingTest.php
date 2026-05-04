@@ -117,7 +117,8 @@ class GoogleErrorHandlingTest extends TestCase
 
         $response = $client->performRequest('GET', '/test');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertTrue(is_callable($client->getRateLimitDetector()));
+        $this->assertIsArray($client->getRateLimitDetector());
+        $this->assertContains('quota', $client->getRateLimitDetector());
     }
 
     public function testGoogleQuotaExceptionUsesStructuredReason(): void
