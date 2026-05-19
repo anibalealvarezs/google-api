@@ -1,66 +1,66 @@
 {
-  "name": "anibalealvarezs/google-api",
-  "description": "Standardized Google API client for APIs Hub, supporting Search Console and Analytics data extraction.",
-  "license": "MIT",
-  "keywords": [
-    "google-api",
-    "google-search-console",
-    "analytics",
-    "apis-hub",
-    "php"
-  ],
-  "homepage": "https://github.com/anibalealvarezs/google-api",
-  "authors": [
-    {
-      "name": "Aníbal Álvarez",
-      "email": "anibalealvarezs@gmail.com"
-    }
-  ],
-  "support": {
-    "issues": "https://github.com/anibalealvarezs/google-api/issues"
-  },
-  "require": {
-    "guzzlehttp/guzzle": "^7.0",
-    "ext-json": "*",
-    "symfony/yaml": "^6.0 || ^7.0",
-    "nesbot/carbon": "^2.61 || ^3.0",
-    "anibalealvarezs/api-client-skeleton": "dev-main",
-    "monolog/monolog": "^2.0 || ^3.0",
-    "psr/log": "^1.0 || ^2.0 || ^3.0",
-    "ext-imap": "*",
-    "php": ">=8.3"
-  },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://satis.anibalalvarez.com/"
-    }
-  ],
-  "autoload": {
-    "psr-4": {
-      "Anibalealvarezs\\GoogleApi\\": "src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Tests\\": "tests/"
-    }
-  },
-  "require-dev": {
-    "phpstan/phpstan": "^1.10",
-    "fakerphp/faker": "^1.20",
-    "doctrine/instantiator": "^1.5",
-    "friendsofphp/php-cs-fixer": "dev-master",
-    "phpunit/phpunit": "^9"
-  },
-  "scripts": {
-    "phpstan": "phpstan analyse"
-  },
-  "config": {
-    "platform": {
-      "php": "8.3.0"
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "name":  "anibalealvarezs/google-api",
+    "description":  "Standardized Google API client for APIs Hub, supporting Search Console and Analytics data extraction.",
+    "license":  "MIT",
+    "keywords":  [
+                     "google-api",
+                     "google-search-console",
+                     "analytics",
+                     "apis-hub",
+                     "php"
+                 ],
+    "homepage":  "https://github.com/anibalealvarezs/google-api",
+    "authors":  [
+                    {
+                        "name":  "Aníbal Álvarez",
+                        "email":  "anibalealvarezs@gmail.com"
+                    }
+                ],
+    "support":  {
+                    "issues":  "https://github.com/anibalealvarezs/google-api/issues"
+                },
+    "require":  {
+                    "guzzlehttp/guzzle":  "^7.0",
+                    "ext-json":  "*",
+                    "symfony/yaml":  "^6.0 || ^7.0",
+                    "nesbot/carbon":  "^2.61 || ^3.0",
+                    "anibalealvarezs/api-client-skeleton":  "^1.0.0",
+                    "monolog/monolog":  "^2.0 || ^3.0",
+                    "psr/log":  "^1.0 || ^2.0 || ^3.0",
+                    "ext-imap":  "*",
+                    "php":  ">=8.3"
+                },
+    "repositories":  [
+                         {
+                             "type":  "composer",
+                             "url":  "https://satis.anibalalvarez.com/"
+                         }
+                     ],
+    "autoload":  {
+                     "psr-4":  {
+                                   "Anibalealvarezs\\GoogleApi\\":  "src"
+                               }
+                 },
+    "autoload-dev":  {
+                         "psr-4":  {
+                                       "Tests\\":  "tests/"
+                                   }
+                     },
+    "require-dev":  {
+                        "fakerphp/faker":  "^1.20",
+                        "doctrine/instantiator":  "^1.5",
+                        "friendsofphp/php-cs-fixer":  "dev-master",
+                        "phpunit/phpunit":  "^9",
+                        "phpstan/phpstan":  "^1.10"
+                    },
+    "scripts":  {
+                    "phpstan":  "phpstan analyse"
+                },
+    "config":  {
+                   "platform":  {
+                                    "php":  "8.3.0"
+                                }
+               },
+    "minimum-stability":  "dev",
+    "prefer-stable":  true
 }
