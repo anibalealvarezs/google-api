@@ -38,7 +38,10 @@ class GoogleAdsApi extends GoogleApi
         string|array $scopes = [],
         string $token = "",
         ?Client $guzzleClient = null,
-        string $tokenPath = ""
+        string $tokenPath = "",
+        string $tokenIdentifier = "",
+        ?\Psr\Log\LoggerInterface $logger = null,
+        mixed $tokenRefresherCallback = null
     ) {
         $this->developerToken = $developerToken;
         $this->loginCustomerId = $loginCustomerId;
@@ -54,6 +57,9 @@ class GoogleAdsApi extends GoogleApi
             token: $token,
             guzzleClient: $guzzleClient,
             tokenPath: $tokenPath,
+            tokenIdentifier: $tokenIdentifier,
+            logger: $logger,
+            tokenRefresherCallback: $tokenRefresherCallback,
         );
 
         $headers = $this->getHeaders();

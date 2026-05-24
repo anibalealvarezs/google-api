@@ -41,7 +41,8 @@ class SearchConsoleApi extends GoogleApi
         ?Client $guzzleClient = null,
         ?Client $defaultSitemapClient = null,
         string $tokenPath = "",
-        ?\Psr\Log\LoggerInterface $logger = null
+        ?\Psr\Log\LoggerInterface $logger = null,
+        mixed $tokenRefresherCallback = null
     ) {
         parent::__construct(
             baseUrl: "https://www.googleapis.com/webmasters/v3/",
@@ -55,6 +56,7 @@ class SearchConsoleApi extends GoogleApi
             guzzleClient: $guzzleClient,
             tokenPath: $tokenPath,
             logger: $logger,
+            tokenRefresherCallback: $tokenRefresherCallback,
         );
         $this->setDefaultSitemapClient($defaultSitemapClient);
     }

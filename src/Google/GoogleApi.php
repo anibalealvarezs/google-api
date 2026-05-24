@@ -41,7 +41,8 @@ class GoogleApi extends OAuthV2Client
         ?Client $guzzleClient = null,
         string $tokenPath = "",
         string $tokenIdentifier = "",
-        ?\Psr\Log\LoggerInterface $logger = null
+        ?\Psr\Log\LoggerInterface $logger = null,
+        mixed $tokenRefresherCallback = null
     ) {
         $this->tokenPath = $tokenPath;
         $this->tokenIdentifier = $tokenIdentifier ?: ($refreshToken ? 'RefreshToken_' . substr(md5($refreshToken), 0, 16) : "");
@@ -76,6 +77,7 @@ class GoogleApi extends OAuthV2Client
             token: $token,
             guzzleClient: $guzzleClient,
             logger: $logger,
+            tokenRefresherCallback: $tokenRefresherCallback,
         );
 
         $this->setResponseErrorDetector('error');

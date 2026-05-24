@@ -34,7 +34,10 @@ class BigQueryApi extends GoogleApi
         string|array $scopes = [],
         string $token = "",
         ?Client $guzzleClient = null,
-        string $tokenPath = ""
+        string $tokenPath = "",
+        string $tokenIdentifier = "",
+        ?\Psr\Log\LoggerInterface $logger = null,
+        mixed $tokenRefresherCallback = null
     ) {
         parent::__construct(
             baseUrl: "https://bigquery.googleapis.com/bigquery/v2/projects/",
@@ -49,6 +52,9 @@ class BigQueryApi extends GoogleApi
             token: $token,
             guzzleClient: $guzzleClient,
             tokenPath: $tokenPath,
+            tokenIdentifier: $tokenIdentifier,
+            logger: $logger,
+            tokenRefresherCallback: $tokenRefresherCallback,
         );
     }
 
