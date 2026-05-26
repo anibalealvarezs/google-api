@@ -222,4 +222,118 @@ class GoogleAdsApiTest extends TestCase
 
         $client->searchAllAndProcess($this->customerId, "SELECT ...", function($results) {});
     }
+
+    /**
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function testGetAccessibleCustomersSuccess(): void
+    {
+        $responseData = ['resourceNames' => ['customers/1234567890']];
+        $mock = new MockHandler([
+            new Response(200, [], json_encode(['access_token' => 'abc'])),
+            new Response(200, [], json_encode($responseData))
+        ]);
+        $guzzle = $this->createMockedGuzzleClient(mock: $mock);
+
+        $client = new GoogleAdsApi($this->redirectUrl, $this->clientId, $this->clientSecret, $this->refreshToken, $this->userId, $this->developerToken, guzzleClient: $guzzle);
+        $result = $client->getAccessibleCustomers();
+
+        $this->assertEquals($responseData, $result);
+    }
+
+    /**
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function testGetCustomerClientsSuccess(): void
+    {
+        $responseData = ['results' => [['customerClient' => ['id' => '0987654321']]]];
+        $mock = new MockHandler([
+            new Response(200, [], json_encode(['access_token' => 'abc'])),
+            new Response(200, [], json_encode($responseData))
+        ]);
+        $guzzle = $this->createMockedGuzzleClient(mock: $mock);
+
+        $client = new GoogleAdsApi($this->redirectUrl, $this->clientId, $this->clientSecret, $this->refreshToken, $this->userId, $this->developerToken, guzzleClient: $guzzle);
+        $result = $client->getCustomerClients($this->customerId);
+
+        $this->assertEquals($responseData, $result);
+    }
+
+    /**
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function testGetCampaignsSuccess(): void
+    {
+        $responseData = ['results' => [['campaign' => ['id' => '111']]]];
+        $mock = new MockHandler([
+            new Response(200, [], json_encode(['access_token' => 'abc'])),
+            new Response(200, [], json_encode($responseData))
+        ]);
+        $guzzle = $this->createMockedGuzzleClient(mock: $mock);
+
+        $client = new GoogleAdsApi($this->redirectUrl, $this->clientId, $this->clientSecret, $this->refreshToken, $this->userId, $this->developerToken, guzzleClient: $guzzle);
+        $result = $client->getCampaigns($this->customerId);
+
+        $this->assertEquals($responseData, $result);
+    }
+
+    /**
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function testGetAdGroupsSuccess(): void
+    {
+        $responseData = ['results' => [['ad_group' => ['id' => '222']]]];
+        $mock = new MockHandler([
+            new Response(200, [], json_encode(['access_token' => 'abc'])),
+            new Response(200, [], json_encode($responseData))
+        ]);
+        $guzzle = $this->createMockedGuzzleClient(mock: $mock);
+
+        $client = new GoogleAdsApi($this->redirectUrl, $this->clientId, $this->clientSecret, $this->refreshToken, $this->userId, $this->developerToken, guzzleClient: $guzzle);
+        $result = $client->getAdGroups($this->customerId);
+
+        $this->assertEquals($responseData, $result);
+    }
+
+    /**
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function testGetAdsSuccess(): void
+    {
+        $responseData = ['results' => [['ad_group_ad' => ['ad' => ['id' => '333']]]]];
+        $mock = new MockHandler([
+            new Response(200, [], json_encode(['access_token' => 'abc'])),
+            new Response(200, [], json_encode($responseData))
+        ]);
+        $guzzle = $this->createMockedGuzzleClient(mock: $mock);
+
+        $client = new GoogleAdsApi($this->redirectUrl, $this->clientId, $this->clientSecret, $this->refreshToken, $this->userId, $this->developerToken, guzzleClient: $guzzle);
+        $result = $client->getAds($this->customerId);
+
+        $this->assertEquals($responseData, $result);
+    }
+
+    /**
+     * @throws GuzzleException
+     * @throws Exception
+     */
+    public function testGetMetricsSuccess(): void
+    {
+        $responseData = ['results' => [['metrics' => ['impressions' => '100']]]];
+        $mock = new MockHandler([
+            new Response(200, [], json_encode(['access_token' => 'abc'])),
+            new Response(200, [], json_encode($responseData))
+        ]);
+        $guzzle = $this->createMockedGuzzleClient(mock: $mock);
+
+        $client = new GoogleAdsApi($this->redirectUrl, $this->clientId, $this->clientSecret, $this->refreshToken, $this->userId, $this->developerToken, guzzleClient: $guzzle);
+        $result = $client->getMetrics($this->customerId, 'campaign', '2025-01-01', '2025-01-31', 'campaign.id, metrics.impressions');
+
+        $this->assertEquals($responseData, $result);
+    }
 }
