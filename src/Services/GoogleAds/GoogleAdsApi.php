@@ -193,4 +193,96 @@ class GoogleAdsApi extends GoogleApi
             $pageToken = $data['nextPageToken'] ?? null;
         } while ($pageToken);
     }
+
+    /**
+     * @return array
+     * @throws GuzzleException
+     */
+    public function getAccessibleCustomers(): array
+    {
+        $response = $this->performRequest(
+            method: "GET",
+            endpoint: "customers:listAccessibleCustomers"
+        );
+
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    /**
+     * @param string $customerId
+     * @return array
+     * @throws GuzzleException
+     */
+    public function getCustomerClients(string $customerId): array
+    {
+        $query = "SELECT customer_client.client_customer, customer_client.hidden, customer_client.level, customer_client.time_zone, customer_client.test_account, customer_client.descriptive_name, customer_client.currency_code, customer_client.id FROM customer_client WHERE customer_client.level <= 1";
+        return $this->searchAll($customerId, $query);
+    }
+
+    /**
+     * @param string $customerId
+     * @param string $fields
+     * @param string $where
+     * @return array
+     * @throws GuzzleException
+     */
+    public function getCampaigns(string $customerId, string $fields = "campaign.id, campaign.name, campaign.status", string $where = ""): array
+    {
+        $query = "SELECT {$fields} FROM campaign";
+        if ($where) {
+            $query .= " WHERE {$where}";
+        }
+        return $this->searchAll($customerId, $query);
+    }
+
+    /**
+     * @param string $customerId
+     * @param string $fields
+     * @param string $where
+     * @return array
+     * @throws GuzzleException
+     */
+    public function getAdGroups(string $customerId, string $fields = "ad_group.id, ad_group.name, ad_group.status, campaign.id", string $where = ""): array
+    {
+        $query = "SELECT {$fields} FROM ad_group";
+        if ($where) {
+            $query .= " WHERE {$where}";
+        }
+        return $this->searchAll($customerId, $query);
+    }
+
+    /**
+     * @param string $customerId
+     * @param string $fields
+     * @param string $where
+     * @return array
+     * @throws GuzzleException
+     */
+    public function getAds(string $customerId, string $fields = "ad_group_ad.ad.id, ad_group_ad.ad.name, ad_group_ad.status, ad_group.id, campaign.id", string $where = ""): array
+    {
+        $query = "SELECT {$fields} FROM ad_group_ad";
+        if ($where) {
+            $query .= " WHERE {$where}";
+        }
+        return $this->searchAll($customerId, $query);
+    }
+
+    /**
+     * @param string $customerId
+     * @param string $resource
+     * @param string $startDate
+     * @param string $endDate
+     * @param string $fields
+     * @param string $where
+     * @return array
+     * @throws GuzzleException
+     */
+    public function getMetrics(string $customerId, string $resource, string $startDate, string $endDate, string $fields, string $where = ""): array
+    {
+        $query = "SELECT {$fields} FROM {$resource} WHERE segments.date >= '{$startDate}' AND segments.date <= '{$endDate}'";
+        if ($where) {
+            $query .= " AND {$where}";
+        }
+        return $this->searchAll($customerId, $query);
+    }
 }
