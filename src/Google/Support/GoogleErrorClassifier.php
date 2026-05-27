@@ -32,6 +32,7 @@ final class GoogleErrorClassifier
             'reason' => $reason,
             'errors' => $errors,
             'raw' => $error,
+            'root_error' => self::normalizeString($payload['error'] ?? null),
         ];
     }
 
@@ -78,6 +79,18 @@ final class GoogleErrorClassifier
             ];
         }
 
+        if (
+            $normalized['root_error'] === 'invalid_grant'
+            || str_contains($message, 'token has been expired or revoked')
+        ) {
+            return [
+                'category' => 'permanent_auth',
+                'reason' => 'google_auth_revoked',
+                'should_retry' => false,
+                'delay_ms' => 0,
+            ];
+        }
+
         return [
             'category' => 'unknown',
             'reason' => 'google_unknown',
@@ -94,6 +107,11 @@ final class GoogleErrorClassifier
     public static function isQuotaExceeded(mixed $input): bool
     {
         return self::classify($input)['category'] === 'quota';
+    }
+
+    public static function isPermanentAuthError(mixed $input): bool
+    {
+        return self::classify($input)['category'] === 'permanent_auth';
     }
 
     /**

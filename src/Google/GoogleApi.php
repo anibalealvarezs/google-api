@@ -3,6 +3,7 @@
 namespace Anibalealvarezs\GoogleApi\Google;
 
 use Anibalealvarezs\ApiSkeleton\Clients\OAuthV2Client;
+use Anibalealvarezs\ApiSkeleton\Classes\Exceptions\PermanentAuthenticationException;
 use Anibalealvarezs\GoogleApi\Google\Exceptions\GoogleQuotaExceededException;
 use Anibalealvarezs\GoogleApi\Google\Support\GoogleErrorClassifier;
 use Exception;
@@ -170,6 +171,10 @@ class GoogleApi extends OAuthV2Client
     {
         if (GoogleErrorClassifier::isQuotaExceeded($exception)) {
             throw new GoogleQuotaExceededException($exception->getMessage(), $exception->getCode(), $exception);
+        }
+
+        if (GoogleErrorClassifier::isPermanentAuthError($exception)) {
+            throw new PermanentAuthenticationException("Permanent authentication failure: " . $exception->getMessage(), $exception->getCode(), $exception);
         }
 
         return parent::handleException($exception, $onFailure);
