@@ -81,7 +81,7 @@ class BusinessInformationApi extends GoogleApi
      * Lists locations for a specific account.
      *
      * @param string $accountName Format: accounts/{accountId}
-     * @param array $readMask Fields to return in locations (comma separated list)
+     * @param string $readMask Fields to return in locations (comma separated list)
      * @return array
      * @throws GuzzleException
      */
