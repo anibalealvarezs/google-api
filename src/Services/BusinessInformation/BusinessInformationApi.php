@@ -85,7 +85,7 @@ class BusinessInformationApi extends GoogleApi
      * @return array
      * @throws GuzzleException
      */
-    public function getLocations(string $accountName, string $readMask = 'name,title,storeCode,latlng,websiteUrl,phoneNumbers'): array
+    public function getLocations(string $accountName, string $readMask = 'name,title,storeCode,latlng,websiteUrl,phoneNumbers,storefrontAddress,categories'): array
     {
         $response = $this->performRequest(
             method: "GET",
