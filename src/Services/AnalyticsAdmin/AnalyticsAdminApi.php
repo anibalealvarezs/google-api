@@ -94,4 +94,25 @@ class AnalyticsAdminApi extends GoogleApi
         
         return $properties;
     }
+
+    /**
+     * Lists data streams for a specific property.
+     *
+     * @param string $propertyId The property ID (e.g., '123456789' or 'properties/123456789')
+     * @return array
+     * @throws GuzzleException
+     * @link https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1beta/properties.dataStreams/list
+     */
+    public function getDataStreams(string $propertyId): array
+    {
+        $propertyName = str_starts_with($propertyId, 'properties/') ? $propertyId : "properties/$propertyId";
+        
+        $response = $this->performRequest(
+            method: "GET",
+            endpoint: "$propertyName/dataStreams"
+        );
+        
+        $data = json_decode($response->getBody()->getContents(), true);
+        return $data['dataStreams'] ?? [];
+    }
 }
