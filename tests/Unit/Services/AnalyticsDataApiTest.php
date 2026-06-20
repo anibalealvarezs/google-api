@@ -238,9 +238,9 @@ class AnalyticsDataApiTest extends TestCase
         $client = new AnalyticsDataApi($this->redirectUrl, $this->clientId, $this->clientSecret, $this->refreshToken, $this->userId, guzzleClient: $guzzle);
         
         $called = 0;
-        $client->runAllReportsAndProcess($this->propertyId, ['limit' => 5], function($rows) use (&$called) {
+        $client->runAllReportsAndProcess($this->propertyId, ['limit' => 5], function($response) use (&$called) {
             $called++;
-            $this->assertCount(5, $rows);
+            $this->assertCount(5, $response['rows']);
         });
 
         $this->assertEquals(2, $called);
@@ -283,6 +283,6 @@ class AnalyticsDataApiTest extends TestCase
 
         $this->expectException(ApiRequestException::class);
 
-        $client->runAllReportsAndProcess($this->propertyId, ['limit' => 5], function($rows) {});
+        $client->runAllReportsAndProcess($this->propertyId, ['limit' => 5], function($response) {});
     }
 }

@@ -198,7 +198,7 @@ class AnalyticsDataApi extends GoogleApi
             if (empty($response['rows'])) {
                 break;
             }
-            $callback($response['rows']);
+            $callback($response);
             $totalProcessed += count($response['rows']);
             $payload['offset'] += count($response['rows']);
             $rowCount = $response['rowCount'] ?? 0;
