@@ -19,10 +19,26 @@ final class GoogleErrorClassifier
         $error = is_array($payload['error'] ?? null) ? $payload['error'] : [];
         $errors = is_array($error['errors'] ?? null) ? $error['errors'] : [];
 
+        // Check for Google Ads Failure details
+        $adsErrors = [];
+        if (!empty($error['details']) && is_array($error['details'])) {
+            foreach ($error['details'] as $detail) {
+                if (is_array($detail) && !empty($detail['errors']) && is_array($detail['errors'])) {
+                    $adsErrors = array_merge($adsErrors, $detail['errors']);
+                }
+            }
+        }
+
         $reason = null;
         if ($errors !== []) {
             $firstError = is_array($errors[0] ?? null) ? $errors[0] : [];
             $reason = self::normalizeString($firstError['reason'] ?? null);
+        } elseif ($adsErrors !== []) {
+            $firstAdsError = is_array($adsErrors[0] ?? null) ? $adsErrors[0] : [];
+            $reason = self::normalizeString($firstAdsError['errorCode'] ?? null);
+            if (is_array($firstAdsError['errorCode'] ?? null)) {
+                $reason = self::normalizeString(key($firstAdsError['errorCode']) . '.' . current($firstAdsError['errorCode']));
+            }
         }
 
         return [
@@ -31,6 +47,7 @@ final class GoogleErrorClassifier
             'status' => self::normalizeString($error['status'] ?? null),
             'reason' => $reason,
             'errors' => $errors,
+            'ads_errors' => $adsErrors,
             'raw' => $error,
             'root_error' => self::normalizeString($payload['error'] ?? null),
         ];
@@ -48,11 +65,16 @@ final class GoogleErrorClassifier
         $reason = strtolower((string)($normalized['reason'] ?? ''));
         $code = $normalized['code'];
 
+        // Google Ads & General Google Quota / Rate limit
         if (
-            in_array($reason, ['quotaexceeded', 'dailylimitexceeded', 'userratelimitexceeded', 'ratelimitexceeded'], true)
+            in_array($reason, ['quotaexceeded', 'dailylimitexceeded', 'userratelimitexceeded', 'ratelimitexceeded', 'resource_exhausted'], true)
+            || str_contains($reason, 'quotaerror')
+            || str_contains($reason, 'ratelimit')
+            || str_contains($reason, 'resource_exhausted')
             || str_contains($message, 'quota exceeded')
             || str_contains($message, 'rate limit exceeded')
             || str_contains($message, 'too many requests')
+            || str_contains($message, 'resource_exhausted')
             || $status === 'resource_exhausted'
             || in_array($code, [429], true)
         ) {
@@ -64,10 +86,15 @@ final class GoogleErrorClassifier
             ];
         }
 
+        // Google Ads & Transient Errors
         if (
-            in_array($reason, ['backenderror', 'internalerror'], true)
+            in_array($reason, ['backenderror', 'internalerror', 'concurrent_modification', 'database_error'], true)
+            || str_contains($reason, 'concurrency')
+            || str_contains($reason, 'transient')
             || str_contains($message, 'backend error')
             || str_contains($message, 'temporarily unavailable')
+            || str_contains($message, 'concurrent_modification')
+            || str_contains($message, 'database error')
             || in_array($status, ['internal', 'unavailable'], true)
             || in_array($code, [500, 503], true)
         ) {
@@ -79,9 +106,18 @@ final class GoogleErrorClassifier
             ];
         }
 
+        // Permanent Auth & Permission Failures
         if (
             $normalized['root_error'] === 'invalid_grant'
             || str_contains($message, 'token has been expired or revoked')
+            || str_contains($message, 'not_ads_user')
+            || str_contains($message, 'developer_token_prohibited')
+            || str_contains($message, 'customer_not_found')
+            || str_contains($reason, 'authenticationerror')
+            || str_contains($reason, 'authorizationerror')
+            || str_contains($reason, 'not_ads_user')
+            || str_contains($reason, 'developer_token_prohibited')
+            || in_array($code, [401], true)
         ) {
             return [
                 'category' => 'permanent_auth',

@@ -71,6 +71,11 @@ if (file_exists($configFile)) {
         'search_console_test_sitemap_url'       => getenv('SEARCH_CONSOLE_TEST_SITEMAP_URL')       ?: null,
         'search_console_test_removable_sitemap_url' => getenv('SEARCH_CONSOLE_TEST_REMOVABLE_SITEMAP_URL') ?: null,
         'search_console_test_inspect_url'       => getenv('SEARCH_CONSOLE_TEST_INSPECT_URL')       ?: null,
+
+        // ── Google Ads ────────────────────────────────────────────────────
+        'google_ads_developer_token'            => getenv('GOOGLE_ADS_DEVELOPER_TOKEN')            ?: null,
+        'google_ads_login_customer_id'          => getenv('GOOGLE_ADS_LOGIN_CUSTOMER_ID')          ?: null,
+        'google_ads_test_customer_id'           => getenv('GOOGLE_ADS_TEST_CUSTOMER_ID')           ?: null,
     ];
 
     // Warn so the developer knows which path was taken
