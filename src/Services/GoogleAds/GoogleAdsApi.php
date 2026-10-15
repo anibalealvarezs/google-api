@@ -47,7 +47,7 @@ class GoogleAdsApi extends GoogleApi
         $this->loginCustomerId = $loginCustomerId;
 
         parent::__construct(
-            baseUrl: "https://googleads.googleapis.com/v17/",
+            baseUrl: "https://googleads.googleapis.com/v26/",
             redirectUrl: $redirectUrl,
             clientId: $clientId,
             clientSecret: $clientSecret,

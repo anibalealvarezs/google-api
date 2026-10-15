@@ -67,7 +67,7 @@ class GoogleAdsApiTest extends TestCase
             token: $this->token
         );
 
-        $this->assertEquals('https://googleads.googleapis.com/v17/', $client->getBaseUrl());
+        $this->assertEquals('https://googleads.googleapis.com/v26/', $client->getBaseUrl());
         $this->assertEquals($this->scopes, $client->getScopes());
         $headers = $client->getHeaders();
         $this->assertArrayHasKey('developer-token', $headers);
@@ -139,7 +139,7 @@ class GoogleAdsApiTest extends TestCase
         $this->assertEquals($responseData, $result);
         $lastRequest = $mock->getLastRequest();
         $this->assertEquals('POST', $lastRequest->getMethod());
-        $this->assertEquals("https://googleads.googleapis.com/v17/customers/{$this->customerId}/googleAds:search", (string)$lastRequest->getUri());
+        $this->assertEquals("https://googleads.googleapis.com/v26/customers/{$this->customerId}/googleAds:search", (string)$lastRequest->getUri());
         
         $requestBody = json_decode($lastRequest->getBody()->getContents(), true);
         $this->assertEquals($query, $requestBody['query']);
