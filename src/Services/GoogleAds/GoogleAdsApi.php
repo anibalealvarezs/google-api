@@ -481,9 +481,9 @@ class GoogleAdsApi extends GoogleApi
         };
 
         $baseFields = match ($level) {
-            'campaign' => ['campaign.id', 'campaign.name'],
-            'ad_group', 'adset' => ['campaign.id', 'ad_group.id', 'ad_group.name'],
-            'ad', 'creative' => ['campaign.id', 'ad_group.id', 'ad_group_ad.ad.id', 'ad_group_ad.ad.name'],
+            'campaign' => ['campaign.id', 'campaign.name', 'campaign.advertising_channel_type'],
+            'ad_group', 'adset' => ['campaign.id', 'ad_group.id', 'ad_group.name', 'campaign.advertising_channel_type'],
+            'ad', 'creative' => ['campaign.id', 'ad_group.id', 'ad_group_ad.ad.id', 'ad_group_ad.ad.name', 'campaign.advertising_channel_type'],
             default => ['customer.id', 'customer.descriptive_name'],
         };
 
