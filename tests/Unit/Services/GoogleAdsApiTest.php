@@ -97,6 +97,24 @@ class GoogleAdsApiTest extends TestCase
         $this->assertEquals($loginCustomerId, $headers['login-customer-id']);
     }
 
+    public function testConstructorThrowsExceptionWhenDeveloperTokenIsEmpty(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('A Google Ads developer token is required.');
+
+        new GoogleAdsApi(
+            redirectUrl: $this->redirectUrl,
+            clientId: $this->clientId,
+            clientSecret: $this->clientSecret,
+            refreshToken: $this->refreshToken,
+            userId: $this->userId,
+            developerToken: '',
+            scopes: $this->scopes,
+            token: $this->token
+        );
+    }
+
+
     /**
      * @throws GuzzleException
      * @throws Exception

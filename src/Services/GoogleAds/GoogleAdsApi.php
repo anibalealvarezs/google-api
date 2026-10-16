@@ -43,6 +43,12 @@ class GoogleAdsApi extends GoogleApi
         ?\Psr\Log\LoggerInterface $logger = null,
         mixed $tokenRefresherCallback = null
     ) {
+        if (trim($developerToken) === '') {
+            throw new \InvalidArgumentException(
+                "A Google Ads developer token is required. Obtain a developer token from the Google Ads Manager Account (MCC) API Center or provide it via configuration."
+            );
+        }
+
         $this->developerToken = $developerToken;
         $this->loginCustomerId = $loginCustomerId;
 
