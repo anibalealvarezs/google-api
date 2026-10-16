@@ -179,12 +179,12 @@ class GoogleAdsApi extends GoogleApi
      *
      * @param string $customerId
      * @param string $query
-     * @param int $pageSize
+     * @param int|null $pageSize
      * @param callable|null $shouldContinue
      * @return array
      * @throws GuzzleException
      */
-    public function searchAll(string $customerId, string $query, int $pageSize = 1000, ?callable $shouldContinue = null): array
+    public function searchAll(string $customerId, string $query, ?int $pageSize = null, ?callable $shouldContinue = null): array
     {
         $results = [];
         $nextPageToken = null;
@@ -197,8 +197,11 @@ class GoogleAdsApi extends GoogleApi
 
             $payload = [
                 "query" => $query,
-                "pageSize" => $pageSize,
             ];
+
+            if ($pageSize !== null && $pageSize > 0) {
+                $payload["pageSize"] = $pageSize;
+            }
 
             if (!$this->updatePaginationQuery($payload, $nextPageToken, $prevPageToken)) {
                 break;
@@ -228,7 +231,7 @@ class GoogleAdsApi extends GoogleApi
      * @param string $customerId
      * @param string $query
      * @param callable $callback
-     * @param int $pageSize
+     * @param int|null $pageSize
      * @param callable|null $shouldContinue
      * @return void
      * @throws GuzzleException
@@ -237,7 +240,7 @@ class GoogleAdsApi extends GoogleApi
         string $customerId,
         string $query,
         callable $callback,
-        int $pageSize = 1000,
+        ?int $pageSize = null,
         ?callable $shouldContinue = null
     ): void {
         $nextPageToken = null;
@@ -250,8 +253,11 @@ class GoogleAdsApi extends GoogleApi
 
             $payload = [
                 "query" => $query,
-                "pageSize" => $pageSize,
             ];
+
+            if ($pageSize !== null && $pageSize > 0) {
+                $payload["pageSize"] = $pageSize;
+            }
 
             if (!$this->updatePaginationQuery($payload, $nextPageToken, $prevPageToken)) {
                 break;
