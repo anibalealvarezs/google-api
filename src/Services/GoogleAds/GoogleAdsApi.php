@@ -68,6 +68,33 @@ class GoogleAdsApi extends GoogleApi
             $headers["login-customer-id"] = $this->loginCustomerId;
         }
         $this->setHeaders($headers);
+
+        $this->setErrorMessageParser(function ($data) {
+            if (isset($data['error']['details'][0]['errors'][0]['message'])) {
+                return $data['error']['details'][0]['errors'][0]['message'];
+            }
+            if (isset($data['error']['message'])) {
+                return $data['error']['message'];
+            }
+            return json_encode($data);
+        });
+    }
+
+    public function setLoginCustomerId(?string $loginCustomerId): void
+    {
+        $this->loginCustomerId = $loginCustomerId;
+        $headers = $this->getHeaders();
+        if ($loginCustomerId) {
+            $headers["login-customer-id"] = $loginCustomerId;
+        } else {
+            unset($headers["login-customer-id"]);
+        }
+        $this->setHeaders($headers);
+    }
+
+    public function getLoginCustomerId(): ?string
+    {
+        return $this->loginCustomerId;
     }
 
     /**
@@ -322,9 +349,13 @@ class GoogleAdsApi extends GoogleApi
      */
     public function getAccessibleCustomers(): array
     {
+        $headers = $this->getHeaders();
+        unset($headers['login-customer-id']);
+
         $response = $this->performRequest(
             method: "GET",
-            endpoint: "customers:listAccessibleCustomers"
+            endpoint: "customers:listAccessibleCustomers",
+            headers: $headers
         );
 
         return json_decode($response->getBody()->getContents(), true);
