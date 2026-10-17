@@ -380,7 +380,7 @@ class GoogleAdsApi extends GoogleApi
      */
     public function getCustomerClients(string $customerId): array
     {
-        $query = "SELECT customer_client.client_customer, customer_client.hidden, customer_client.level, customer_client.time_zone, customer_client.test_account, customer_client.descriptive_name, customer_client.currency_code, customer_client.id FROM customer_client WHERE customer_client.level <= 1";
+        $query = "SELECT customer_client.client_customer, customer_client.hidden, customer_client.level, customer_client.time_zone, customer_client.test_account, customer_client.descriptive_name, customer_client.currency_code, customer_client.id, customer_client.manager FROM customer_client WHERE customer_client.level <= 1";
         return $this->searchAll($customerId, $query);
     }
 
