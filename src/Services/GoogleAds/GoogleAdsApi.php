@@ -477,6 +477,7 @@ class GoogleAdsApi extends GoogleApi
             'campaign' => 'campaign',
             'ad_group', 'adset' => 'ad_group',
             'ad', 'creative' => 'ad_group_ad',
+            'search_term', 'query' => 'search_term_view',
             default => 'customer',
         };
 
@@ -484,6 +485,7 @@ class GoogleAdsApi extends GoogleApi
             'campaign' => ['campaign.id', 'campaign.name', 'campaign.advertising_channel_type'],
             'ad_group', 'adset' => ['campaign.id', 'ad_group.id', 'ad_group.name', 'campaign.advertising_channel_type'],
             'ad', 'creative' => ['campaign.id', 'ad_group.id', 'ad_group_ad.ad.id', 'ad_group_ad.ad.name', 'campaign.advertising_channel_type'],
+            'search_term', 'query' => ['campaign.id', 'campaign.name', 'ad_group.id', 'ad_group.name', 'search_term_view.search_term', 'search_term_view.status'],
             default => ['customer.id', 'customer.descriptive_name'],
         };
 
@@ -496,6 +498,37 @@ class GoogleAdsApi extends GoogleApi
             startDate: $startDate,
             endDate: $endDate,
             fields: $fieldsStr,
+            where: $where
+        );
+    }
+
+    /**
+     * Retrieve search term view metrics for user queries.
+     *
+     * @param string $customerId
+     * @param string $startDate
+     * @param string $endDate
+     * @param array $metrics
+     * @param array $segments
+     * @param string $where
+     * @return array
+     * @throws GuzzleException
+     */
+    public function getSearchTerms(
+        string $customerId,
+        string $startDate,
+        string $endDate,
+        array $metrics = ['metrics.cost_micros', 'metrics.impressions', 'metrics.clicks', 'metrics.conversions', 'metrics.conversions_value'],
+        array $segments = ['segments.date', 'segments.device'],
+        string $where = ""
+    ): array {
+        return $this->getMetricsForLevel(
+            customerId: $customerId,
+            level: 'search_term',
+            startDate: $startDate,
+            endDate: $endDate,
+            metrics: $metrics,
+            segments: $segments,
             where: $where
         );
     }
