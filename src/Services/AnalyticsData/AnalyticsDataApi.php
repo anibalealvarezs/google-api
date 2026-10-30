@@ -104,11 +104,22 @@ class AnalyticsDataApi extends GoogleApi
 
     /**
      * @param string $propertyId
-     * @param array $requests Array of runReport request payloads
+     * @param array $payload Requested metrics/dimensions and optional filters
      * @return array
      * @throws GuzzleException
-     * @link https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties/batchRunReports
+     * @link https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties/checkCompatibility
      */
+    public function checkCompatibility(string $propertyId, array $payload): array
+    {
+        $response = $this->performRequest(
+            method: 'POST',
+            endpoint: 'properties/'.$propertyId.':checkCompatibility',
+            body: json_encode(array_intersect_key($payload, array_flip(['dimensions', 'metrics', 'dimensionFilter', 'metricFilter', 'compatibilityFilter'])), JSON_THROW_ON_ERROR),
+        );
+        return json_decode($response->getBody()->getContents(), true, flags: JSON_THROW_ON_ERROR);
+    }
+
+    /** Submit a batch of runReport payloads. */
     public function batchRunReports(string $propertyId, array $requests): array
     {
         $payload = [
