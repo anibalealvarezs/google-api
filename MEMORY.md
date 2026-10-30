@@ -11,3 +11,7 @@
 ## Current notes
 - GA4 compatibility (2026-10-30): AnalyticsDataApi::checkCompatibility POSTs only supported metric/dimension/filter fields to the property endpoint. Driver uses metadata and compatible requested-field coverage before runReport; no source calls in isolated SDK test. Run that test with --bootstrap vendor/autoload.php to avoid configuration/credential bootstrap. Release SDK before the driver which calls the new endpoint.
 - Shared Google client for driver and facade integrations.
+
+- 2026-10-30: GA4 pagination: continue by absolute offset versus rowCount, including short pages and nonzero offsets; premature empty pages throw instead of silently completing. Both collecting and streaming report helpers covered offline. Release SDK before its dependent driver increment.
+
+- 2026-10-30: GA4 pagination follows absolute offset/rowCount including short pages and nonzero offsets; unexpected empty pages fail explicitly. Collecting/streaming helpers covered offline. Release SDK before dependent driver increment.

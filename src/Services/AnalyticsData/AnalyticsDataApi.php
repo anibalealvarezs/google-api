@@ -178,12 +178,15 @@ class AnalyticsDataApi extends GoogleApi
         do {
             $response = $this->runReport($propertyId, $payload);
             if (empty($response['rows'])) {
+                if ($payload['offset'] < (int)($response['rowCount'] ?? 0)) {
+                    throw new \RuntimeException('GA4 pagination ended before the reported row count.');
+                }
                 break;
             }
             $rows = array_merge($rows, $response['rows']);
             $payload['offset'] += count($response['rows']);
             $rowCount = $response['rowCount'] ?? 0;
-        } while (count($rows) < $rowCount && count($response['rows']) >= $payload['limit']);
+        } while ($payload['offset'] < $rowCount);
 
         $response['rows'] = $rows;
         return $response;
@@ -202,17 +205,18 @@ class AnalyticsDataApi extends GoogleApi
     {
         $payload['limit'] = $payload['limit'] ?? 10000;
         $payload['offset'] = $payload['offset'] ?? 0;
-        $totalProcessed = 0;
 
         do {
             $response = $this->runReport($propertyId, $payload);
             if (empty($response['rows'])) {
+                if ($payload['offset'] < (int)($response['rowCount'] ?? 0)) {
+                    throw new \RuntimeException('GA4 pagination ended before the reported row count.');
+                }
                 break;
             }
             $callback($response);
-            $totalProcessed += count($response['rows']);
             $payload['offset'] += count($response['rows']);
             $rowCount = $response['rowCount'] ?? 0;
-        } while ($totalProcessed < $rowCount && count($response['rows']) >= $payload['limit']);
+        } while ($payload['offset'] < $rowCount);
     }
 }
