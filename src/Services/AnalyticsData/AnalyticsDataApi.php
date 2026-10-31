@@ -10,6 +10,18 @@ use GuzzleHttp\Exception\GuzzleException;
 
 class AnalyticsDataApi extends GoogleApi
 {
+    /** Funnels have their own alpha API and must never be inferred from Core event totals. */
+    public function runFunnelReport(string $propertyId, array $payload): array
+    {
+        if (!ctype_digit($propertyId)) throw new \InvalidArgumentException('Invalid GA4 property ID.');
+        $response = $this->performRequest(
+            method: 'POST', endpoint: 'properties/'.$propertyId.':runFunnelReport',
+            baseUrl: 'https://analyticsdata.googleapis.com/v1alpha/',
+            body: json_encode($payload, JSON_THROW_ON_ERROR),
+        );
+        return json_decode($response->getBody()->getContents(), true, flags: JSON_THROW_ON_ERROR);
+    }
+
     /**
      * @param string $redirectUrl
      * @param string $clientId

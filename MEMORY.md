@@ -15,3 +15,5 @@
 - 2026-10-30: GA4 pagination: continue by absolute offset versus rowCount, including short pages and nonzero offsets; premature empty pages throw instead of silently completing. Both collecting and streaming report helpers covered offline. Release SDK before its dependent driver increment.
 
 - 2026-10-30: GA4 pagination follows absolute offset/rowCount including short pages and nonzero offsets; unexpected empty pages fail explicitly. Collecting/streaming helpers covered offline. Release SDK before dependent driver increment.
+
+- GA4 dedicated funnels (2026-10-30, unreleased): AnalyticsDataApi::runFunnelReport sends POST to the explicit v1alpha properties/{id}:runFunnelReport endpoint. It does not reuse ordinary beta runReport. Driver/tenant own validation, enablement and budgets; source canary is required before alpha production enablement. SDK fixture tests verify endpoint/payload, not Google parity.
